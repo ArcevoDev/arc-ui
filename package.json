@@ -5,7 +5,7 @@
   "description": "Domain-customizable auth-first component system for the Arcevo ecosystem",
   "type": "module",
   "scripts": {
-    "build": "pnpm -r build && storybook build",
+    "build": "pnpm build:tokens && pnpm -r build && storybook build",
     "build:tokens": "pnpm -F @arc-ui/tokens build",
     "build:components": "pnpm -F @arc-ui/components build",
     "build:sdk": "pnpm -F @arc-ui/sdk build",

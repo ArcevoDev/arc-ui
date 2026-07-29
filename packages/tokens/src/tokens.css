@@ -172,7 +172,8 @@ body {
 
 /* ── Utility classes ──────────────────────────────────────────── */
 .glow-indigo {
-  box-shadow: 0 0 25px -5px oklch(0.58 0.23 273 / 15%),
+  box-shadow:
+    0 0 25px -5px oklch(0.58 0.23 273 / 15%),
     0 0 10px -6px oklch(0.58 0.23 273 / 20%);
 }
 
@@ -180,6 +181,25 @@ body {
   background: oklch(0.155 0.02 240 / 80%);
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
+}
+
+/* Glass card — elevated glassmorphic surface for hero sections */
+.glass-card {
+  background: oklch(0.155 0.02 240 / 60%);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid oklch(1 0 0 / 8%);
+  box-shadow:
+    0 8px 32px oklch(0 0 0 / 30%),
+    inset 0 0 0 1px oklch(1 0 0 / 4%);
+}
+
+[data-theme="light"] .glass-card {
+  background: oklch(0.97 0.01 240 / 60%);
+  border: 1px solid oklch(0 0 0 / 8%);
+  box-shadow:
+    0 8px 32px oklch(0 0 0 / 8%),
+    inset 0 0 0 1px oklch(1 0 0 / 50%);
 }
 
 .text-gradient {

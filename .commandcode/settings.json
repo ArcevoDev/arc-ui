@@ -10,7 +10,9 @@
       "Shell(cd /d C:\\Users\\HP\\Desktop\\ArcevoDev\\arcbase && dir /b /a-d 2>nul && echo --- && type README.md 2>nul || echo \"NO README\")",
       "Shell(cd /d C:\\Users\\HP\\Desktop\\ArcevoDev\\arc-ui\\packages\\auth\\src && wc -l *.tsx *.ts 2>nul || for %f in (*.tsx *.ts) do @find /c /v \"\" \"%f\")",
       "Shell(rmdir /q C:\\Users\\HP\\Desktop\\ArcevoDev\\arc-ui\\packages\\auth\\src\\presets 2>nul && echo \"Done\")",
-      "powershell"
+      "powershell",
+      "Shell(tsc:*)",
+      "Shell(....node_modules.bintsc:*)"
     ],
     "deny": [],
     "defaultMode": "default"

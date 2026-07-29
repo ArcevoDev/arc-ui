@@ -20,7 +20,9 @@ export { Label } from "./ui/label.js";
 export { type BadgeProps, Badge, badgeVariants } from "./ui/badge.js";
 
 export {
+  type CardProps,
   Card,
+  cardVariants,
   CardHeader,
   CardFooter,
   CardTitle,

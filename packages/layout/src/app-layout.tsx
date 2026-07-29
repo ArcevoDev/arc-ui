@@ -1,0 +1,119 @@
+/**
+ * @arc-ui/layout — AppLayout
+ *
+ * Auth page shell — split panel on desktop, centered card on mobile.
+ * Used for login, register, MFA, forgot-password pages.
+ * Configurable via LayoutConfig.brand.
+ */
+
+import * as React from "react";
+import type { LayoutConfig } from "./types.js";
+
+export interface AppLayoutProps {
+  config: LayoutConfig;
+  children: React.ReactNode;
+}
+
+export function AppLayout({ config, children }: AppLayoutProps) {
+  const { brand } = config;
+
+  return (
+    <div className="flex min-h-screen bg-background">
+      {/* Left panel — hidden below lg */}
+      <div className="hidden flex-col justify-between bg-[#0A1A2F] p-8 lg:flex lg:w-1/2">
+        <div className="flex flex-col gap-8">
+          {/* Logo + Name */}
+          <div className="flex items-center gap-3">
+            {brand.logo ?? (
+              <svg
+                width="40"
+                height="40"
+                viewBox="0 0 24 24"
+                fill="none"
+                className="text-[#4AD3F5]"
+              >
+                <path
+                  d="M12 2L4 6V12C4 17.52 7.58 22.48 12 24C16.42 22.48 20 17.52 20 12V6L12 2Z"
+                  fill="currentColor"
+                  opacity="0.8"
+                />
+                <path
+                  d="M12 6L8 8V12C8 14.5 9.67 16.8 12 17.5C14.33 16.8 16 14.5 16 12V8L12 6Z"
+                  fill="currentColor"
+                  opacity="0.4"
+                />
+              </svg>
+            )}
+            <span className="font-heading text-2xl font-bold text-white">
+              {brand.name}
+            </span>
+          </div>
+
+          {/* Tagline */}
+          {brand.tagline && (
+            <p className="text-lg text-white/80">{brand.tagline}</p>
+          )}
+
+          {/* Benefits */}
+          {brand.benefits && brand.benefits.length > 0 && (
+            <div className="space-y-4">
+              {brand.benefits.map((benefit, i) => (
+                <div key={i} className="flex items-center gap-3">
+                  <svg
+                    width="16"
+                    height="16"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="#4AD3F5"
+                    strokeWidth="2"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    className="shrink-0"
+                  >
+                    <polyline points="20 6 9 17 4 12" />
+                  </svg>
+                  <span className="text-sm text-white/70">{benefit}</span>
+                </div>
+              ))}
+            </div>
+          )}
+        </div>
+
+        <p className="text-xs text-[#D4AF37]">ArcevoCirqle Ecosystem</p>
+      </div>
+
+      {/* Right panel — centered card */}
+      <div className="flex flex-1 flex-col items-center justify-center p-4 lg:p-8">
+        {/* Mobile logo (hidden on lg+) */}
+        <div className="mb-8 flex flex-col items-center gap-2 lg:hidden">
+          <svg
+            width="40"
+            height="40"
+            viewBox="0 0 24 24"
+            fill="none"
+            className="text-primary"
+          >
+            <path
+              d="M12 2L4 6V12C4 17.52 7.58 22.48 12 24C16.42 22.48 20 17.52 20 12V6L12 2Z"
+              fill="currentColor"
+              opacity="0.8"
+            />
+            <path
+              d="M12 6L8 8V12C8 14.5 9.67 16.8 12 17.5C14.33 16.8 16 14.5 16 12V8L12 6Z"
+              fill="currentColor"
+              opacity="0.4"
+            />
+          </svg>
+          <h1 className="text-xl font-bold text-foreground">{brand.name}</h1>
+          {brand.tagline && (
+            <p className="text-sm text-muted-foreground">{brand.tagline}</p>
+          )}
+        </div>
+
+        <div className="w-full max-w-md rounded-xl border bg-card p-6 shadow-lg">
+          {children}
+        </div>
+      </div>
+    </div>
+  );
+}

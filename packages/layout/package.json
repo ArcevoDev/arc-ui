@@ -1,0 +1,54 @@
+{
+  "name": "@arc-ui/layout",
+  "version": "0.1.0",
+  "description": "Domain-configurable app shell for the ArcevoCirqle ecosystem — Sidebar, Topbar, AppLayout, ConsoleLayout, LandingLayout, PageHeader, TenantSwitcher, and 5 domain presets (fintech, med, edu, enterprise, default).",
+  "type": "module",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js",
+      "default": "./dist/index.js"
+    }
+  },
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "files": ["dist"],
+  "scripts": {
+    "build": "tsup src/index.ts --format esm --dts --clean",
+    "clean": "rm -rf dist",
+    "typecheck": "tsc --noEmit"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ArcevoDev/arc-ui.git",
+    "directory": "packages/layout"
+  },
+  "bugs": {
+    "url": "https://github.com/ArcevoDev/arc-ui/issues"
+  },
+  "homepage": "https://arc-ui.vercel.app",
+  "license": "MIT",
+  "keywords": ["layout", "sidebar", "topbar", "app-shell", "arcevocirqle", "react", "dashboard"],
+  "dependencies": {
+    "@arc-ui/auth": "workspace:*",
+    "@arc-ui/components": "workspace:*"
+  },
+  "peerDependencies": {
+    "react": "^19",
+    "react-dom": "^19"
+  },
+  "devDependencies": {
+    "@types/react": "^19",
+    "@types/react-dom": "^19",
+    "react": "^19",
+    "react-dom": "^19",
+    "tsup": "^8.5.1",
+    "typescript": "^5"
+  },
+  "engines": {
+    "node": ">=22"
+  }
+}

@@ -1,0 +1,86 @@
+import { Meta } from "@storybook/blocks";
+
+<Meta title="Auth Guide" />
+
+# Auth Components Guide
+
+The `@arc-ui/auth` package provides a complete authentication system built on `@arc-ui/sdk`.
+
+## ArcProvider
+
+Wrap your app with `ArcProvider` and pass an `ArcIdClient` instance:
+
+```tsx
+import { ArcProvider } from "@arc-ui/auth";
+import { ArcIdClient } from "@arc-ui/sdk";
+
+const client = new ArcIdClient({
+  baseUrl: "https://auth.arcevo.dev/api/v1",
+});
+
+function Root({ children }) {
+  return <ArcProvider client={client}>{children}</ArcProvider>;
+}
+```
+
+`ArcProvider` handles:
+- Session restore from stored tokens
+- Automatic access token refresh
+- Login, registration, logout
+- MFA flow coordination
+
+## SignIn
+
+Multi-step sign-in with a state machine:
+
+```tsx
+import { SignIn } from "@arc-ui/auth";
+
+<SignIn
+  config={fintechPreset}
+  onSuccess={(tokenPair) => console.log("Logged in", tokenPair)}
+/>
+```
+
+Steps: `idle → select_method → login_form → check_mfa → mfa_challenge → complete`
+
+## SignUp
+
+Registration with validation:
+
+```tsx
+import { SignUp } from "@arc-ui/auth";
+
+<SignUp onSuccess={(tokenPair) => console.log("Registered", tokenPair)} />
+```
+
+## Guard
+
+Route protection component:
+
+```tsx
+<Guard role="admin" fallback={<Unauthorized />}>
+  <AdminPanel />
+</Guard>
+```
+
+## UserButton
+
+User menu with avatar, name, organization switcher, and logout:
+
+```tsx
+<UserButton />
+```
+
+## MfaDialog
+
+MFA verification dialog with OTP input and recovery codes:
+
+```tsx
+<MfaDialog
+  open={showMfa}
+  client={arcIdClient}
+  sessionId="sess_xxx"
+  onComplete={(result) => handleLogin(result)}
+/>
+```

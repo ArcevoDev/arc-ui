@@ -1,0 +1,143 @@
+/* =================================================================
+ * @arc-ui/tokens — Design Token CSS Custom Properties
+ *
+ * Dark-first design system for the Arcevo ecosystem.
+ * Import this file to make all tokens available as CSS variables.
+ *
+ *   @import "@arc-ui/tokens/tokens.css";
+ *
+ * The variable names match arc-id's globals.css exactly so that
+ * arc-id can replace its stylesheet with this one — zero migration cost.
+ * ================================================================= */
+
+/* ── Alpha Palette (raw brand colors) ─────────────────────────── */
+:root {
+  --alpha-deep-space: #0a1a2f;
+  --alpha-electric-cyan: #4ad3f5;
+  --alpha-mist-gray: #e0e5e8;
+  --alpha-logic-gold: #d4af37;
+  --alpha-base-white: #ffffff;
+
+  /* ── Typography ─────────────────────────────────────────────── */
+  --font-heading: "Montserrat", sans-serif;
+  --font-body: "Inter", sans-serif;
+  --font-mono: "JetBrains Mono", monospace;
+  --font-technical: "Rajdhani", sans-serif;
+
+  /* ── Core semantic colour tokens ────────────────────────────── */
+  --background: oklch(0.12 0.02 240);
+  --foreground: oklch(0.95 0.01 240);
+
+  --card: oklch(0.155 0.02 240);
+  --card-foreground: oklch(0.95 0.01 240);
+
+  --popover: oklch(0.14 0.02 240);
+  --popover-foreground: oklch(0.95 0.01 240);
+
+  /* Primary — indigo, maps to arc-id brand */
+  --primary: oklch(0.58 0.23 273);
+  --primary-foreground: oklch(0.99 0 0);
+
+  /* Secondary — subtle surface */
+  --secondary: oklch(0.19 0.02 240);
+  --secondary-foreground: oklch(0.95 0.01 240);
+
+  /* Muted */
+  --muted: oklch(0.19 0.02 240);
+  --muted-foreground: oklch(0.65 0.02 240);
+
+  /* Accent */
+  --accent: oklch(0.22 0.03 240);
+  --accent-foreground: oklch(0.98 0 0);
+
+  /* Destructive */
+  --destructive: oklch(0.577 0.245 27.325);
+  --destructive-foreground: oklch(0.99 0 0);
+
+  /* Success — green */
+  --success: oklch(0.527 0.154 150);
+  --success-foreground: oklch(0.99 0 0);
+
+  /* Warning — amber */
+  --warning: oklch(0.7 0.18 80);
+  --warning-foreground: oklch(0.12 0.02 240);
+
+  /* Borders and inputs */
+  --border: oklch(0.22 0.02 240);
+  --input: oklch(0.22 0.02 240);
+  --ring: oklch(0.58 0.23 273 / 50%);
+  --radius: 0.5rem;
+
+  /* Charts */
+  --chart-1: oklch(0.58 0.23 273);
+  --chart-2: oklch(0.696 0.17 162);
+  --chart-3: oklch(0.398 0.07 227);
+  --chart-4: oklch(0.828 0.189 84);
+  --chart-5: oklch(0.769 0.188 70);
+
+  /* Sidebar */
+  --sidebar: oklch(0.135 0.02 240);
+  --sidebar-foreground: oklch(0.95 0.01 240);
+  --sidebar-primary: oklch(0.58 0.23 273);
+  --sidebar-primary-foreground: oklch(0.99 0 0);
+  --sidebar-accent: oklch(0.19 0.02 240);
+  --sidebar-accent-foreground: oklch(0.95 0.01 240);
+  --sidebar-border: oklch(0.22 0.02 240);
+  --sidebar-ring: oklch(0.58 0.23 273 / 50%);
+
+  /* ── Radius scale ───────────────────────────────────────────── */
+  --radius-sm: calc(var(--radius) * 0.6);
+  --radius-md: calc(var(--radius) * 0.8);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) * 1.4);
+  --radius-2xl: calc(var(--radius) * 1.8);
+  --radius-3xl: calc(var(--radius) * 2.2);
+
+  /* ── Sub-brand accent overrides (set via JS at runtime) ─────── */
+  --sub-brand-accent: var(--primary);
+  --sub-brand-accent-foreground: var(--primary-foreground);
+}
+
+/* ── Base reset (opt-in via @layer base) ──────────────────────── */
+*,
+*::before,
+*::after {
+  border-color: var(--border);
+}
+
+html {
+  font-family: var(--font-body);
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  background-color: var(--background);
+  color: var(--foreground);
+}
+
+/* ── Utility classes ──────────────────────────────────────────── */
+.glow-indigo {
+  box-shadow: 0 0 25px -5px oklch(0.58 0.23 273 / 15%),
+    0 0 10px -6px oklch(0.58 0.23 273 / 20%);
+}
+
+.glass {
+  background: oklch(0.155 0.02 240 / 80%);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+}
+
+.text-gradient {
+  background: linear-gradient(
+    135deg,
+    oklch(0.75 0.15 273) 0%,
+    oklch(0.85 0.08 220) 100%
+  );
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}

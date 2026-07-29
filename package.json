@@ -1,0 +1,35 @@
+{
+  "name": "arc-ui",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Domain-customizable auth-first component system for the Arcevo ecosystem",
+  "type": "module",
+  "scripts": {
+    "build": "pnpm -r build",
+    "build:tokens": "pnpm -F @arc-ui/tokens build",
+    "build:components": "pnpm -F @arc-ui/components build",
+    "build:sdk": "pnpm -F @arc-ui/sdk build",
+    "release": "pnpm build && pnpm changeset publish",
+    "dev:landing": "pnpm -F @arc-ui/landing dev",
+    "dev:docs": "pnpm -F @arc-ui/docs dev",
+    "lint": "eslint . --ext .ts,.tsx --ignore-pattern dist --ignore-pattern .next",
+    "format": "prettier --write \"**/*.{ts,tsx,json,css,md}\" --ignore-path .gitignore",
+    "typecheck": "pnpm -r typecheck",
+    "nuke": "pnpm clean --lockfile"
+  },
+  "devDependencies": {
+    "@changesets/cli": "^2.31.1",
+    "@types/node": "^20",
+    "@types/react": "^19",
+    "@types/react-dom": "^19",
+    "eslint": "^9",
+    "prettier": "^3.8.3",
+    "tsup": "^8.5.1",
+    "typescript": "^5"
+  },
+  "engines": {
+    "node": ">=22",
+    "pnpm": ">=9"
+  },
+  "packageManager": "pnpm@11.17.0"
+}

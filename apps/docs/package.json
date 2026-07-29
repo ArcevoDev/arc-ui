@@ -1,0 +1,25 @@
+{
+  "name": "@arc-ui/docs",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "storybook dev -p 6006 --no-open",
+    "build": "storybook build -o dist",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@arc-ui/auth": "workspace:*",
+    "@arc-ui/components": "workspace:*",
+    "@arc-ui/sdk": "workspace:*",
+    "@arc-ui/tokens": "workspace:*"
+  },
+  "devDependencies": {
+    "@storybook/addon-essentials": "^8.6.12",
+    "@storybook/addon-themes": "^8.6.12",
+    "@storybook/react-vite": "^8.6.12",
+    "storybook": "^8.6.12",
+    "@storybook/react": "^8.6.12",
+    "typescript": "^5"
+  }
+}

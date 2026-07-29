@@ -1,0 +1,53 @@
+import { Meta } from "@storybook/blocks";
+
+<Meta title="Theming" />
+
+# Theming
+
+arc-ui is **dark-first** — the default theme uses dark backgrounds with light text. A light theme can be enabled by toggling a `data-theme` attribute.
+
+## How It Works
+
+All design tokens are defined in `:root`. When `data-theme="light"` is set on the `<html>` element, light values override the defaults:
+
+```css
+[data-theme="light"] {
+  --background: oklch(0.98 0.01 240);
+  --foreground: oklch(0.12 0.02 240);
+  /* ... more overrides */
+}
+```
+
+## Usage
+
+Storybook includes a theme toolbar toggle. In your app:
+
+```tsx
+import { useEffect, useState } from "react";
+
+function ThemeToggle() {
+  const [theme, setTheme] = useState("dark");
+
+  useEffect(() => {
+    document.documentElement.setAttribute("data-theme", theme);
+  }, [theme]);
+
+  return (
+    <button onClick={() => setTheme(theme === "dark" ? "light" : "dark")}>
+      Switch to {theme === "dark" ? "Light" : "Dark"} Mode
+    </button>
+  );
+}
+```
+
+## Domain Presets
+
+arc-ui ships with auth domain presets. Each preset configures MFA requirements, passkey support, session TTL, and more:
+
+| Preset | MFA | Passkey | Session TTL | Use Case |
+|---|---|---|---|---|
+| `fintechPreset` | Required | Yes | 15 min | Trading, banking |
+| `medPreset` | Required | No | 30 min | HIPAA-compliant |
+| `eduPreset` | Optional | Yes | 12 hr | Student portals |
+| `enterprisePreset` | Required | Yes | 8 hr | SSO + MFA |
+| `defaultPreset` | Optional | Yes | 8 hr | General |

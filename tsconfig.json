@@ -1,0 +1,11 @@
+{
+  "extends": "./tsconfig.base.json",
+  "files": [],
+  "references": [
+    { "path": "packages/tokens" },
+    { "path": "packages/sdk" },
+    { "path": "packages/components" },
+    { "path": "apps/landing" },
+    { "path": "apps/docs" }
+  ]
+}

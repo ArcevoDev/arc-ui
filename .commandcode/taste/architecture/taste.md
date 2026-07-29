@@ -1,0 +1,12 @@
+# architecture
+- Prefers clean directory scaffolding — empty stub directories that serve no purpose should be flagged and either populated or removed; every directory should have intentional content. Confidence: 0.85
+- Prefers domain-namespaced subdirectory organization (e.g., `forms/auth/`, `forms/mfa/`) with barrel exports resolving upward to a root barrel, keeping related files grouped by domain rather than flat. Confidence: 0.8
+- Uses barrel exports (index.ts re-exports) for grouped directories to improve import readability and provide clean public API surfaces. Confidence: 0.85
+- Prefers splitting large files (200-300+ lines) into smaller, focused modules extracted by concern, for future-proof maintainability and independent testability. Confidence: 0.85
+- Auth components must be domain-customizable (different configs for fintech vs med vs edu) — not one-size-fits-all. Confidence: 0.85
+- Include a welcoming landing page and deployed documentation site alongside the component library. Confidence: 0.70
+- Build a differentiated component library wired to arc-id SDK, not a generic clone of existing UI libraries. Confidence: 0.65
+- Prefers npm package installation as the primary consumption model for UI libraries (install and import directly like react-email), with CLI component init (like shadcn add) deferred as a secondary tier. Confidence: 0.8
+- Prefers publishing packages as public on npm (not private/internal), using changesets for versioning/changelogs and a CI/CD pipeline with GitHub Actions. Confidence: 0.8
+- Uses Storybook as the development preview environment for testing and validating components before deployment. Confidence: 0.8
+- Prefers a framework-agnostic, composable layout shell (slot-based: <Shell sidebar topbar>content</Shell>) that consumers wire their own routing into — not a framework-coupled layout. Confidence: 0.7

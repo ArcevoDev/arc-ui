@@ -11,11 +11,7 @@ const preview: Preview = {
       },
     },
     backgrounds: {
-      default: "dark",
-      values: [
-        { name: "dark", value: "oklch(0.12 0.02 240)" },
-        { name: "light", value: "#ffffff" },
-      ],
+      disable: true, // handled by tokens.css theme variables
     },
     viewport: {
       defaultViewport: "responsive",
@@ -30,6 +26,7 @@ const preview: Preview = {
       },
       defaultTheme: "dark",
       attributeName: "data-theme",
+      parentSelector: "html",
     }),
   ],
 };

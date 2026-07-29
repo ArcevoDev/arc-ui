@@ -18,6 +18,18 @@ export interface ArcIdClientConfig {
   baseUrl: string;
   apiKey?: string;
   fetchInit?: RequestInit;
+  /**
+   * Optional 401 auto-refresh hook.
+   * Called when any request returns 401. Return the new access token to
+   * retry the request, or null to propagate the error.
+   *
+   * Usage:
+   *   onTokenRefresh: async (failedToken) => {
+   *     const newToken = await authSdk.refresh(refreshToken);
+   *     return newToken ?? null;
+   *   }
+   */
+  onTokenRefresh?: (failedToken: string) => Promise<string | null>;
 }
 
 export class ArcIdClient {
@@ -27,65 +39,91 @@ export class ArcIdClient {
     this.config = config;
   }
 
+  /** Override the apiKey at runtime (e.g. after a token refresh) */
+  setApiKey(apiKey: string): void {
+    this.config.apiKey = apiKey;
+  }
+
   private async request<T>(
     method: string,
     path: string,
     body?: unknown,
     init?: RequestInit,
   ): Promise<ApiResponse<T>> {
-    try {
-      const url = `${this.config.baseUrl}${path}`;
-      const headers: Record<string, string> = {
-        "Content-Type": "application/json",
-      };
-      if (this.config.apiKey) {
-        headers["Authorization"] = `Bearer ${this.config.apiKey}`;
-      }
-
-      const response = await fetch(url, {
-        method,
-        headers: {
-          ...headers,
-          ...this.config.fetchInit?.headers,
-        },
-        body: body ? JSON.stringify(body) : undefined,
-        signal: this.config.fetchInit?.signal,
-        ...init,
-      });
-
-      if (!response.ok) {
-        let errBody: Partial<ApiError> = {};
-        try {
-          errBody = (await response.json()) as Partial<ApiError>;
-        } catch {
-          // ignore parse failure
+    const attempt = async (): Promise<ApiResponse<T>> => {
+      try {
+        const url = `${this.config.baseUrl}${path}`;
+        const headers: Record<string, string> = {
+          "Content-Type": "application/json",
+        };
+        if (this.config.apiKey) {
+          headers["Authorization"] = `Bearer ${this.config.apiKey}`;
         }
+
+        const response = await fetch(url, {
+          method,
+          headers: {
+            ...headers,
+            ...this.config.fetchInit?.headers,
+          },
+          body: body ? JSON.stringify(body) : undefined,
+          signal: this.config.fetchInit?.signal,
+          ...init,
+        });
+
+        if (!response.ok) {
+          let errBody: Partial<ApiError> = {};
+          try {
+            errBody = (await response.json()) as Partial<ApiError>;
+          } catch {
+            // ignore parse failure
+          }
+          return {
+            data: null,
+            error: {
+              statusCode: response.status,
+              error: errBody.error ?? "UNKNOWN_ERROR",
+              message: errBody.message ?? response.statusText,
+            },
+          };
+        }
+
+        if (response.status === 204) {
+          return { data: undefined as T, error: null };
+        }
+
+        const json = (await response.json()) as T;
+        return { data: json, error: null };
+      } catch (err) {
         return {
           data: null,
           error: {
-            statusCode: response.status,
-            error: errBody.error ?? "UNKNOWN_ERROR",
-            message: errBody.message ?? response.statusText,
+            statusCode: 0,
+            error: "NETWORK_ERROR",
+            message: err instanceof Error ? err.message : "Unknown network error",
           },
         };
       }
+    };
 
-      if (response.status === 204) {
-        return { data: undefined as T, error: null };
+    // Make the initial request
+    const result = await attempt();
+
+    // Auto-refresh on 401 if a tokenRefresher is configured
+    if (
+      result.error?.statusCode === 401 &&
+      this.config.onTokenRefresh &&
+      this.config.apiKey
+    ) {
+      const newToken = await this.config.onTokenRefresh(this.config.apiKey);
+      if (newToken) {
+        this.config.apiKey = newToken;
+        // Retry exactly once with the refreshed token
+        return attempt();
       }
-
-      const json = (await response.json()) as T;
-      return { data: json, error: null };
-    } catch (err) {
-      return {
-        data: null,
-        error: {
-          statusCode: 0,
-          error: "NETWORK_ERROR",
-          message: err instanceof Error ? err.message : "Unknown network error",
-        },
-      };
     }
+
+    return result;
   }
 
   get<T>(path: string, init?: RequestInit) {

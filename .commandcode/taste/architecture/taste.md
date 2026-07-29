@@ -10,3 +10,5 @@
 - Prefers publishing packages as public on npm (not private/internal), using changesets for versioning/changelogs and a CI/CD pipeline with GitHub Actions. Confidence: 0.8
 - Uses Storybook as the development preview environment for testing and validating components before deployment. Confidence: 0.8
 - Prefers a framework-agnostic, composable layout shell (slot-based: <Shell sidebar topbar>content</Shell>) that consumers wire their own routing into — not a framework-coupled layout. Confidence: 0.7
+- Design packages for unknown 3rd-party consumption — API surfaces, configurability, and docs must serve developers who have no knowledge of internal arc-ecosystem conventions; not just internal reuse across company repos. Confidence: 0.8
+- Before designing a shared abstraction package (e.g., layout), audit all consuming repos (arc-id, arcbase, arc-wallet) to find true shared patterns and avoid premature abstraction. Confidence: 0.7

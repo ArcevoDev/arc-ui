@@ -25,6 +25,11 @@ export interface ArcProviderProps {
   client: ArcIdClient;
   storage?: TokenStorage;
   children: React.ReactNode;
+  /** Called after session restore succeeds (user was rehydrated from stored tokens).
+   *  Useful for loading tenant/scoped data on app boot. */
+  onSessionRestore?: (user: AuthUser) => void;
+  /** Called when auth state changes (login, logout, session expiry). */
+  onAuthChange?: (state: { isAuthenticated: boolean; user: AuthUser | null }) => void;
 }
 
 /* ── Provider ──────────────────────────────────────────────── */
@@ -33,6 +38,8 @@ export function ArcProvider({
   client,
   storage = defaultStorage,
   children,
+  onSessionRestore,
+  onAuthChange,
 }: ArcProviderProps) {
   const authSdk = React.useMemo(() => new AuthSdk(client), [client]);
 
@@ -50,6 +57,24 @@ export function ArcProvider({
     error: null,
   });
 
+  /* ── Derive isAuthenticated (not stored in state) ──────────── */
+
+  const isAuthenticated = !!state.user && !!state.accessToken;
+
+  /* ── Track state changes for onAuthChange ──────────────────── */
+
+  const prevAuthRef = React.useRef(isAuthenticated);
+
+  React.useEffect(() => {
+    if (prevAuthRef.current !== isAuthenticated || state.isLoading === false) {
+      onAuthChange?.({
+        isAuthenticated,
+        user: state.user,
+      });
+    }
+    prevAuthRef.current = isAuthenticated;
+  }, [isAuthenticated, state.user, state.isLoading, onAuthChange]);
+
   /* ── Bootstrap: try to restore session ─────────────────────── */
 
   React.useEffect(() => {
@@ -63,22 +88,26 @@ export function ArcProvider({
       .me()
       .then((res: import("@arc-ui/sdk").ApiResponse<import("@arc-ui/sdk").UserProfile>) => {
         if (res.data) {
+          const user = res.data as unknown as AuthUser;
           setState((prev) => ({
             ...prev,
-            user: res.data as unknown as AuthUser,
+            user,
             isLoading: false,
           }));
+          onSessionRestore?.(user);
         } else {
           // Token expired — try refresh
           return refreshAccessToken(authSdk, storage).then((newToken) => {
             if (newToken) {
               return authSdk.me().then((r: import("@arc-ui/sdk").ApiResponse<import("@arc-ui/sdk").UserProfile>) => {
                 if (r.data) {
+                  const refreshedUser = r.data as unknown as AuthUser;
                   setState((prev) => ({
                     ...prev,
-                    user: r.data as unknown as AuthUser,
+                    user: refreshedUser,
                     isLoading: false,
                   }));
+                  onSessionRestore?.(refreshedUser);
                 } else {
                   throw new Error("Session expired");
                 }
@@ -171,7 +200,7 @@ export function ArcProvider({
 
   const value: AuthContextValue = {
     ...state,
-    isAuthenticated: !!state.user && !!state.accessToken,
+    isAuthenticated,
     login,
     register,
     logout,

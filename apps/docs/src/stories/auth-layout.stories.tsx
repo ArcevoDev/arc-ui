@@ -1,16 +1,16 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import { AppLayout, fintechLayoutPreset, eduLayoutPreset } from "@arc-ui/layout";
+import { AuthLayout, fintechLayoutPreset, eduLayoutPreset } from "@arc-ui/layout";
 import { Button } from "@arc-ui/components";
 
-const meta: Meta<typeof AppLayout> = {
-  title: "Layout/AppLayout",
-  component: AppLayout,
+const meta: Meta<typeof AuthLayout> = {
+  title: "Layout/AuthLayout",
+  component: AuthLayout,
   parameters: { layout: "fullscreen" },
   tags: ["autodocs"],
 };
 
 export default meta;
-type Story = StoryObj<typeof AppLayout>;
+type Story = StoryObj<typeof AuthLayout>;
 
 export const Fintech: Story = {
   args: {

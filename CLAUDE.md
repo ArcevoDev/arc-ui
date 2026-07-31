@@ -88,19 +88,19 @@ COMPLETE → (onSuccess callback) → redirect
 | Session TTL | 15 min | 30 min | 24 hr | 8 hr |
 | Magic link | ✅ | ❌ | ✅ | ❌ |
 
-## Build Status (2026-07-29)
+## Build Status (2026-07-31)
 
 1. ✅ `packages/tokens/`: Complete
-2. ✅ `packages/sdk/`: Complete
-3. ✅ `packages/components/`: 27 styled Radix components
-4. ✅ `packages/auth/`: ArcProvider, SignIn, SignUp, UserButton, Guard, MfaDialog, forms
-5. ✅ `packages/layout/`: ConsoleLayout, AppLayout, LandingLayout, 5 presets
-6. ✅ `apps/docs/`: Storybook 10.5.5, 34 story files + 5 MDX docs, mock SDK decorator
+2. ✅ `packages/sdk/`: Complete, strict domain types (`sdk/src/types.ts`)
+3. ✅ `packages/components/`: 35+ styled Radix components + theme system
+4. ✅ `packages/auth/`: ArcProvider, SignIn, SignUp, UserButton, Guard, MfaDialog, 8 standalone forms
+5. ✅ `packages/layout/`: ConsoleLayout (full + rail modes), AuthLayout, LandingLayout, 5 presets
+6. ✅ `apps/docs/`: Storybook 10.5.5, 50+ story files + 5 MDX docs, mock SDK decorator
 7. ✅ Changesets + npm publish pipeline
-8. 🔲 `apps/landing/`: Referenced in root scripts but directory doesn't exist
-9. 🔲 Layout stories: ConsoleLayout, AppLayout, Sidebar, Topbar, 5 presets: zero stories
-10. 🔲 Tests: zero test files across all packages
-11. 🔲 SignIn mfa_challenge: inline placeholder, not MfaVerifyForm
+8. ✅ `apps/landing/`: rebuilt public-facing site (vite + tailwind v4)
+9. ✅ Layout stories: ConsoleLayout, AuthLayout, Sidebar, Topbar, PageHeader, LandingLayout
+10. ✅ Tests: vitest workspace, 89 tests across sdk/components/auth/layout
+11. ✅ SignIn mfa_challenge wired to MfaVerifyForm
 
 ## Known Gaps for arc-id Consumption
 
@@ -109,24 +109,24 @@ When arc-id adopts arc-ui as its frontend, these need resolution:
 **Resolved blockers (were blockers, now fixed):**
 1. ✅ **SDK 401 auto-refresh**: Added `onTokenRefresh` callback to `ArcIdClient` (`client.ts:113-124`). Automatic retry on 401.
 2. ✅ **Placeholder handlers**: `handlePasskeyAuth` now calls `passkeySdk.authenticationOptions()` → `navigator.credentials.get()` → `passkeySdk.authenticate()`. `handleForgotPasswordSubmit` calls `authSdk.forgotPassword()`. No longer stubs.
+3. ✅ **Test infrastructure**: Vitest workspace, 89 tests across all packages.
+4. ✅ **SignIn MFA challenge**: Wired to `MfaVerifyForm` (2026-07-31).
+5. ✅ **Duplicate dropdowns**: `layout/UserMenu` now uses `@arc-ui/components` `DropdownMenu`.
+6. ✅ **Type strictness**: SDK now has strict domain interfaces in `sdk/src/types.ts`; `Record<string, unknown>` eliminated.
+7. ✅ **Sidebar router coupling**: `RouterAdapter` pattern (`router.tsx`) supports Next.js App Router, Remix, and React Router.
+8. ✅ **Theme switching**: `ThemeProvider`/`useTheme`/`ThemeToggle` with localStorage persistence + system preference detection.
 
 **Still open (not blockers):**
-3. **No test infrastructure**: Zero tests across the monorepo. Must be added before production consumption.
-4. **`SignIn` MFA challenge is a stub**: Renders inline Card HTML instead of actual `MfaVerifyForm`. Needs wiring to use the extracted form.
-5. **Duplicate dropdowns**: `layout/UserMenu` implements custom dropdown instead of using `@arc-ui/components` `DropdownMenu`.
-6. **No Tailwind config**: No `tailwind.config.*`. Relies on CSS variables. Consumers need `tailwindcss-animate` plugin.
+9. **OAuth provider buttons**: SignIn renders provider buttons from `config.oauthProviders` but they are inert; an `onOAuth` callback is planned.
+10. **No Tailwind config**: No `tailwind.config.*`. Relies on CSS variables. Consumers need `tailwindcss-animate` plugin.
+11. **Form validation**: Auth forms do client-side validation (password match, min length) but no integration with react-hook-form or zod.
 
 **Optimization opportunities for scalability & dynamism:**
-7. **Type strictness**: Overuse of `Record<string, unknown>` in SDK types (memberships, user fields). Should be strict interfaces. Cast patterns like `as unknown as AuthUser` are fragile.
-8. **No icon library**: Inline SVGs throughout (~20 extra lines per component). A shared icon registry or Lucide/Radi Icons integration would reduce bloat and enable runtime icon swapping for domain customization.
-9. **Sidebar router coupling**: Uses `window.location.pathname` for active link detection. A router adapter pattern would support Next.js App Router, Remix, and React Router equally.
-10. **Form validation**: Auth forms do client-side validation (password match, min length) but no integration with react-hook-form or zod. For third-party consumption, schema-driven validation would be more robust.
-11. **Domain preset extensibility**: Currently 5 hardcoded presets. A registry pattern (register custom domain configs) would let third parties add presets without forking.
-12. **Theme switching**: Dark-first via `data-theme` attribute. Light mode toggling works but has no persisted preference or system-preference detection. Adding `prefers-color-scheme` media query + localStorage persistence would be production-ready.
-13. **Bundle optimization**: tsup uses CLI flags, not config files. No code-splitting, no external analysis for tree-shake effectiveness. Adding bundle analysis (via `--metafile` or `@anthropic/bundle-visualizer`) would catch bloat early.
-14. **PostCSS config**: Required for Tailwind CSS v4. Not present in any package. Consumers must provide their own.
-15. **CSS build pipeline**: Tokens CSS is copied via inline `fs.cpSync` instead of a proper build step. A CSS build pipeline (PostCSS + autoprefixer + minification) would make the tokens package self-contained.
-16. **Cross-package dependency graph**: `tokens ← components ← auth ← layout` (plus SDK is peer of components/auth/layout). No circular deps: this is clean. But there's no enforced build order beyond the root script. Adding `turbo` or `nx` for task orchestration would make incremental builds reliable.
+12. **No icon library registry**: lucide-react adopted piecemeal. An IconRegistry with domain overrides would enable runtime icon swapping.
+13. **Domain preset extensibility**: Currently 5 hardcoded presets. A registry pattern (register custom domain configs) would let third parties add presets without forking.
+14. **Bundle optimization**: tsup uses CLI flags, not config files. No code-splitting, no external analysis for tree-shake effectiveness.
+15. **CSS build pipeline**: Tokens CSS is copied via inline `fs.cpSync` instead of a proper build step (PostCSS + autoprefixer + minification).
+16. **Cross-package dependency graph**: `tokens ← components ← auth ← layout` (plus SDK is peer). No circular deps. Adding `turbo`/`nx` for task orchestration would make incremental builds reliable.
 17. **Component a11y audit**: Radix primitives provide baseline accessibility, but compounded components (SignIn state machine, MfaDialog phases) need keyboard navigation and screen reader testing before third-party use.
 
 ## Consumption Target

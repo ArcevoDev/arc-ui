@@ -37,6 +37,8 @@ export interface SignInProps {
   config?: Partial<AuthConfig>;
   slots?: ComponentSlots;
   onSuccess?: (result: TokenPair) => void;
+  /** Called when a user clicks an OAuth provider button. Receives the provider id (e.g. "google"). */
+  onOAuth?: (provider: string) => void;
 }
 
 /* ── Method selector (internal to SignIn) ──────────────────── */
@@ -47,12 +49,14 @@ function SelectMethodStep({
   cfg,
   onSelectMethod,
   handlePasskeyAuth,
+  onOAuth,
 }: {
   appearance?: Appearance;
   slots?: ComponentSlots;
   cfg: AuthConfig;
   onSelectMethod: (step: SignInStep) => void;
   handlePasskeyAuth: () => void;
+  onOAuth?: (provider: string) => void;
 }) {
   return (
     <Card className={appearance?.className}>
@@ -84,7 +88,12 @@ function SelectMethodStep({
           <>
             <Separator className="my-2" />
             {cfg.oauthProviders.map((provider) => (
-              <Button key={provider} variant="outline" className="w-full">
+              <Button
+                key={provider}
+                variant="outline"
+                className="w-full"
+                onClick={() => onOAuth?.(provider)}
+              >
                 Sign in with {provider}
               </Button>
             ))}
@@ -102,6 +111,7 @@ export function SignIn({
   config: configOverrides,
   slots,
   onSuccess,
+  onOAuth,
 }: SignInProps) {
   const cfg = { ...defaultConfig, ...configOverrides };
   const { login, verifyMfa, isAuthenticated, client } = useAuth();
@@ -261,6 +271,7 @@ export function SignIn({
           cfg={cfg}
           onSelectMethod={setStep}
           handlePasskeyAuth={handlePasskeyAuth}
+          onOAuth={onOAuth}
         />
       );
     case "login_form":

@@ -54,7 +54,12 @@ export { type TenantSwitcherProps, TenantSwitcher } from "./tenant-switcher.js";
 
 export { type PageHeaderProps, PageHeader } from "./page-header.js";
 
-export { type AppLayoutProps, AppLayout } from "./app-layout.js";
+export {
+  type AuthLayoutProps,
+  AuthLayout,
+} from "./auth-layout.js";
+/** @deprecated Use AuthLayout. Kept as an alias for backwards compatibility. */
+export { AppLayout } from "./auth-layout.js";
 
 export { type ConsoleLayoutProps, ConsoleLayout } from "./console-layout.js";
 

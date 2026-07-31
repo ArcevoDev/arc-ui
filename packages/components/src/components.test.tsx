@@ -253,6 +253,42 @@ describe("Navbar", () => {
     expect(features).not.toHaveAttribute("aria-current", "page");
     expect(demo).toHaveAttribute("aria-current", "page");
   });
+
+  it("renders pill with actions, badges, and sub-links together", async () => {
+    const onNavigate = vi.fn();
+    render(
+      <Navbar
+        variant="pill"
+        brand="Acme"
+        links={[
+          { href: "/dashboard", label: "Dashboard" },
+          { href: "/inbox", label: "Inbox", badge: 5 },
+          {
+            href: "/product",
+            label: "Product",
+            children: [
+              { href: "/product/pricing", label: "Pricing" },
+              { href: "/product/changelog", label: "Changelog" },
+            ],
+          },
+        ]}
+        actions={<button type="button">Sign in</button>}
+        onNavigate={onNavigate}
+      />,
+    );
+
+    // Actions render in the pill bar
+    expect(screen.getByRole("button", { name: /sign in/i })).toBeInTheDocument();
+
+    // Badge renders next to the label
+    expect(screen.getByText("5")).toBeInTheDocument();
+
+    // Sub-links open a dropdown from the pill trigger
+    const product = screen.getByRole("button", { name: /product/i });
+    await userEvent.click(product);
+    expect(await screen.findByText("Pricing")).toBeInTheDocument();
+    expect(screen.getByText("Changelog")).toBeInTheDocument();
+  });
 });
 
 describe("NotificationDrawer", () => {

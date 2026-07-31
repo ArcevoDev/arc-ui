@@ -9,4 +9,6 @@
 - Deploys to Vercel for static sites and Storybook documentation builds. Confidence: 0.7
 - Produces migration documentation to ease consumption by downstream projects (e.g., arc-id migration guide). Confidence: 0.6
 - Prioritizes work by dependency-chain and impact: the blocking prerequisite gets tackled first (e.g., SDK auto-refresh before layout because it unblocks downstream repos). Confidence: 0.7
-n and impact: the blocking prerequisite gets tackled first (e.g., SDK auto-refresh before layout because it unblocks downstream repos). Confidence: 0.7
+- Commits and pushes incrementally: work is committed in logical batches per completed priority/feature (with descriptive commit messages and Co-authored-by attribution), not as one giant commit at the end; each batch is pushed to origin after verification. Confidence: 0.7
+- When packages are publish/deploy-ready, writes the concrete publish/deploy steps into .agent/output.txt (prereqs, version/publish commands, hosting config) rather than executing the publish itself. Confidence: 0.6
+- Transient session bookmarks like .agent/nt.txt are deleted once their content is absorbed and merged into .agent/summary-output.txt: stale notes files are not kept around after being folded into the summary. Confidence: 0.6

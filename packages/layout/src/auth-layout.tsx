@@ -1,20 +1,24 @@
 /**
- * @arc-ui/layout: AppLayout
+ * @arc-ui/layout: AuthLayout
  *
  * Auth page shell: split panel on desktop, centered card on mobile.
  * Used for login, register, MFA, forgot-password pages.
  * Configurable via LayoutConfig.brand.
+ *
+ * Named AuthLayout (formerly AppLayout) so its purpose is unambiguous:
+ * it is the branded auth page frame, not a general app shell. See
+ * ConsoleLayout for the dashboard shell and LandingLayout for marketing.
  */
 
 import * as React from "react";
 import type { LayoutConfig } from "./types.js";
 
-export interface AppLayoutProps {
+export interface AuthLayoutProps {
   config: LayoutConfig;
   children: React.ReactNode;
 }
 
-export function AppLayout({ config, children }: AppLayoutProps) {
+export function AuthLayout({ config, children }: AuthLayoutProps) {
   const { brand } = config;
 
   return (
@@ -117,3 +121,10 @@ export function AppLayout({ config, children }: AppLayoutProps) {
     </div>
   );
 }
+
+/**
+ * @deprecated Renamed to AuthLayout so its role as the branded auth
+ * page shell is unambiguous. This alias will be removed in a future
+ * major version.
+ */
+export const AppLayout = AuthLayout;

@@ -2,38 +2,8 @@ import { act, render, renderHook, screen, waitFor } from "@testing-library/react
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 import { ArcIdClient } from "@arc-ui/sdk";
 import { ArcProvider, useAuth } from "./provider.js";
-import type { TokenStorage } from "./storage.js";
+import { createMemoryStorage } from "./test-storage.js";
 import type { AuthUser } from "./types.js";
-
-/* ── In-memory storage ─────────────────────────────────────── */
-
-function createMemoryStorage(): TokenStorage & {
-  access: string | null;
-  refresh: string | null;
-  clearCount: number;
-} {
-  const storage = {
-    access: null as string | null,
-    refresh: null as string | null,
-    clearCount: 0,
-    getAccessToken: function () {
-      return this.access;
-    },
-    getRefreshToken: function () {
-      return this.refresh;
-    },
-    setTokens: function (a: string, r: string) {
-      this.access = a;
-      this.refresh = r;
-    },
-    clearTokens: function () {
-      this.access = null;
-      this.refresh = null;
-      this.clearCount++;
-    },
-  };
-  return storage;
-}
 
 const USER: AuthUser = {
   id: "u1",

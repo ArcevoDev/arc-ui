@@ -14,7 +14,7 @@ design manual (Alpha Palette), and your auth requirements differ per sector
 | `@arc-ui/sdk` | arc-id API client (pure fetch, typed, 10 domain SDKs) | ✅ Done |
 | `@arc-ui/components` | 35+ styled UI components (Radix + tailwind-merge + variants) | ✅ Done |
 | `@arc-ui/auth` | Auth components + domain presets: SignIn, SignUp, Guard, MfaDialog, forms | ✅ Done |
-| `@arc-ui/layout` | Domain-configurable app shell: ConsoleLayout, AppLayout, LandingLayout, Sidebar, Topbar, 5 presets | ✅ Done |
+| `@arc-ui/layout` | Domain-configurable app shell: ConsoleLayout, AuthLayout, LandingLayout, Sidebar, Topbar, 5 presets | ✅ Done |
 
 ## Quick Start
 
@@ -53,7 +53,10 @@ Framework-agnostic slot-based shells: no routing dependency:
   Two sidebar versions: `mode="full"` (always-labeled sidebar) and
   `mode="rail"` (collapsible to an icon-only rail, choice persisted in
   localStorage). Both are screen responsive (mobile collapses to a Sheet).
-- **AppLayout**: split-panel auth page (login/register/MFA), brand left panel
+- **AuthLayout**: branded split-panel auth page frame (login/register/MFA,
+  forgot-password) with brand logo, tagline, and benefits on the left panel
+  and a centered card on the right. Mobile shows a compact centered layout.
+  Formerly named AppLayout; the old name remains as a deprecated alias.
 - **LandingLayout**: full-bleed marketing page, glassmorphic hero, glow CTAs.
   Pair it with the `Navbar` `pill` variant for a floating frosted-glass bar.
 - **5 domain presets**: fintech, med, edu, enterprise, default

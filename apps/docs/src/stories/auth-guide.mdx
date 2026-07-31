@@ -72,6 +72,60 @@ User menu with avatar, name, organization switcher, and logout:
 <UserButton />
 ```
 
+## Customizing Components
+
+Every auth component is dynamically configurable by consumers through
+three prop families: `appearance`, `slots`, and `config`.
+
+### appearance (styling)
+
+Pass className overrides to the root element (or specific slots where
+supported):
+
+```tsx
+<SignIn
+  appearance={{ className: "max-w-md rounded-3xl border-primary/20" }}
+/>
+```
+
+### slots (content replacement)
+
+Replace built-in copy or nodes with your own. Available slots vary by
+component (title, description, footer, trigger, complete):
+
+```tsx
+<SignIn
+  slots={{
+    title: <h1>Welcome back</h1>,
+    description: <p>Sign in to your workspace</p>,
+    complete: <RedirectToDashboard />,
+  }}
+/>
+```
+
+### config (behavior)
+
+Pass a partial `AuthConfig` to override domain presets per-instance:
+
+```tsx
+<SignIn
+  config={{ requireMfa: true, allowMagicLink: false, oauthProviders: ["google"] }}
+  onOAuth={(provider) => window.location.assign(`/oauth/${provider}`)}
+/>
+```
+
+The same pattern applies to `SignUp`, `Guard`, `UserButton`, `MfaDialog`,
+and every standalone form (`LoginForm`, `MagicLinkForm`, `MfaVerifyForm`,
+and the rest). Because `config` is `Partial<AuthConfig>`, any consumer
+can build their own presets from an existing one and pass them per
+component:
+
+```tsx
+const myPreset = { ...defaultPreset, sessionTtl: 60, oauthProviders: ["google"] };
+
+<SignIn config={myPreset} />
+```
+
 ## MfaDialog
 
 MFA verification dialog with OTP input and recovery codes:

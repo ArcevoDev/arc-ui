@@ -36,7 +36,7 @@ export interface NavSection {
   items: NavItem[];
 }
 
-/* ── Brand identity (used in AppLayout left panel) ────────── */
+/* ── Brand identity (used in AuthLayout left panel) ────────── */
 
 export interface BrandConfig {
   /** Product / company name */

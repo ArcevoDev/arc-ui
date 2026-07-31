@@ -239,6 +239,20 @@ describe("Navbar", () => {
     expect(tray).toHaveClass("rounded-full");
     expect(tray).toHaveClass("bg-muted/40");
   });
+
+  it("marks a hash link active when the hash matches", () => {
+    const anchorLinks: NavLink[] = [
+      { href: "#features", label: "Features" },
+      { href: "#demo", label: "Demo" },
+    ];
+    window.location.hash = "#demo";
+    render(<Navbar brand="Acme" links={anchorLinks} />);
+
+    const features = screen.getByRole("link", { name: /features/i });
+    const demo = screen.getByRole("link", { name: /demo/i });
+    expect(features).not.toHaveAttribute("aria-current", "page");
+    expect(demo).toHaveAttribute("aria-current", "page");
+  });
 });
 
 describe("NotificationDrawer", () => {

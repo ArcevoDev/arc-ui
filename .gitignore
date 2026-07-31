@@ -7,3 +7,8 @@ dist
 .env.local
 .DS_Store
 *.log
+# scratch / generated agent output
+test-out.txt
+typecheck-out.txt
+ui_codebase_snapshot.txt
+storybook-static

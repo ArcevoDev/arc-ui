@@ -241,7 +241,7 @@ function NavLinkItem({
     link.active ??
     (router
       ? router.isActive(link.href)
-      : typeof window !== "undefined" && window.location.pathname === link.href);
+      : typeof window !== "undefined" && isHrefActive(link.href));
 
   // In pill mode the active item gets a solid rounded chip on the tray.
   const itemClass = cn(
@@ -437,3 +437,15 @@ function MobileNavLink({
 }
 
 Navbar.displayName = "Navbar";
+
+/**
+ * Active-state matching for plain anchors:
+ * - Hash links ("#features") match against window.location.hash.
+ * - Path links ("/dashboard") match the pathname.
+ */
+function isHrefActive(href: string): boolean {
+  if (href.startsWith("#")) {
+    return window.location.hash === href;
+  }
+  return window.location.pathname === href;
+}

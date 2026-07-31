@@ -1,5 +1,5 @@
 /**
- * @arc-ui/layout — LandingLayout
+ * @arc-ui/layout: LandingLayout
  *
  * Full-bleed marketing/landing page shell.
  * Glassmorphic hero section, glow CTAs, text-gradient headings.
@@ -27,14 +27,10 @@ export function LandingLayout({
 }: LandingLayoutProps) {
   return (
     <div className="flex min-h-screen flex-col bg-background">
-      {/* Top nav bar */}
-      {nav && (
-        <nav className="sticky top-0 z-50 border-b border-border/50 bg-background/80 backdrop-blur-md">
-          <div className="mx-auto flex h-16 max-w-7xl items-center justify-between px-8">
-            {nav}
-          </div>
-        </nav>
-      )}
+      {/* Top nav. Rendered as-is so the consumer owns positioning:
+          the Navbar component's sticky/pill variants handle their own
+          top offset, width, and backdrop. */}
+      {nav}
 
       {/* Hero */}
       <section className="relative overflow-hidden">

@@ -1,7 +1,7 @@
 /**
- * @arc-ui/layout — ConsoleLayout
+ * @arc-ui/layout: ConsoleLayout
  *
- * Dashboard shell — fixed sidebar + topbar + content area.
+ * Dashboard shell: fixed sidebar + topbar + content area.
  * On mobile the sidebar collapses into a Sheet overlay.
  * Uses LayoutProvider for sidebar state.
  */
@@ -12,13 +12,18 @@ import { Sheet, SheetContent } from "@arc-ui/components";
 import { useLayout, LayoutProvider } from "./layout-context.js";
 import { Sidebar } from "./sidebar.js";
 import { Topbar } from "./topbar.js";
-import type { LayoutConfig, Tenant } from "./types.js";
+import type { ConsoleLayoutMode, LayoutConfig, Tenant } from "./types.js";
+import type { RouterAdapter } from "./router.js";
 
 export interface ConsoleLayoutProps {
   config: LayoutConfig;
   tenants?: Tenant[];
   activeTenant?: Tenant | null;
   onTenantSwitch?: (tenantId: string) => void;
+  /** Sidebar mode. "full" = always-labeled, "rail" = collapsible icon-only. Default: "full" */
+  mode?: ConsoleLayoutMode;
+  /** Framework-aware navigation (Next <Link>, react-router <Link>, ...). */
+  router?: RouterAdapter;
   children: React.ReactNode;
 }
 
@@ -27,10 +32,11 @@ function ConsoleLayoutInner({
   tenants,
   activeTenant,
   onTenantSwitch,
+  mode = "full",
   children,
 }: ConsoleLayoutProps) {
   const { isAuthenticated, isLoading } = useAuth();
-  const { sidebarOpen, setSidebarOpen } = useLayout();
+  const { sidebarOpen, setSidebarOpen, sidebarCollapsed } = useLayout();
 
   // Show loading state while auth resolves
   if (isLoading) {
@@ -41,16 +47,18 @@ function ConsoleLayoutInner({
     );
   }
 
-  // Not authenticated — render children directly (let Guard or SignIn handle it)
+  // Not authenticated: render children directly (let Guard or SignIn handle it)
   if (!isAuthenticated) {
     return <>{children}</>;
   }
+
+  const sidebarWidth = mode === "rail" && sidebarCollapsed ? "lg:pl-[68px]" : "lg:pl-[260px]";
 
   return (
     <div className="flex min-h-screen bg-background">
       {/* Desktop sidebar */}
       <div className="hidden lg:block">
-        <Sidebar config={config} />
+        <Sidebar config={config} collapsed={mode === "rail" && sidebarCollapsed} />
       </div>
 
       {/* Mobile sidebar (sheet) */}
@@ -61,11 +69,12 @@ function ConsoleLayoutInner({
       </Sheet>
 
       {/* Main area */}
-      <div className="flex flex-1 flex-col lg:pl-[260px]">
+      <div className={`flex flex-1 flex-col transition-[padding] duration-200 ${sidebarWidth}`}>
         <Topbar
           tenants={tenants}
           activeTenant={activeTenant}
           onTenantSwitch={onTenantSwitch}
+          mode={mode}
         />
         <main className="flex-1 p-8">
           <div className="mx-auto w-full max-w-[1440px]">{children}</div>
@@ -77,7 +86,7 @@ function ConsoleLayoutInner({
 
 export function ConsoleLayout(props: ConsoleLayoutProps) {
   return (
-    <LayoutProvider>
+    <LayoutProvider router={props.router}>
       <ConsoleLayoutInner {...props} />
     </LayoutProvider>
   );

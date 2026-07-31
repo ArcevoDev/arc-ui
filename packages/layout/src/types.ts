@@ -1,5 +1,5 @@
 /**
- * @arc-ui/layout — Core types
+ * @arc-ui/layout: Core types
  *
  * LayoutConfig drives the entire app shell: sidebar nav, brand identity,
  * and feature toggles. Domain presets in presets.ts provide pre-built
@@ -7,6 +7,7 @@
  */
 
 import type { ReactNode } from "react";
+import type { RouterAdapter } from "./router.js";
 
 /* ── Nav shape (mirrors arc-id's navConfig structure) ──────── */
 
@@ -15,12 +16,17 @@ export interface NavItem {
   href: string;
   /** Display label */
   label: string;
-  /** Icon component (consumer passes e.g. lucide icon) */
-  icon: ReactNode;
+  /** Optional icon element (consumer passes e.g. lucide <BarChart3 />) */
+  icon?: ReactNode;
   /** Optional badge count or label (e.g. "3", "New") */
   badge?: string | number;
-  /** Optional RBAC permission string — reserved for future gating */
+  /** Optional RBAC permission string: reserved for future gating */
   requiredPermission?: string;
+  /**
+   * Optional nested children. When present, the item renders as a
+   * collapsible group that expands to reveal its children inline.
+   */
+  children?: NavItem[];
 }
 
 export interface NavSection {
@@ -71,12 +77,23 @@ export interface Tenant {
   plan?: string;
 }
 
+/* ── Layout modes ──────────────────────────────────────────── */
+
+/** ConsoleLayout sidebar mode. "full" = always-labeled sidebar, "rail" = collapsible icon-only sidebar. */
+export type ConsoleLayoutMode = "full" | "rail";
+
 /* ── Layout context value ─────────────────────────────────── */
 
 export interface LayoutContextValue {
   sidebarOpen: boolean;
   setSidebarOpen: (open: boolean) => void;
   toggleSidebar: () => void;
+  /** Rail mode: sidebar collapsed to icon-only (desktop only). Default: false */
+  sidebarCollapsed: boolean;
+  setSidebarCollapsed: (collapsed: boolean) => void;
+  toggleSidebarCollapsed: () => void;
+  /** Framework-aware navigation. Defaults to window.location + plain <a>. */
+  router?: RouterAdapter;
 }
 
 /* ── Component props ──────────────────────────────────────── */

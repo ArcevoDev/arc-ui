@@ -1,5 +1,5 @@
 /**
- * @arc-ui/layout — Domain-configurable app shell components.
+ * @arc-ui/layout: Domain-configurable app shell components.
  *
  * Usage:
  *   import { ConsoleLayout, Sidebar, PageHeader } from "@arc-ui/layout";
@@ -21,6 +21,7 @@ export type {
   Tenant,
   LayoutContextValue,
   LayoutProviderProps,
+  ConsoleLayoutMode,
 } from "./types.js";
 
 /* ── Presets ──────────────────────────────────────────────── */
@@ -34,6 +35,13 @@ export {
 
 /* ── Context ──────────────────────────────────────────────── */
 export { LayoutProvider, useLayout } from "./layout-context.js";
+
+/* ── Router adapter ───────────────────────────────────────── */
+export {
+  createDefaultAdapter,
+  matchPath,
+} from "./router.js";
+export type { RouterAdapter, RouterLinkProps } from "./router.js";
 
 /* ── Components ───────────────────────────────────────────── */
 export { type SidebarProps, Sidebar } from "./sidebar.js";

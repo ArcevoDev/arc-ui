@@ -1,5 +1,5 @@
 /**
- * @arc-ui/layout — Tenant Switcher
+ * @arc-ui/layout: Tenant Switcher
  *
  * Select dropdown for switching between organisations/tenants.
  * Auto-hidden when there's only one tenant.

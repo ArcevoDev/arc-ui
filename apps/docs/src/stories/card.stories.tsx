@@ -37,3 +37,27 @@ export const Simple: Story = {
     </Card>
   ),
 };
+
+export const Variants: Story = {
+  render: () => (
+    <div className="grid w-full max-w-3xl gap-4 sm:grid-cols-2">
+      {(["default", "glass", "glow", "ghost", "outline", "elevated", "interactive"] as const).map(
+        (variant) => (
+          <Card key={variant} variant={variant} className="w-full">
+            <CardHeader>
+              <CardTitle className="capitalize">{variant}</CardTitle>
+              <CardDescription>
+                The {variant} variant using the shared card chrome.
+              </CardDescription>
+            </CardHeader>
+            <CardContent>
+              <p className="text-sm text-muted-foreground">
+                Cards carry the surface, border and shadow tokens so content stays readable in any theme.
+              </p>
+            </CardContent>
+          </Card>
+        ),
+      )}
+    </div>
+  ),
+};

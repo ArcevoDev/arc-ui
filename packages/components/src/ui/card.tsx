@@ -10,6 +10,10 @@ const cardVariants = cva("rounded-xl border shadow", {
         "glass-card text-card-foreground",
       glow: "bg-card text-card-foreground glow-indigo",
       ghost: "border-transparent bg-transparent shadow-none",
+      outline: "border bg-transparent text-card-foreground shadow-none",
+      elevated: "bg-card text-card-foreground shadow-md",
+      interactive:
+        "bg-card text-card-foreground shadow transition-colors hover:bg-accent/50 cursor-pointer",
     },
   },
   defaultVariants: {

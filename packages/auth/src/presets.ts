@@ -1,5 +1,5 @@
 /**
- * Domain presets — pre-configured AuthConfig for common domains.
+ * Domain presets: pre-configured AuthConfig for common domains.
  *
  * Each preset tailors auth behavior (MFA requirement, session TTL,
  * allowed methods, etc.) to the security and UX needs of that domain.
@@ -17,7 +17,7 @@
 import type { AuthConfig } from "./types.js";
 
 /**
- * Fintech — high security, short sessions, mandatory MFA.
+ * Fintech: high security, short sessions, mandatory MFA.
  * Passkeys discouraged (device-bound auth is rare in regulated finance).
  */
 export const fintechPreset: AuthConfig = {
@@ -31,7 +31,7 @@ export const fintechPreset: AuthConfig = {
 };
 
 /**
- * Medical / Healthcare — high security, medium sessions, mandatory MFA.
+ * Medical / Healthcare: high security, medium sessions, mandatory MFA.
  * HIPAA considerations: short sessions, no passkeys (shared device risk).
  */
 export const medPreset: AuthConfig = {
@@ -45,8 +45,8 @@ export const medPreset: AuthConfig = {
 };
 
 /**
- * Education — low friction, long sessions, passkey-friendly.
- * MFA optional — most edu platforms don't mandate it.
+ * Education: low friction, long sessions, passkey-friendly.
+ * MFA optional: most edu platforms don't mandate it.
  */
 export const eduPreset: AuthConfig = {
   requireMfa: false,
@@ -59,7 +59,7 @@ export const eduPreset: AuthConfig = {
 };
 
 /**
- * Enterprise — high security, moderate sessions, SSO-first.
+ * Enterprise: high security, moderate sessions, SSO-first.
  * Passkeys supported (enterprises often use YubiKeys / Windows Hello).
  * Magic links are a security risk in enterprise contexts.
  */
@@ -74,7 +74,7 @@ export const enterprisePreset: AuthConfig = {
 };
 
 /**
- * Default / general-purpose — balanced security and UX.
+ * Default / general-purpose: balanced security and UX.
  */
 export const defaultPreset: AuthConfig = {
   requireMfa: false,

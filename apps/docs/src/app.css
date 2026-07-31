@@ -1,0 +1,24 @@
+/* ── Google Fonts ──────────────────────────────────────────── */
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&family=Montserrat:wght@600;700;800&family=Rajdhani:wght@500;600;700&display=swap");
+
+/* ── Tailwind v4 (Rust parser, CSS-native config) ──────────── */
+@import "tailwindcss";
+
+/* ── arc-ui design tokens (CSS custom properties) ──────────── */
+@import "../../../packages/tokens/src/tokens.css";
+
+/* ── Tailwind v4 theme extension (maps CSS vars → utilities) ─ */
+@import "../../../packages/tokens/src/tailwind.css";
+
+/* ── Scanner hints: crawl workspace packages for class names: */
+@source "../../../packages/components/src";
+@source "../../../packages/layout/src";
+@source "../../../packages/auth/src";
+
+/* ── Storybook code blocks: force JetBrains Mono ──────────────── */
+.sbdocs pre,
+.sbdocs code,
+.docblock-source,
+.docblock-code-toggle {
+  font-family: var(--font-mono) !important;
+}

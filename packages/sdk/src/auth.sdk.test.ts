@@ -1,0 +1,164 @@
+import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
+import { ArcIdClient } from "./client.js";
+import { AuthSdk } from "./auth.sdk.js";
+
+describe("AuthSdk", () => {
+  let fetchMock: ReturnType<typeof vi.fn>;
+  let client: ArcIdClient;
+  let auth: AuthSdk;
+
+  beforeEach(() => {
+    fetchMock = vi.fn();
+    globalThis.fetch = fetchMock as unknown as typeof fetch;
+    client = new ArcIdClient({ baseUrl: "https://auth.arcevo.dev/api/v1" });
+    auth = new AuthSdk(client);
+  });
+
+  afterEach(() => {
+    vi.restoreAllMocks();
+  });
+
+  function mockJson(body: unknown, status = 200): void {
+    fetchMock.mockResolvedValue(
+      new Response(JSON.stringify(body), {
+        status,
+        headers: { "Content-Type": "application/json" },
+      }),
+    );
+  }
+
+  function lastCall(): [string, RequestInit] {
+    const call = fetchMock.mock.calls.at(-1);
+    if (!call) throw new Error("fetch not called");
+    return call as unknown as [string, RequestInit];
+  }
+
+  const user = { id: "u1", email: "a@b.c", name: "Ada", memberships: [] };
+
+  const loginNoMfa = {
+    identity: user,
+    sessionId: "sess-1",
+    requiresMfa: false,
+    mfaEnrollmentRequired: false,
+    mfaTypes: [],
+    accessToken: "at",
+    refreshToken: "rt",
+    idToken: null,
+    expiresIn: 900,
+  };
+
+  const loginWithMfa = {
+    identity: user,
+    sessionId: "sess-1",
+    requiresMfa: true,
+    mfaEnrollmentRequired: false,
+    mfaTypes: ["TOTP"],
+  };
+
+  it("login posts credentials to /auth/login and unwraps the envelope", async () => {
+    mockJson({ success: true, data: loginNoMfa });
+
+    const res = await auth.login("a@b.c", "pw");
+
+    expect(res.data).toEqual(loginNoMfa);
+    const [url, init] = lastCall();
+    expect(url).toContain("/auth/login");
+    expect(JSON.parse(init.body as string)).toEqual({ email: "a@b.c", password: "pw" });
+  });
+
+  it("login surfaces MFA challenge without tokens", async () => {
+    mockJson({ success: true, data: loginWithMfa });
+
+    const res = await auth.login("a@b.c", "pw");
+
+    expect(res.data?.requiresMfa).toBe(true);
+    expect(res.data?.sessionId).toBe("sess-1");
+    expect(res.data?.accessToken).toBeUndefined();
+  });
+
+  it("register returns the identity only (no tokens)", async () => {
+    mockJson({ success: true, data: { identity: user } });
+
+    const res = await auth.register("Ada", "a@b.c", "pw");
+
+    expect(res.data).toEqual({ identity: user });
+    const [, init] = lastCall();
+    expect(JSON.parse(init.body as string)).toEqual({
+      name: "Ada",
+      email: "a@b.c",
+      password: "pw",
+    });
+  });
+
+  it("verifyMfa posts code + sessionId", async () => {
+    mockJson({
+      success: true,
+      data: {
+        sessionId: "sess-1",
+        accessToken: "at",
+        refreshToken: "rt",
+        idToken: null,
+        expiresIn: 900,
+      },
+    });
+
+    await auth.verifyMfa("123456", "sess-1");
+
+    const [url, init] = lastCall();
+    expect(url).toContain("/auth/mfa/verify");
+    expect(JSON.parse(init.body as string)).toEqual({
+      code: "123456",
+      sessionId: "sess-1",
+    });
+  });
+
+  it("forgotPassword posts email to /auth/password/reset", async () => {
+    mockJson({ success: true, data: {} });
+
+    await auth.forgotPassword("a@b.c");
+
+    const [url, init] = lastCall();
+    expect(url).toContain("/auth/password/reset");
+    expect(JSON.parse(init.body as string)).toEqual({ email: "a@b.c" });
+  });
+
+  it("refresh posts refresh_token grant and normalizes the bare snake_case response", async () => {
+    mockJson({
+      access_token: "new-at",
+      refresh_token: "new-rt",
+      expires_in: 900,
+      token_type: "Bearer",
+    });
+
+    const res = await auth.refresh("old-rt");
+
+    const [url, init] = lastCall();
+    expect(url).toContain("/oauth/token");
+    expect(JSON.parse(init.body as string)).toEqual({
+      grant_type: "refresh_token",
+      refresh_token: "old-rt",
+    });
+    expect(res.data?.accessToken).toBe("new-at");
+    expect(res.data?.refreshToken).toBe("new-rt");
+    expect(res.data?.expiresIn).toBe(900);
+  });
+
+  it("revokeSession DELETEs the session endpoint", async () => {
+    mockJson({ success: true, data: {} });
+
+    await auth.revokeSession("sess-9");
+
+    const [, init] = lastCall();
+    expect(init.method).toBe("DELETE");
+    expect(lastCall()[0]).toContain("/auth/sessions/sess-9");
+  });
+
+  it("surfaces API errors without throwing", async () => {
+    mockJson({ success: false, error: "RATE_LIMITED", message: "Slow down" }, 429);
+
+    const res = await auth.login("a@b.c", "pw");
+
+    expect(res.data).toBeNull();
+    expect(res.error).toMatchObject({ statusCode: 429, message: "Slow down" });
+  });
+});

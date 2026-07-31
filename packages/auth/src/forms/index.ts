@@ -5,6 +5,8 @@ export {
   MagicLinkForm,
   type ForgotPasswordFormProps,
   ForgotPasswordForm,
+  type ResetPasswordFormProps,
+  ResetPasswordForm,
 } from "./auth/index.js";
 
 export {

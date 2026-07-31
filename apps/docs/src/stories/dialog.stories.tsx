@@ -43,3 +43,50 @@ export const Default: Story = {
     </Dialog>
   ),
 };
+
+export const Compact: Story = {
+  render: () => (
+    <Dialog defaultOpen>
+      <DialogTrigger asChild>
+        <Button variant="outline">Open Dialog</Button>
+      </DialogTrigger>
+      <DialogContent variant="compact">
+        <DialogHeader>
+          <DialogTitle>Delete account?</DialogTitle>
+          <DialogDescription>
+            This action is permanent and removes all of your data.
+          </DialogDescription>
+        </DialogHeader>
+        <DialogFooter>
+          <DialogClose asChild>
+            <Button variant="outline">Cancel</Button>
+          </DialogClose>
+          <Button variant="destructive">Delete</Button>
+        </DialogFooter>
+      </DialogContent>
+    </Dialog>
+  ),
+};
+
+export const Blurred: Story = {
+  render: () => (
+    <Dialog defaultOpen>
+      <DialogTrigger asChild>
+        <Button variant="outline">Open Dialog</Button>
+      </DialogTrigger>
+      <DialogContent variant="blurred">
+        <DialogHeader>
+          <DialogTitle>Blurred overlay</DialogTitle>
+          <DialogDescription>
+            A frosted backdrop that keeps the page softly visible behind it.
+          </DialogDescription>
+        </DialogHeader>
+        <DialogFooter>
+          <DialogClose asChild>
+            <Button variant="outline">Close</Button>
+          </DialogClose>
+        </DialogFooter>
+      </DialogContent>
+    </Dialog>
+  ),
+};

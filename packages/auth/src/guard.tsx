@@ -1,5 +1,5 @@
 /**
- * Guard — route/component-level auth guard.
+ * Guard: route/component-level auth guard.
  *
  * Wraps children and renders them only when the user meets the
  * configured requirements. Supports role-based access control.
@@ -39,12 +39,12 @@ export interface GuardProps {
 export function Guard({ role, fallback = null, children, appearance }: GuardProps) {
   const { user, isAuthenticated, isLoading } = useAuth();
 
-  // Still loading auth state — render nothing or a skeleton
+  // Still loading auth state: render nothing or a skeleton
   if (isLoading) {
     return null;
   }
 
-  // Not authenticated — show fallback
+  // Not authenticated: show fallback
   if (!isAuthenticated || !user) {
     return <>{fallback}</>;
   }
@@ -52,7 +52,7 @@ export function Guard({ role, fallback = null, children, appearance }: GuardProp
   // Role check: look through memberships for the required role
   if (role && user.memberships) {
     const hasRole = user.memberships.some(
-      (m: Record<string, unknown>) => m.role === role || m.name === role,
+      (m) => m.role === role || m.name === role,
     );
     if (!hasRole) {
       return <>{fallback}</>;

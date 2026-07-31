@@ -4,7 +4,7 @@ import { Meta } from "@storybook/blocks";
 
 # Theming
 
-arc-ui is **dark-first** — the default theme uses dark backgrounds with light text. A light theme can be enabled by toggling a `data-theme` attribute.
+arc-ui is **dark-first**: the default theme uses dark backgrounds with light text. A light theme can be enabled by toggling a `data-theme` attribute.
 
 ## How It Works
 
@@ -18,27 +18,52 @@ All design tokens are defined in `:root`. When `data-theme="light"` is set on th
 }
 ```
 
-## Usage
+## ThemeProvider
 
-Storybook includes a theme toolbar toggle. In your app:
+The `@arc-ui/components` package ships a complete theme system: `ThemeProvider`, `ThemeToggle`, and `useTheme`. It supports light/dark/system, persists to `localStorage`, follows the OS preference, and lets consumers override any token per brand.
 
 ```tsx
-import { useEffect, useState } from "react";
+import {
+  ThemeProvider,
+  ThemeToggle,
+  useTheme,
+} from "@arc-ui/components";
 
-function ThemeToggle() {
-  const [theme, setTheme] = useState("dark");
-
-  useEffect(() => {
-    document.documentElement.setAttribute("data-theme", theme);
-  }, [theme]);
-
+function App() {
   return (
-    <button onClick={() => setTheme(theme === "dark" ? "light" : "dark")}>
-      Switch to {theme === "dark" ? "Light" : "Dark"} Mode
-    </button>
+    <ThemeProvider defaultTheme="system">
+      <Nav />
+      <Page />
+    </ThemeProvider>
   );
 }
+
+// Anywhere inside the provider:
+function Nav() {
+  const { theme, resolvedTheme, toggleTheme } = useTheme();
+  return <ThemeToggle />;
+}
 ```
+
+## Customizing Tokens Per Brand
+
+Pass `overrideVars` to remap any design-token CSS variable for a brand or domain: useful for fintech, healthcare, and education consumers:
+
+```tsx
+<ThemeProvider
+  defaultTheme="dark"
+  overrideVars={{
+    "--primary": "oklch(0.55 0.2 162)", // brand green
+    "--sub-brand-accent": "oklch(0.6 0.15 250)",
+  }}
+>
+  <App />
+</ThemeProvider>
+```
+
+## System Preference
+
+Use `theme="system"` to follow the OS preference. The provider resolves it to light/dark via `prefers-color-scheme` and re-applies on OS changes. The resolved value is exposed as `resolvedTheme`.
 
 ## Domain Presets
 

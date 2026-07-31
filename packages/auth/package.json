@@ -1,24 +1,28 @@
 {
   "name": "@arc-ui/auth",
   "version": "0.1.0",
-  "description": "Domain-customizable auth components for the ArcevoCirqle ecosystem — ArcProvider, SignIn/SignUp, Guard, MfaDialog, and 5 domain presets (fintech, med, edu, enterprise, default). Wired to @arc-ui/sdk.",
+  "description": "Domain-customizable auth components for the ArcevoCirqle ecosystem: ArcProvider, SignIn/SignUp, Guard, MfaDialog, and 5 domain presets (fintech, med, edu, enterprise, default). Wired to @arc-ui/sdk.",
   "type": "module",
   "exports": {
     ".": {
       "types": "./dist/index.d.ts",
       "import": "./dist/index.js",
       "default": "./dist/index.js"
-    }
+    },
+    "./package.json": "./package.json"
   },
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
+  "sideEffects": false,
   "files": [
     "dist"
   ],
   "scripts": {
     "build": "tsup src/index.ts --format esm --dts --clean",
     "clean": "rm -rf dist",
-    "typecheck": "tsc --noEmit"
+    "typecheck": "tsc --noEmit",
+    "test": "vitest run",
+    "test:watch": "vitest"
   },
   "publishConfig": {
     "access": "public"
@@ -43,6 +47,8 @@
     "react-dom": "^19"
   },
   "devDependencies": {
+    "@testing-library/react": "^16.3.0",
+    "@testing-library/user-event": "^14.6.1",
     "@types/react": "^19",
     "@types/react-dom": "^19",
     "react": "^19",
@@ -51,6 +57,6 @@
     "typescript": "^5"
   },
   "engines": {
-    "node": ">=22"
+    "node": ">=20"
   }
 }

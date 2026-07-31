@@ -1,5 +1,5 @@
 /**
- * MfaRecoveryForm — single recovery code input.
+ * MfaRecoveryForm: single recovery code input.
  */
 
 import * as React from "react";

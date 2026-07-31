@@ -28,11 +28,27 @@ const badgeVariants = cva(
 
 export interface BadgeProps
   extends React.HTMLAttributes<HTMLDivElement>,
-    VariantProps<typeof badgeVariants> {}
+    VariantProps<typeof badgeVariants> {
+  /** Optional leading icon element (e.g. lucide <Sparkles />) */
+  icon?: React.ReactNode;
+  /** Render an icon-only square badge. Default: false */
+  iconOnly?: boolean;
+}
 
-function Badge({ className, variant, ...props }: BadgeProps) {
+function Badge({ className, variant, icon, iconOnly, children, ...props }: BadgeProps) {
   return (
-    <div className={cn(badgeVariants({ variant }), className)} {...props} />
+    <div
+      className={cn(
+        badgeVariants({ variant }),
+        "gap-1",
+        iconOnly && "size-6 justify-center p-0",
+        className,
+      )}
+      {...props}
+    >
+      {icon && <span className="shrink-0 leading-none">{icon}</span>}
+      {!iconOnly && children}
+    </div>
   );
 }
 

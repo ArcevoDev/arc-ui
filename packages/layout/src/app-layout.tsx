@@ -1,7 +1,7 @@
 /**
- * @arc-ui/layout — AppLayout
+ * @arc-ui/layout: AppLayout
  *
- * Auth page shell — split panel on desktop, centered card on mobile.
+ * Auth page shell: split panel on desktop, centered card on mobile.
  * Used for login, register, MFA, forgot-password pages.
  * Configurable via LayoutConfig.brand.
  */
@@ -19,7 +19,7 @@ export function AppLayout({ config, children }: AppLayoutProps) {
 
   return (
     <div className="flex min-h-screen bg-background">
-      {/* Left panel — hidden below lg */}
+      {/* Left panel: hidden below lg */}
       <div className="hidden flex-col justify-between bg-[#0A1A2F] p-8 lg:flex lg:w-1/2">
         <div className="flex flex-col gap-8">
           {/* Logo + Name */}
@@ -82,7 +82,7 @@ export function AppLayout({ config, children }: AppLayoutProps) {
         <p className="text-xs text-[#D4AF37]">ArcevoCirqle Ecosystem</p>
       </div>
 
-      {/* Right panel — centered card */}
+      {/* Right panel: centered card */}
       <div className="flex flex-1 flex-col items-center justify-center p-4 lg:p-8">
         {/* Mobile logo (hidden on lg+) */}
         <div className="mb-8 flex flex-col items-center gap-2 lg:hidden">

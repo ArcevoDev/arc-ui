@@ -1,5 +1,5 @@
 /**
- * @arc-ui/sdk — arc-id API client
+ * @arc-ui/sdk: arc-id API client
  *
  * Pure fetch. No framework dependencies.
  *
@@ -12,7 +12,13 @@
  */
 
 export { ArcIdClient } from "./client.js";
-export type { ApiError, ApiResponse, ArcIdClientConfig } from "./client.js";
+export type {
+  ApiError,
+  ApiEnvelope,
+  ApiResponse,
+  ArcIdClientConfig,
+  RequestOptions,
+} from "./client.js";
 
 export { AuthSdk } from "./auth.sdk.js";
 export type {
@@ -23,9 +29,58 @@ export type {
   StepUpResult,
   UserProfile,
   SwitchContextResult,
+  RefreshResult,
 } from "./auth.sdk.js";
 
+export type {
+  User,
+  Membership,
+  Session,
+  Device,
+  LinkedAccount,
+  ExternalId,
+  Delegation,
+  LoginResult,
+  RegisterResult,
+  TokenBundle,
+  OAuthTokenResponse,
+  OAuthClient,
+  OAuthToken,
+  Consent,
+  TokenIntrospection,
+  OidcUserInfo,
+  Jwks,
+  JwkKey,
+  Tenant,
+  TenantPolicy,
+  TenantDid,
+  SigningKey,
+  Project,
+  OnboardingFlow,
+  OnboardingStep,
+  InviteAcceptResult,
+  WebhookEndpoint,
+  WebhookEvent,
+  Subscription,
+  AuditLogEntry,
+  IdpConnection,
+  Credential,
+  VerificationSession,
+  VerificationResult,
+  StatusList,
+  Passkey,
+  OnboardingSession,
+  Paginated,
+  JsonObject,
+  JsonValue,
+} from "./types.js";
+
 export { PasskeySdk } from "./passkey.sdk.js";
+export type {
+  PasskeyRegistrationOptions,
+  PasskeyAuthenticationOptions,
+  PasskeyRegisterResult,
+} from "./passkey.sdk.js";
 
 export { VcSdk } from "./vcs.sdk.js";
 

@@ -1,11 +1,19 @@
 /**
- * OAuth SDK — Full OIDC provider (clients, tokens, consent, introspection, revocation)
+ * OAuth SDK: Full OIDC provider (clients, tokens, consent, introspection, revocation)
  *
  * arc-id paths: /oauth/*
  */
 
 import { ArcIdClient } from "./client.js";
 import type { ApiResponse } from "./client.js";
+import type {
+  Consent,
+  Jwks,
+  OAuthClient,
+  OAuthToken,
+  OidcUserInfo,
+  TokenIntrospection,
+} from "./types.js";
 
 /* ── Types ─────────────────────────────────────────────────── */
 
@@ -32,14 +40,14 @@ export class OAuthSdk {
 
   /* ── Clients ──────────────────────────────────────────────── */
 
-  listClients(): Promise<ApiResponse<Record<string, unknown>[]>> {
-    return this.client.get<Record<string, unknown>[]>("/oauth/clients");
+  listClients(): Promise<ApiResponse<OAuthClient[]>> {
+    return this.client.get<OAuthClient[]>("/oauth/clients");
   }
 
   createClient(
     data: CreateClientParams,
-  ): Promise<ApiResponse<void>> {
-    return this.client.post<void>("/oauth/clients", data);
+  ): Promise<ApiResponse<OAuthClient>> {
+    return this.client.post<OAuthClient>("/oauth/clients", data);
   }
 
   deleteClient(clientId: string): Promise<ApiResponse<void>> {
@@ -48,8 +56,8 @@ export class OAuthSdk {
 
   /* ── Tokens ───────────────────────────────────────────────── */
 
-  listTokens(): Promise<ApiResponse<Record<string, unknown>[]>> {
-    return this.client.get<Record<string, unknown>[]>("/oauth/tokens");
+  listTokens(): Promise<ApiResponse<OAuthToken[]>> {
+    return this.client.get<OAuthToken[]>("/oauth/tokens");
   }
 
   revokeToken(tokenId: string): Promise<ApiResponse<void>> {
@@ -68,16 +76,16 @@ export class OAuthSdk {
     return this.client.del<void>(`/oauth/consent/${clientId}`);
   }
 
-  listConsents(): Promise<ApiResponse<Record<string, unknown>[]>> {
-    return this.client.get<Record<string, unknown>[]>("/oauth/consents");
+  listConsents(): Promise<ApiResponse<Consent[]>> {
+    return this.client.get<Consent[]>("/oauth/consents");
   }
 
   /* ── Introspection & Revocation ──────────────────────────── */
 
   introspectToken(
     token: string,
-  ): Promise<ApiResponse<Record<string, unknown>>> {
-    return this.client.post<Record<string, unknown>>(
+  ): Promise<ApiResponse<TokenIntrospection>> {
+    return this.client.post<TokenIntrospection>(
       "/oauth/introspect",
       { token },
     );
@@ -95,11 +103,13 @@ export class OAuthSdk {
 
   /* ── OIDC ─────────────────────────────────────────────────── */
 
-  userinfo(): Promise<ApiResponse<Record<string, unknown>>> {
-    return this.client.get<Record<string, unknown>>("/oauth/userinfo");
+  /** GET /oauth/userinfo — bare OIDC UserInfo payload. */
+  userinfo(): Promise<ApiResponse<OidcUserInfo>> {
+    return this.client.get<OidcUserInfo>("/oauth/userinfo", { bare: true });
   }
 
-  jwks(): Promise<ApiResponse<Record<string, unknown>>> {
-    return this.client.get<Record<string, unknown>>("/oauth/jwks");
+  /** GET /oauth/jwks — bare { keys } payload. */
+  jwks(): Promise<ApiResponse<Jwks>> {
+    return this.client.get<Jwks>("/oauth/jwks", { bare: true });
   }
 }

@@ -1,5 +1,5 @@
 /**
- * @arc-ui/components — Styled shadcn-equivalent UI components
+ * @arc-ui/components: Styled shadcn-equivalent UI components
  *
  * These are Layer 2 components: Radix primitives + Alpha Palette styling.
  * No business logic, just polished, accessible UI.
@@ -10,6 +10,10 @@
  */
 
 export { cn } from "./utils.js";
+
+/* ── Theme system ────────────────────────────────────────────── */
+export { ThemeProvider, useTheme, ThemeToggle } from "./theme/index.js";
+export type { Theme, ThemeProviderProps, ThemeToggleProps } from "./theme/index.js";
 
 export { type ButtonProps, Button, buttonVariants } from "./ui/button.js";
 
@@ -51,7 +55,10 @@ export {
   DialogFooter,
   DialogTitle,
   DialogDescription,
+  dialogOverlayVariants,
+  dialogContentVariants,
 } from "./ui/dialog.js";
+export type { DialogOverlayProps, DialogContentProps } from "./ui/dialog.js";
 
 export {
   Select,
@@ -158,3 +165,68 @@ export {
   InputOTPSlot,
   InputOTPSeparator,
 } from "./ui/input-otp.js";
+
+export {
+  Collapsible,
+  CollapsibleTrigger,
+  CollapsibleContent,
+} from "./ui/collapsible.js";
+
+export { Toaster } from "./ui/sonner.js";
+
+export {
+  Accordion,
+  AccordionItem,
+  AccordionTrigger,
+  AccordionContent,
+  accordionItemVariants,
+} from "./ui/accordion.js";
+export type { AccordionItemProps } from "./ui/accordion.js";
+
+export {
+  NavigationMenu,
+  NavigationMenuList,
+  NavigationMenuItem,
+  NavigationMenuContent,
+  NavigationMenuTrigger,
+  NavigationMenuLink,
+  NavigationMenuIndicator,
+  NavigationMenuViewport,
+  navigationMenuTriggerStyle,
+} from "./ui/navigation-menu.js";
+
+export {
+  Command,
+  CommandDialog,
+  CommandInput,
+  CommandList,
+  CommandEmpty,
+  CommandGroup,
+  CommandItem,
+  CommandShortcut,
+  CommandSeparator,
+} from "./ui/command.js";
+
+export { NotificationBell } from "./ui/notification-bell.js";
+export type { Notification as BellNotification, NotificationBellProps } from "./ui/notification-bell.js";
+
+export {
+  Navbar,
+  navbarVariants,
+} from "./ui/navbar.js";
+export type {
+  NavbarProps,
+  NavLink,
+  NavChildLink,
+  NavbarRouter,
+  NavbarRouterLinkProps,
+} from "./ui/navbar.js";
+
+export {
+  NotificationDrawer,
+} from "./ui/notification-drawer.js";
+export type {
+  Notification as DrawerNotification,
+  NotificationDrawerProps,
+  NotificationType,
+} from "./ui/notification-drawer.js";

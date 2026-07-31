@@ -1,5 +1,5 @@
 /**
- * MfaDialog — MFA verification dialog with OTP input and recovery code fallback.
+ * MfaDialog: MFA verification dialog with OTP input and recovery code fallback.
  *
  * Orchestrates MfaVerifyForm, MfaSetupForm, MfaRecoveryCodesForm, and
  * MfaRecoveryForm through the MFA phase flow. Extracted forms are

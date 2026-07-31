@@ -1,4 +1,5 @@
-import "@arc-ui/tokens/tokens.css";
+/// <reference path="./env.d.ts" />
+import "../src/app.css";
 import { withThemeByDataAttribute } from "@storybook/addon-themes";
 import type { Preview } from "@storybook/react";
 

@@ -1,5 +1,5 @@
 /**
- * @arc-ui/tokens — Design tokens for the Arcevo ecosystem
+ * @arc-ui/tokens: Design tokens for the Arcevo ecosystem
  *
  * Single source of truth for the Alpha Palette, typography scale,
  * spacing system, and sub-brand accent colors.

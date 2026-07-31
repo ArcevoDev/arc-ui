@@ -5,5 +5,5 @@
     "rootDir": "src",
     "declarationDir": "dist"
   },
-  "include": ["src"]
+  "include": ["src", ".storybook"]
 }

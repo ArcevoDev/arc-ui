@@ -1,5 +1,5 @@
 /**
- * MagicLinkForm — email input form for magic link sign-in.
+ * MagicLinkForm: email input form for magic link sign-in.
  *
  * Handles sent/resent confirmation state.
  */

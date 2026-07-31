@@ -1,5 +1,8 @@
 /**
- * Token persistence layer. Swappable — uses localStorage by default.
+ * Token persistence layer. Swappable: uses localStorage by default.
+ *
+ * Safe on the server: localStorage is only touched lazily inside the
+ * accessor functions, so importing this module during SSR never throws.
  */
 
 export interface TokenStorage {
@@ -12,15 +15,23 @@ export interface TokenStorage {
 const ACCESS_KEY = "arcid_access_token";
 const REFRESH_KEY = "arcid_refresh_token";
 
+function hasWindow(): boolean {
+  return typeof window !== "undefined" && typeof window.localStorage !== "undefined";
+}
+
 export const defaultStorage: TokenStorage = {
-  getAccessToken: () => localStorage.getItem(ACCESS_KEY),
-  getRefreshToken: () => localStorage.getItem(REFRESH_KEY),
+  getAccessToken: () =>
+    hasWindow() ? window.localStorage.getItem(ACCESS_KEY) : null,
+  getRefreshToken: () =>
+    hasWindow() ? window.localStorage.getItem(REFRESH_KEY) : null,
   setTokens: (accessToken, refreshToken) => {
-    localStorage.setItem(ACCESS_KEY, accessToken);
-    localStorage.setItem(REFRESH_KEY, refreshToken);
+    if (!hasWindow()) return;
+    window.localStorage.setItem(ACCESS_KEY, accessToken);
+    window.localStorage.setItem(REFRESH_KEY, refreshToken);
   },
   clearTokens: () => {
-    localStorage.removeItem(ACCESS_KEY);
-    localStorage.removeItem(REFRESH_KEY);
+    if (!hasWindow()) return;
+    window.localStorage.removeItem(ACCESS_KEY);
+    window.localStorage.removeItem(REFRESH_KEY);
   },
 };

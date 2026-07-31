@@ -1,5 +1,5 @@
 /**
- * SignIn — multi-step sign-in component with state machine.
+ * SignIn: multi-step sign-in component with state machine.
  *
  * Orchestrates LoginForm, MagicLinkForm, and ForgotPasswordForm through
  * the auth step flow. Extracted forms are independently importable from
@@ -10,12 +10,15 @@
  */
 
 import * as React from "react";
+import { AuthSdk, PasskeySdk } from "@arc-ui/sdk";
+import type { LoginResult, TokenPair } from "@arc-ui/sdk";
 import { useAuth } from "./provider.js";
 import { defaultConfig } from "./types.js";
-import type { AuthConfig, Appearance, ComponentSlots, SignInStep, TokenPair } from "./types.js";
+import type { AuthConfig, Appearance, ComponentSlots, SignInStep } from "./types.js";
 import { LoginForm } from "./forms/auth/login-form.js";
 import { MagicLinkForm } from "./forms/auth/magic-link-form.js";
 import { ForgotPasswordForm } from "./forms/auth/forgot-password-form.js";
+import { MfaVerifyForm } from "./forms/mfa/verify-form.js";
 
 import {
   Button,
@@ -24,7 +27,6 @@ import {
   CardTitle,
   CardDescription,
   CardContent,
-  CardFooter,
   Separator,
 } from "@arc-ui/components";
 
@@ -102,13 +104,17 @@ export function SignIn({
   onSuccess,
 }: SignInProps) {
   const cfg = { ...defaultConfig, ...configOverrides };
-  const { login, isAuthenticated } = useAuth();
+  const { login, verifyMfa, isAuthenticated, client } = useAuth();
+
+  const authSdk = React.useMemo(() => new AuthSdk(client), [client]);
+  const passkeySdk = React.useMemo(() => new PasskeySdk(client), [client]);
 
   const [step, setStep] = React.useState<SignInStep>("idle");
   const [error, setError] = React.useState<string | null>(null);
 
   // Form fields that persist across steps
   const [, setEmail] = React.useState("");
+  const [sessionId, setSessionId] = React.useState<string | null>(null);
 
   /* ── Bootstrap ───────────────────────────────────────────── */
 
@@ -129,13 +135,14 @@ export function SignIn({
     try {
       const res = await login({ email: emailVal, password });
       if (res.data) {
-        const data = res.data as Record<string, unknown>;
-        if (data.sessionId && !data.accessToken) {
+        const result = res.data as LoginResult;
+        if (result.sessionId && !result.accessToken) {
+          setSessionId(result.sessionId);
           setStep("mfa_challenge");
           return null;
         }
         setStep("complete");
-        onSuccess?.(res.data);
+        onSuccess?.(res.data as unknown as TokenPair);
         return null;
       }
       return res.error?.message ?? "Login failed";
@@ -154,14 +161,90 @@ export function SignIn({
     setStep("forgot_password");
   };
 
-  const handleForgotPasswordSubmit = async (_email: string) => {
-    // Placeholder: wire to actual password-reset-request flow
-    return null;
+  const handleForgotPasswordSubmit = async (email: string) => {
+    setError(null);
+    const res = await authSdk.forgotPassword(email);
+    return res.error?.message ?? null;
   };
 
-  const handlePasskeyAuth = () => {
-    // Placeholder: wire to passkey auth flow
-    setStep("login_form");
+  const handleMfaVerify = async (code: string) => {
+    const sId = sessionId;
+    if (!sId) {
+      setStep("select_method");
+      return;
+    }
+    const res = await verifyMfa(code, sId);
+    if (res.data) {
+      setStep("complete");
+    } else {
+      setError(res.error?.message ?? "Invalid code");
+    }
+  };
+
+  const handlePasskeyAuth = async () => {
+    setError(null);
+    try {
+      const optsRes = await passkeySdk.authenticationOptions();
+      if (!optsRes.data) {
+        setError(optsRes.error?.message ?? "Failed to initiate passkey auth");
+        return;
+      }
+
+      const challengeId = optsRes.data.challengeId;
+      const publicKey = optsRes.data.options as unknown as PublicKeyCredentialRequestOptions;
+
+      // WebAuthn API: browser creates the assertion
+      const credential = (await navigator.credentials.get({
+        publicKey,
+      })) as PublicKeyCredential | null;
+
+      if (!credential) {
+        setError("Passkey authentication cancelled");
+        return;
+      }
+
+      const res = await passkeySdk.authenticate({
+        response: {
+          id: credential.id,
+          rawId: Array.from(new Uint8Array(credential.rawId)),
+          type: credential.type,
+          response: {
+            authenticatorData: Array.from(
+              new Uint8Array(
+                (credential.response as AuthenticatorAssertionResponse).authenticatorData,
+              ),
+            ),
+            clientDataJSON: Array.from(
+              new Uint8Array(
+                (credential.response as AuthenticatorAssertionResponse).clientDataJSON,
+              ),
+            ),
+            signature: Array.from(
+              new Uint8Array(
+                (credential.response as AuthenticatorAssertionResponse).signature,
+              ),
+            ),
+            userHandle: (credential.response as AuthenticatorAssertionResponse).userHandle
+              ? Array.from(
+                  new Uint8Array(
+                    (credential.response as AuthenticatorAssertionResponse).userHandle!,
+                  ),
+                )
+              : null,
+          },
+        },
+        challengeId,
+      });
+
+      if (res.data) {
+        setStep("complete");
+        onSuccess?.(res.data as unknown as TokenPair);
+      } else {
+        setError(res.error?.message ?? "Passkey authentication failed");
+      }
+    } catch (err) {
+      setError(err instanceof Error ? err.message : "Passkey authentication failed");
+    }
   };
 
   /* ── Root render ─────────────────────────────────────────── */
@@ -208,23 +291,13 @@ export function SignIn({
     case "mfa_challenge":
       return (
         <Card className={appearance?.className}>
-          <CardHeader>
-            <CardTitle>Two-Factor Authentication</CardTitle>
-            <CardDescription>
-              Enter the code from your authenticator app
-            </CardDescription>
-          </CardHeader>
-          <CardContent>
-            <p className="text-sm text-muted-foreground">
-              MFA verification required. Please enter your authentication code.
-            </p>
-            {error && <p className="mt-2 text-sm text-destructive">{error}</p>}
+          <CardContent className="p-0">
+            <MfaVerifyForm
+              onVerify={handleMfaVerify}
+              onCancel={() => setStep("select_method")}
+              error={error ?? undefined}
+            />
           </CardContent>
-          <CardFooter className="flex-col gap-2">
-            <Button className="w-full" onClick={() => setStep("select_method")}>
-              Use a different method
-            </Button>
-          </CardFooter>
         </Card>
       );
     case "complete":

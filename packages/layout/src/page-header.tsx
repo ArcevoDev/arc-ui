@@ -1,5 +1,5 @@
 /**
- * @arc-ui/layout — PageHeader
+ * @arc-ui/layout: PageHeader
  *
  * Consistent page title + description + actions slot.
  */

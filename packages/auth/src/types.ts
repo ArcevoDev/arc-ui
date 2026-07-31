@@ -4,10 +4,13 @@
 
 import type {
   ApiResponse,
-  UserProfile,
+  LoginResult,
   MfaSetupResult,
+  RegisterResult,
+  TokenBundle,
+  UserProfile,
 } from "@arc-ui/sdk";
-import type { TokenPair } from "@arc-ui/sdk";
+import type { ArcIdClient } from "@arc-ui/sdk";
 
 /* ── Identity ──────────────────────────────────────────────── */
 
@@ -36,11 +39,24 @@ export type RegisterParams = {
 };
 
 export type AuthContextValue = AuthState & {
-  login: (params: LoginParams) => Promise<ApiResponse<TokenPair>>;
-  register: (params: RegisterParams) => Promise<ApiResponse<TokenPair>>;
+  client: ArcIdClient;
+  /**
+   * Login is two-phase with arc-id:
+   *  - No MFA required: returns a LoginResult with accessToken/refreshToken.
+   *  - MFA required: returns a LoginResult with sessionId + requiresMfa,
+   *    no tokens. Call `verifyMfa` (or `mfaRecovery`) to complete.
+   */
+  login: (params: LoginParams) => Promise<ApiResponse<LoginResult>>;
+  register: (params: RegisterParams) => Promise<ApiResponse<RegisterResult>>;
+  /** Complete the MFA challenge started by login. */
+  verifyMfa: (code: string, sessionId: string) => Promise<ApiResponse<TokenBundle>>;
+  mfaRecovery: (code: string, sessionId: string) => Promise<ApiResponse<TokenBundle>>;
   logout: () => Promise<void>;
   refreshSession: () => Promise<string | null>;
   clearError: () => void;
+  forgotPassword: (email: string) => Promise<ApiResponse<void>>;
+  resetPassword: (token: string, newPassword: string) => Promise<ApiResponse<void>>;
+  changePassword: (currentPassword: string, newPassword: string) => Promise<ApiResponse<void>>;
 };
 
 /* ── SignIn State Machine ──────────────────────────────────── */

@@ -1,5 +1,5 @@
 /**
- * @arc-ui/auth — domain-customizable auth components wired to arc-id SDK.
+ * @arc-ui/auth: domain-customizable auth components wired to arc-id SDK.
  *
  * Usage:
  *   import { ArcProvider, SignIn, Guard } from "@arc-ui/auth";
@@ -45,6 +45,8 @@ export {
   MagicLinkForm,
   type ForgotPasswordFormProps,
   ForgotPasswordForm,
+  type ResetPasswordFormProps,
+  ResetPasswordForm,
   type MfaVerifyFormProps,
   MfaVerifyForm,
   type MfaSetupFormProps,

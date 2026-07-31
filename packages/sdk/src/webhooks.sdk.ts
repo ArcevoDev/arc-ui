@@ -1,24 +1,25 @@
 /**
- * Webhooks SDK — Endpoint management, delivery events, test pings, retries
+ * Webhooks SDK: Endpoint management, delivery events, test pings, retries
  *
  * arc-id paths: /webhooks/endpoints/*, /webhooks/events/*
  */
 
 import { ArcIdClient } from "./client.js";
 import type { ApiResponse } from "./client.js";
+import type { WebhookEndpoint, WebhookEvent } from "./types.js";
 
 /* ── Types ─────────────────────────────────────────────────── */
 
 export type CreateWebhookParams = {
   url: string;
-  events: string[];
+  eventTypes: string[];
   secret?: string;
   enabled?: boolean;
 };
 
 export type UpdateWebhookParams = {
   url?: string;
-  events?: string[];
+  eventTypes?: string[];
   enabled?: boolean;
 };
 
@@ -33,21 +34,21 @@ export type ListEventsParams = {
 export class WebhooksSdk {
   constructor(private client: ArcIdClient) {}
 
-  list(): Promise<ApiResponse<Record<string, unknown>[]>> {
-    return this.client.get<Record<string, unknown>[]>("/webhooks/endpoints");
+  list(): Promise<ApiResponse<WebhookEndpoint[]>> {
+    return this.client.get<WebhookEndpoint[]>("/webhooks/endpoints");
   }
 
   create(
     data: CreateWebhookParams,
-  ): Promise<ApiResponse<void>> {
-    return this.client.post<void>("/webhooks/endpoints", data);
+  ): Promise<ApiResponse<WebhookEndpoint>> {
+    return this.client.post<WebhookEndpoint>("/webhooks/endpoints", data);
   }
 
   update(
     id: string,
     data: UpdateWebhookParams,
-  ): Promise<ApiResponse<void>> {
-    return this.client.patch<void>(`/webhooks/endpoints/${id}`, data);
+  ): Promise<ApiResponse<WebhookEndpoint>> {
+    return this.client.patch<WebhookEndpoint>(`/webhooks/endpoints/${id}`, data);
   }
 
   delete(id: string): Promise<ApiResponse<void>> {
@@ -60,13 +61,13 @@ export class WebhooksSdk {
 
   listEvents(
     params?: ListEventsParams,
-  ): Promise<ApiResponse<Record<string, unknown>[]>> {
+  ): Promise<ApiResponse<WebhookEvent[]>> {
     const qs = new URLSearchParams();
     if (params?.status) qs.set("status", params.status);
     if (params?.cursor) qs.set("cursor", params.cursor);
     if (params?.limit) qs.set("limit", String(params.limit));
     const q = qs.toString();
-    return this.client.get<Record<string, unknown>[]>(
+    return this.client.get<WebhookEvent[]>(
       `/webhooks/events${q ? `?${q}` : ""}`,
     );
   }

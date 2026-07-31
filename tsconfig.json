@@ -5,7 +5,9 @@
     { "path": "packages/tokens" },
     { "path": "packages/sdk" },
     { "path": "packages/components" },
-    { "path": "apps/landing" },
-    { "path": "apps/docs" }
+    { "path": "packages/auth" },
+    { "path": "packages/layout" },
+    { "path": "apps/docs" },
+    { "path": "apps/landing" }
   ]
 }

@@ -1,5 +1,5 @@
 /**
- * UserButton — user avatar dropdown trigger.
+ * UserButton: user avatar dropdown trigger.
  *
  * Shows the user's avatar (or initials fallback) with a dropdown
  * menu for profile, settings, and sign out.
@@ -103,13 +103,11 @@ export function UserButton({ appearance, slots, onSignOut }: UserButtonProps) {
             <DropdownMenuLabel className="text-xs text-muted-foreground">
               Organizations
             </DropdownMenuLabel>
-            {user.memberships.map(
-              (m: Record<string, unknown>, i: number) => (
-                <DropdownMenuItem key={i}>
-                  {(m.name as string) ?? ""}
-                </DropdownMenuItem>
-              ),
-            )}
+            {user.memberships.map((m, i) => (
+              <DropdownMenuItem key={i}>
+                {m.name ?? ""}
+              </DropdownMenuItem>
+            ))}
           </>
         )}
         <DropdownMenuSeparator />

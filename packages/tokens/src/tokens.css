@@ -1,5 +1,5 @@
 /* =================================================================
- * @arc-ui/tokens — Design Token CSS Custom Properties
+ * @arc-ui/tokens: Design Token CSS Custom Properties
  *
  * Dark-first design system for the Arcevo ecosystem.
  * Import this file to make all tokens available as CSS variables.
@@ -7,7 +7,7 @@
  *   @import "@arc-ui/tokens/tokens.css";
  *
  * The variable names match arc-id's globals.css exactly so that
- * arc-id can replace its stylesheet with this one — zero migration cost.
+ * arc-id can replace its stylesheet with this one: zero migration cost.
  * ================================================================= */
 
 /* ── Alpha Palette (raw brand colors) ─────────────────────────── */
@@ -34,11 +34,11 @@
   --popover: oklch(0.14 0.02 240);
   --popover-foreground: oklch(0.95 0.01 240);
 
-  /* Primary — indigo, maps to arc-id brand */
+  /* Primary: indigo, maps to arc-id brand */
   --primary: oklch(0.58 0.23 273);
   --primary-foreground: oklch(0.99 0 0);
 
-  /* Secondary — subtle surface */
+  /* Secondary: subtle surface */
   --secondary: oklch(0.19 0.02 240);
   --secondary-foreground: oklch(0.95 0.01 240);
 
@@ -54,11 +54,11 @@
   --destructive: oklch(0.577 0.245 27.325);
   --destructive-foreground: oklch(0.99 0 0);
 
-  /* Success — green */
+  /* Success: green */
   --success: oklch(0.527 0.154 150);
   --success-foreground: oklch(0.99 0 0);
 
-  /* Warning — amber */
+  /* Warning: amber */
   --warning: oklch(0.7 0.18 80);
   --warning-foreground: oklch(0.12 0.02 240);
 
@@ -183,7 +183,7 @@ body {
   -webkit-backdrop-filter: blur(12px);
 }
 
-/* Glass card — elevated glassmorphic surface for hero sections */
+/* Glass card: elevated glassmorphic surface for hero sections */
 .glass-card {
   background: oklch(0.155 0.02 240 / 60%);
   backdrop-filter: blur(16px);

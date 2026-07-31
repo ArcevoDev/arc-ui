@@ -1,5 +1,5 @@
 /**
- * MfaVerifyForm — OTP input for TOTP verification.
+ * MfaVerifyForm: OTP input for TOTP verification.
  *
  * Standalone form: manages its own OTP state, calls onVerify when
  * complete (6 digits entered).

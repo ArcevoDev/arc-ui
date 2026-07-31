@@ -1,5 +1,5 @@
 /**
- * LoginForm — email/password form with forgot-password link.
+ * LoginForm: email/password form with forgot-password link.
  *
  * Standalone form for direct use outside the SignIn state machine.
  */

@@ -1,7 +1,7 @@
 {
   "name": "@arc-ui/tokens",
   "version": "0.1.0",
-  "description": "Design tokens for the ArcevoCirqle ecosystem — Alpha Palette colors, typography, spacing, and sub-brand accents in OKLCH",
+  "description": "Design tokens for the ArcevoCirqle ecosystem: Alpha Palette colors, typography, spacing, and sub-brand accents in OKLCH",
   "type": "module",
   "exports": {
     ".": {
@@ -9,13 +9,16 @@
       "import": "./dist/index.js",
       "default": "./dist/index.js"
     },
-    "./tokens.css": "./dist/tokens.css"
+    "./tokens.css": "./dist/tokens.css",
+    "./tailwind.css": "./dist/tailwind.css",
+    "./package.json": "./package.json"
   },
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
   "files": ["dist"],
+  "sideEffects": ["**/*.css"],
   "scripts": {
-    "build": "tsup src/index.ts --format esm --dts --clean && node -e \"require('fs').cpSync('src/tokens.css', 'dist/tokens.css')\"",
+    "build": "tsup src/index.ts --format esm --dts --clean && node -e \"require('fs').cpSync('src/tokens.css', 'dist/tokens.css'); require('fs').cpSync('src/tailwind.css', 'dist/tailwind.css')\"",
     "clean": "rm -rf dist",
     "typecheck": "tsc --noEmit"
   },
@@ -38,6 +41,6 @@
     "typescript": "^5"
   },
   "engines": {
-    "node": ">=22"
+    "node": ">=20"
   }
 }

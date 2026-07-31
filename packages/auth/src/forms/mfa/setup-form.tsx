@@ -1,5 +1,5 @@
 /**
- * MfaSetupForm — QR code + manual key display, then OTP confirmation.
+ * MfaSetupForm: QR code + manual key display, then OTP confirmation.
  *
  * Two-phase form inside a single component:
  *   1. Show secret/URI for scanning

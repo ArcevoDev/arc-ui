@@ -1,52 +1,99 @@
 /**
- * Passkey SDK — WebAuthn registration and authentication
+ * Passkey SDK: WebAuthn registration and authentication
  *
  * arc-id paths: /auth/passkey/*
+ * Verified: options endpoints return { options, challengeId }; verify
+ * endpoints take { response, challengeId }.
  */
 
 import { ArcIdClient } from "./client.js";
 import type { ApiResponse } from "./client.js";
+import type { TokenPair } from "./auth.sdk.js";
+import type { Passkey, TokenBundle, User } from "./types.js";
+
+/* ── WebAuthn types ────────────────────────────────────────── */
+
+export type PasskeyRegistrationOptions = {
+  options: PublicKeyCredentialCreationOptionsJSON;
+  challengeId: string;
+};
+
+export type PasskeyAuthenticationOptions = {
+  options: PublicKeyCredentialRequestOptionsJSON;
+  challengeId: string;
+};
+
+/** PublicKeyCredential* JSON serialization shapes (WebAuthn Level 3). */
+export interface PublicKeyCredentialCreationOptionsJSON {
+  rp: { id: string; name: string };
+  user: { id: string; name: string; displayName: string };
+  challenge: string;
+  pubKeyCredParams: Array<{ alg: number; type: string }>;
+  timeout?: number;
+  excludeCredentials?: Array<{ id: string; type: string }>;
+  authenticatorSelection?: {
+    authenticatorAttachment?: string;
+    residentKey?: string;
+    userVerification?: string;
+  };
+  attestation?: string;
+}
+
+export interface PublicKeyCredentialRequestOptionsJSON {
+  challenge: string;
+  timeout?: number;
+  rpId?: string;
+  allowCredentials?: Array<{ id: string; type: string }>;
+  userVerification?: string;
+}
+
+export type PasskeyRegisterResult = {
+  passkey: Passkey;
+  user: User;
+};
+
+/** POST /auth/passkey/authenticate returns tokens in the flow. */
+export type PasskeyAuthenticateResult = TokenPair | TokenBundle;
 
 /* ── SDK Module ────────────────────────────────────────────── */
 
 export class PasskeySdk {
   constructor(private client: ArcIdClient) {}
 
-  list(): Promise<ApiResponse<Record<string, unknown>[]>> {
-    return this.client.get<Record<string, unknown>[]>("/auth/passkey");
+  list(): Promise<ApiResponse<Passkey[]>> {
+    return this.client.get<Passkey[]>("/auth/passkey");
   }
 
-  registrationOptions(
-    data: { name: string },
-  ): Promise<ApiResponse<Record<string, unknown>>> {
-    return this.client.post<Record<string, unknown>>(
+  /** POST /auth/passkey/options/register. No body required by arc-id. */
+  registrationOptions(): Promise<ApiResponse<PasskeyRegistrationOptions>> {
+    return this.client.post<PasskeyRegistrationOptions>(
       "/auth/passkey/options/register",
-      data,
+      undefined,
     );
   }
 
   register(
-    data: Record<string, unknown>,
-  ): Promise<ApiResponse<Record<string, unknown>>> {
-    return this.client.post<Record<string, unknown>>(
+    data: { response: unknown; challengeId: string },
+  ): Promise<ApiResponse<PasskeyRegisterResult>> {
+    return this.client.post<PasskeyRegisterResult>(
       "/auth/passkey/register",
       data,
     );
   }
 
   authenticationOptions(
-    sessionId?: string,
-  ): Promise<ApiResponse<Record<string, unknown>>> {
-    return this.client.post<Record<string, unknown>>(
+    identityId?: string,
+  ): Promise<ApiResponse<PasskeyAuthenticationOptions>> {
+    return this.client.post<PasskeyAuthenticationOptions>(
       "/auth/passkey/options/authenticate",
-      sessionId ? { sessionId } : {},
+      identityId ? { identityId } : undefined,
     );
   }
 
   authenticate(
-    data: Record<string, unknown>,
-  ): Promise<ApiResponse<Record<string, unknown>>> {
-    return this.client.post<Record<string, unknown>>(
+    data: { response: unknown; challengeId: string },
+  ): Promise<ApiResponse<PasskeyAuthenticateResult>> {
+    return this.client.post<PasskeyAuthenticateResult>(
       "/auth/passkey/authenticate",
       data,
     );

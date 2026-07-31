@@ -1,5 +1,5 @@
 /**
- * Identity SDK — Profile, admin, devices, linked accounts, external IDs,
+ * Identity SDK: Profile, admin, devices, linked accounts, external IDs,
  * delegations, onboarding, wallet DID
  *
  * arc-id paths: /identity/*
@@ -7,6 +7,16 @@
 
 import { ArcIdClient } from "./client.js";
 import type { ApiResponse } from "./client.js";
+import type {
+  Delegation,
+  Device,
+  ExternalId,
+  JsonObject,
+  LinkedAccount,
+  OnboardingSession,
+  Paginated,
+  User,
+} from "./types.js";
 
 /* ── SDK Module ────────────────────────────────────────────── */
 
@@ -18,12 +28,16 @@ export class IdentitySdk {
   list(params?: {
     search?: string;
     status?: string;
-  }): Promise<ApiResponse<Record<string, unknown>[]>> {
+    page?: number;
+    limit?: number;
+  }): Promise<ApiResponse<Paginated<User>>> {
     const qs = new URLSearchParams();
     if (params?.search) qs.set("search", params.search);
     if (params?.status) qs.set("status", params.status);
+    if (params?.page) qs.set("page", String(params.page));
+    if (params?.limit) qs.set("limit", String(params.limit));
     const q = qs.toString();
-    return this.client.get<Record<string, unknown>[]>(
+    return this.client.get<Paginated<User>>(
       `/identity/admin${q ? `?${q}` : ""}`,
     );
   }
@@ -51,9 +65,8 @@ export class IdentitySdk {
 
   updateProfile(data: {
     name?: string;
-    displayName?: string;
     picture?: string;
-    metadata?: Record<string, unknown>;
+    metadata?: JsonObject;
   }): Promise<ApiResponse<void>> {
     return this.client.patch<void>("/identity/profile", data);
   }
@@ -64,8 +77,8 @@ export class IdentitySdk {
 
   /* ── Devices ───────────────────────────────────────────── */
 
-  listDevices(): Promise<ApiResponse<Record<string, unknown>[]>> {
-    return this.client.get<Record<string, unknown>[]>("/identity/devices");
+  listDevices(): Promise<ApiResponse<Device[]>> {
+    return this.client.get<Device[]>("/identity/devices");
   }
 
   deleteDevice(id: string): Promise<ApiResponse<void>> {
@@ -74,8 +87,8 @@ export class IdentitySdk {
 
   /* ── Linked Accounts ───────────────────────────────────── */
 
-  listLinkedAccounts(): Promise<ApiResponse<Record<string, unknown>[]>> {
-    return this.client.get<Record<string, unknown>[]>(
+  listLinkedAccounts(): Promise<ApiResponse<LinkedAccount[]>> {
+    return this.client.get<LinkedAccount[]>(
       "/identity/linked-accounts",
     );
   }
@@ -86,8 +99,8 @@ export class IdentitySdk {
 
   /* ── External IDs ──────────────────────────────────────── */
 
-  listExternalIds(): Promise<ApiResponse<Record<string, unknown>[]>> {
-    return this.client.get<Record<string, unknown>[]>(
+  listExternalIds(): Promise<ApiResponse<ExternalId[]>> {
+    return this.client.get<ExternalId[]>(
       "/identity/external-ids",
     );
   }
@@ -105,16 +118,16 @@ export class IdentitySdk {
 
   /* ── Delegations ───────────────────────────────────────── */
 
-  listDelegations(): Promise<ApiResponse<Record<string, unknown>[]>> {
-    return this.client.get<Record<string, unknown>[]>(
+  listDelegations(): Promise<ApiResponse<Delegation[]>> {
+    return this.client.get<Delegation[]>(
       "/identity/delegations",
     );
   }
 
   createDelegation(
-    data: Record<string, unknown>,
-  ): Promise<ApiResponse<void>> {
-    return this.client.post<void>("/identity/delegations", data);
+    data: { subjectId: string; scope: string; expiresAt?: string },
+  ): Promise<ApiResponse<Delegation>> {
+    return this.client.post<Delegation>("/identity/delegations", data);
   }
 
   revokeDelegation(id: string): Promise<ApiResponse<void>> {
@@ -125,8 +138,8 @@ export class IdentitySdk {
 
   startOnboarding(
     flowId: string,
-  ): Promise<ApiResponse<Record<string, unknown>>> {
-    return this.client.post<Record<string, unknown>>(
+  ): Promise<ApiResponse<OnboardingSession>> {
+    return this.client.post<OnboardingSession>(
       "/identity/onboarding/start",
       { flowId },
     );
@@ -134,8 +147,8 @@ export class IdentitySdk {
 
   getOnboardingProgress(
     progressId: string,
-  ): Promise<ApiResponse<Record<string, unknown>>> {
-    return this.client.get<Record<string, unknown>>(
+  ): Promise<ApiResponse<OnboardingSession>> {
+    return this.client.get<OnboardingSession>(
       `/identity/onboarding/${progressId}`,
     );
   }
@@ -143,9 +156,9 @@ export class IdentitySdk {
   advanceOnboarding(
     progressId: string,
     stepId: string,
-    data?: Record<string, unknown>,
-  ): Promise<ApiResponse<void>> {
-    return this.client.post<void>(
+    data?: JsonObject,
+  ): Promise<ApiResponse<OnboardingSession>> {
+    return this.client.post<OnboardingSession>(
       `/identity/onboarding/${progressId}/advance`,
       { stepId, ...data },
     );
@@ -154,7 +167,7 @@ export class IdentitySdk {
   /* ── Wallet DID ────────────────────────────────────────── */
 
   registerWalletDid(data: {
-    publicKeyJwk: Record<string, unknown>;
+    publicKeyJwk: JsonObject;
     provider: string;
     providerWalletId: string;
   }): Promise<ApiResponse<void>> {

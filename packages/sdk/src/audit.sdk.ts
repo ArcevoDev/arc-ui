@@ -1,11 +1,12 @@
 /**
- * Audit SDK — Audit log retrieval with filtering
+ * Audit SDK: Audit log retrieval with filtering
  *
  * arc-id paths: /audit/logs
  */
 
 import { ArcIdClient } from "./client.js";
 import type { ApiResponse } from "./client.js";
+import type { AuditLogEntry, Paginated } from "./types.js";
 
 /* ── Types ─────────────────────────────────────────────────── */
 
@@ -26,7 +27,7 @@ export class AuditSdk {
 
   list(
     params?: AuditListParams,
-  ): Promise<ApiResponse<Record<string, unknown>[]>> {
+  ): Promise<ApiResponse<Paginated<AuditLogEntry>>> {
     const query = new URLSearchParams();
     if (params?.identityId) query.set("identityId", params.identityId);
     if (params?.tenantId) query.set("tenantId", params.tenantId);
@@ -36,7 +37,7 @@ export class AuditSdk {
     if (params?.page) query.set("page", String(params.page));
     if (params?.limit) query.set("limit", String(params.limit));
     const qs = query.toString();
-    return this.client.get<Record<string, unknown>[]>(
+    return this.client.get<Paginated<AuditLogEntry>>(
       `/audit/logs${qs ? `?${qs}` : ""}`,
     );
   }

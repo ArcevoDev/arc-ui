@@ -1,5 +1,5 @@
 /**
- * SignUp — registration form component.
+ * SignUp: registration form component.
  *
  * Calls the ArcProvider register action. Supports appearance overrides,
  * domain config, and slot overrides for title/description.

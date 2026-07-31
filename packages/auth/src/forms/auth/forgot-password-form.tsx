@@ -1,5 +1,5 @@
 /**
- * ForgotPasswordForm — email input for password reset request.
+ * ForgotPasswordForm: email input for password reset request.
  *
  * Currently the SignIn component has an empty stub for "Forgot password?".
  * This fills that gap with a proper form.

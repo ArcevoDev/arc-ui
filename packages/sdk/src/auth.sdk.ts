@@ -1,25 +1,31 @@
 /**
- * Auth SDK — Login, register, MFA, sessions, magic link, password management
+ * Auth SDK: Login, register, MFA, sessions, magic link, password management
  *
- * Matches arc-id's actual /auth/* endpoints.
+ * Matches arc-id's actual /auth/* endpoints (verified against
+ * arc-id src/modules/auth/routes/* + src/lib/api/routes/index.ts).
  */
 
 import { ArcIdClient } from "./client.js";
 import type { ApiResponse } from "./client.js";
+import type {
+  LoginResult,
+  OAuthTokenResponse,
+  RegisterResult,
+  Session,
+  TokenBundle,
+  User,
+} from "./types.js";
 
 /* ── Types ─────────────────────────────────────────────────── */
 
+/** Result of a completed auth flow: tokens + resolved identity. */
 export type TokenPair = {
   accessToken: string;
   refreshToken: string;
-  user: Record<string, unknown>;
+  user: User;
 };
 
-export type MfaVerifyResult = {
-  accessToken: string;
-  refreshToken: string;
-  user: Record<string, unknown>;
-};
+export type MfaVerifyResult = TokenBundle;
 
 export type MfaSetupResult = {
   secret: string;
@@ -36,20 +42,16 @@ export type StepUpResult = {
   elevatedUntil: string;
 };
 
-export type UserProfile = {
-  id: string;
-  email: string;
-  name: string;
-  memberships: Record<string, unknown>[];
-  plan: string;
-  tenantId: string | null;
-};
+export type UserProfile = User;
 
-export type SwitchContextResult = {
+export type SwitchContextResult = TokenBundle;
+
+/** Normalized refresh result from the bare RFC 6749 token endpoint. */
+export type RefreshResult = {
   accessToken: string;
-  refreshToken: string;
-  idToken: string | null;
-  expiresIn: number;
+  refreshToken?: string;
+  idToken?: string | null;
+  expiresIn?: number;
 };
 
 /* ── SDK Module ────────────────────────────────────────────── */
@@ -57,16 +59,25 @@ export type SwitchContextResult = {
 export class AuthSdk {
   constructor(private client: ArcIdClient) {}
 
-  login(email: string, password: string): Promise<ApiResponse<TokenPair>> {
-    return this.client.post<TokenPair>("/auth/login", { email, password });
+  /**
+   * POST /auth/login.
+   * Returns a sessionId (with requiresMfa) or a full token bundle when
+   * MFA is not required for this identity.
+   */
+  login(
+    email: string,
+    password: string,
+  ): Promise<ApiResponse<LoginResult>> {
+    return this.client.post<LoginResult>("/auth/login", { email, password });
   }
 
+  /** POST /auth/register. arc-id returns only the identity (no tokens). */
   register(
     name: string,
     email: string,
     password: string,
-  ): Promise<ApiResponse<TokenPair>> {
-    return this.client.post<TokenPair>("/auth/register", {
+  ): Promise<ApiResponse<RegisterResult>> {
+    return this.client.post<RegisterResult>("/auth/register", {
       name,
       email,
       password,
@@ -77,12 +88,13 @@ export class AuthSdk {
     return this.client.post<void>("/auth/logout", { sessionId });
   }
 
+  /** GET /identity/profile — resolves the current identity from the bearer token. */
   me(): Promise<ApiResponse<UserProfile>> {
     return this.client.get<UserProfile>("/identity/profile");
   }
 
-  listSessions(): Promise<ApiResponse<Record<string, unknown>[]>> {
-    return this.client.get<Record<string, unknown>[]>("/auth/sessions");
+  listSessions(): Promise<ApiResponse<Session[]>> {
+    return this.client.get<Session[]>("/auth/sessions");
   }
 
   revokeSession(sessionId: string): Promise<ApiResponse<void>> {
@@ -107,11 +119,8 @@ export class AuthSdk {
     return this.client.post<void>("/auth/email/verify", { token });
   }
 
-  verifyMfa(
-    code: string,
-    sessionId: string,
-  ): Promise<ApiResponse<MfaVerifyResult>> {
-    return this.client.post<MfaVerifyResult>("/auth/mfa/verify", {
+  verifyMfa(code: string, sessionId: string): Promise<ApiResponse<TokenBundle>> {
+    return this.client.post<TokenBundle>("/auth/mfa/verify", {
       code,
       sessionId,
     });
@@ -136,7 +145,7 @@ export class AuthSdk {
   stepUp(
     method: "password" | "totp" | "passkey",
     sessionId: string,
-    credential: Record<string, unknown>,
+    credential: { password?: string; totpCode?: string; passkeyResponse?: unknown; passkeyChallengeId?: string },
   ): Promise<ApiResponse<StepUpResult>> {
     return this.client.post<StepUpResult>("/auth/step-up", {
       method,
@@ -148,8 +157,8 @@ export class AuthSdk {
   mfaRecovery(
     code: string,
     sessionId: string,
-  ): Promise<ApiResponse<MfaVerifyResult>> {
-    return this.client.post<MfaVerifyResult>("/auth/mfa/recovery", {
+  ): Promise<ApiResponse<TokenBundle>> {
+    return this.client.post<TokenBundle>("/auth/mfa/recovery", {
       code,
       sessionId,
     });
@@ -169,22 +178,37 @@ export class AuthSdk {
     return this.client.post<void>("/auth/magic-link/request", { email });
   }
 
-  authenticateMagicLink(
-    token: string,
-  ): Promise<ApiResponse<TokenPair>> {
-    return this.client.post<TokenPair>("/auth/magic-link", { token });
+  authenticateMagicLink(token: string): Promise<ApiResponse<LoginResult>> {
+    return this.client.post<LoginResult>("/auth/magic-link", { token });
   }
 
-  refresh(
+  /**
+   * POST /oauth/token (bare RFC 6749 response).
+   * Normalizes snake_case access_token/refresh_token to camelCase.
+   */
+  async refresh(
     refreshToken: string,
-  ): Promise<ApiResponse<{ accessToken: string; refreshToken?: string }>> {
-    return this.client.post<{ accessToken: string; refreshToken?: string }>(
+  ): Promise<ApiResponse<RefreshResult>> {
+    const res = await this.client.post<OAuthTokenResponse>(
       "/oauth/token",
       {
         grant_type: "refresh_token",
         refresh_token: refreshToken,
       },
+      { bare: true },
     );
+    if (res.data) {
+      return {
+        data: {
+          accessToken: res.data.access_token,
+          refreshToken: res.data.refresh_token,
+          idToken: res.data.id_token ?? null,
+          expiresIn: res.data.expires_in,
+        },
+        error: null,
+      };
+    }
+    return res as unknown as ApiResponse<RefreshResult>;
   }
 
   setUsername(name: string): Promise<ApiResponse<void>> {

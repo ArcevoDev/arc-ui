@@ -1,4 +1,4 @@
-# arc-ui — Agent Session Rules
+# arc-ui: Agent Session Rules
 
 This file is loaded at the start of every session.
 It overrides/supplements CLAUDE.md for AI agents.
@@ -14,7 +14,7 @@ It overrides/supplements CLAUDE.md for AI agents.
 ## Architecture Rules
 
 - Auth components must be domain-customizable (different configs for
-  fintech vs med vs edu) — not one-size-fits-all.
+  fintech vs med vs edu): not one-size-fits-all.
 - Include a welcoming landing page and deployed documentation site alongside
   the component library.
 - Build a differentiated component library wired to arc-id SDK, not a generic

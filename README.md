@@ -16,24 +16,23 @@ design manual (Alpha Palette), and your auth requirements differ per sector
 | `@arcevo/facet-auth`       | Auth components + domain presets: SignIn, SignUp, Guard, MfaDialog, forms                           | ✅ 1.0.0 |
 | `@arcevo/facet-layout`     | Domain-configurable app shell: ConsoleLayout, AuthLayout, LandingLayout, Sidebar, Topbar, 5 presets | ✅ 1.0.0 |
 
-All five packages are versioned at 1.0.0 and publish-ready. Publishing is
-paused pending resolution of the npm scope: the `@arcevo/facet-*` names are
-already owned on the public npm registry by an unrelated project (BT's
-"Arc UI System"), so the intended scope would collide. Options: publish
-under a different scope, or verify ownership of `@facet` before pushing.
-See `.agent/output.txt` for the current publish status.
+All five packages are versioned at 1.0.0 and publish-ready. See
+`.agent/output.txt` (kept in sync during development) for the live build
+status; the tracked `README.md` mirrors the important details.
 
 ## Quick Start
 
 ```sh
 pnpm install
 pnpm build
+pnpm test      # 108 tests across 4 packages (vitest)
+pnpm typecheck # all 7 projects
 ```
 
 Consume in your app:
 
 ```tsx
-import { ConsoleLayout, defaultLayoutPreset } from "@arcevo/facet-layout";
+import { ConsoleLayout, enterpriseLayoutPreset } from "@arcevo/facet-layout";
 import { AuthGuard } from "@arcevo/facet-auth";
 
 function App() {
@@ -79,6 +78,22 @@ import { fintechAuthPreset, SignIn, MfaVerifyForm } from "@arcevo/facet-auth";
 
 Forms are independently importable: `LoginForm`, `MagicLinkForm`, `ForgotPasswordForm`,
 `MfaVerifyForm`, `MfaSetupForm`, `MfaRecoveryForm`.
+
+## Publishing
+
+Packages publish to npm under the `@arcevo/facet-*` scope via Changesets
+(the repo was renamed from `@arc-ui/*` because that scope belongs to an
+unrelated project).
+
+```sh
+npm login                  # requires delegated browser auth
+pnpm changeset publish     # ships unpublished packages at their current version
+```
+
+The GitHub Actions workflow (`.github/workflows/ci-cd.yml`) also runs
+`pnpm changeset publish` on `main` using the `NPM_TOKEN` secret. No packages
+are published yet; after `npm login` succeeds, run `pnpm changeset publish`
+to ship the initial 1.0.0 release.
 
 ## Dev Preview
 

@@ -10,11 +10,18 @@ design manual (Alpha Palette), and your auth requirements differ per sector
 
 | Package              | Description                                                                                         | Status  |
 | -------------------- | --------------------------------------------------------------------------------------------------- | ------- |
-| `@arc-ui/tokens`     | Design tokens: Alpha Palette, typography, spacing, CSS vars                                         | ✅ Done |
-| `@arc-ui/sdk`        | arc-id API client (pure fetch, typed, 10 domain SDKs)                                               | ✅ Done |
-| `@arc-ui/components` | 35+ styled UI components (Radix + tailwind-merge + variants)                                        | ✅ Done |
-| `@arc-ui/auth`       | Auth components + domain presets: SignIn, SignUp, Guard, MfaDialog, forms                           | ✅ Done |
-| `@arc-ui/layout`     | Domain-configurable app shell: ConsoleLayout, AuthLayout, LandingLayout, Sidebar, Topbar, 5 presets | ✅ Done |
+| `@arc-ui/tokens`     | Design tokens: Alpha Palette, typography, spacing, CSS vars                                         | ✅ 1.0.0 |
+| `@arc-ui/sdk`        | arc-id API client (pure fetch, typed, 10 domain SDKs)                                               | ✅ 1.0.0 |
+| `@arc-ui/components` | 35+ styled UI components (Radix + tailwind-merge + variants)                                        | ✅ 1.0.0 |
+| `@arc-ui/auth`       | Auth components + domain presets: SignIn, SignUp, Guard, MfaDialog, forms                           | ✅ 1.0.0 |
+| `@arc-ui/layout`     | Domain-configurable app shell: ConsoleLayout, AuthLayout, LandingLayout, Sidebar, Topbar, 5 presets | ✅ 1.0.0 |
+
+All five packages are versioned at 1.0.0 and publish-ready. Publishing is
+paused pending resolution of the npm scope: the `@arc-ui/*` names are
+already owned on the public npm registry by an unrelated project (BT's
+"Arc UI System"), so the intended scope would collide. Options: publish
+under a different scope, or verify ownership of `@arc-ui` before pushing.
+See `.agent/output.txt` for the current publish status.
 
 ## Quick Start
 

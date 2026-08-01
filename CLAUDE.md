@@ -26,6 +26,7 @@ packages/tokens/       ← Design tokens (finished)
 packages/sdk/          ← arc-id SDK (finished)
 packages/components/   ← 27 styled shadcn equivalents
 packages/auth/         ← Auth components + presets
+packages/layout/       ← Domain-configurable app shell (ConsoleLayout, AuthLayout, LandingLayout)
 apps/docs/             ← Documentation site
 apps/landing/          ← Landing page
 ```
@@ -88,19 +89,21 @@ COMPLETE → (onSuccess callback) → redirect
 | Session TTL  | 15 min  | 30 min | 24 hr | 8 hr       |
 | Magic link   | ✅      | ❌     | ✅    | ❌         |
 
-## Build Status (2026-07-31)
+## Build Status (2026-08-01)
 
 1. ✅ `packages/tokens/`: Complete
 2. ✅ `packages/sdk/`: Complete, strict domain types (`sdk/src/types.ts`)
 3. ✅ `packages/components/`: 35+ styled Radix components + theme system
 4. ✅ `packages/auth/`: ArcProvider, SignIn, SignUp, UserButton, Guard, MfaDialog, 8 standalone forms
-5. ✅ `packages/layout/`: ConsoleLayout (full + rail modes), AuthLayout, LandingLayout, 5 presets
+5. ✅ `packages/layout/`: ConsoleLayout (full + rail modes), AuthLayout (renamed from AppLayout, alias kept), LandingLayout, 5 presets
 6. ✅ `apps/docs/`: Storybook 10.5.5, 50+ story files + 5 MDX docs, mock SDK decorator
 7. ✅ Changesets + npm publish pipeline
 8. ✅ `apps/landing/`: rebuilt public-facing site (vite + tailwind v4)
 9. ✅ Layout stories: ConsoleLayout, AuthLayout, Sidebar, Topbar, PageHeader, LandingLayout
-10. ✅ Tests: vitest workspace, 89 tests across sdk/components/auth/layout
+10. ✅ Tests: vitest workspace, 107 tests across sdk/components/auth/layout (12 files)
 11. ✅ SignIn mfa_challenge wired to MfaVerifyForm
+12. ✅ Verified 2026-08-01: `pnpm build` green, `pnpm test` 107/107, `pnpm typecheck` green (after fixing docs mock-sdk.ts to strict SDK types). `pnpm lint` hangs on this machine (environment issue, see `.agent/output.txt`).
+13. ⚠ Publish blocked: `@arc-ui/*` npm scope is owned by BT's Arc UI System; npm also requires delegated browser auth. See `.agent/output.txt` PUBLISH STATUS.
 
 ## Known Gaps for arc-id Consumption
 
@@ -110,25 +113,32 @@ When arc-id adopts arc-ui as its frontend, these need resolution:
 
 1. ✅ **SDK 401 auto-refresh**: Added `onTokenRefresh` callback to `ArcIdClient` (`client.ts:113-124`). Automatic retry on 401.
 2. ✅ **Placeholder handlers**: `handlePasskeyAuth` now calls `passkeySdk.authenticationOptions()` → `navigator.credentials.get()` → `passkeySdk.authenticate()`. `handleForgotPasswordSubmit` calls `authSdk.forgotPassword()`. No longer stubs.
-3. ✅ **Test infrastructure**: Vitest workspace, 89 tests across all packages.
+3. ✅ **Test infrastructure**: Vitest workspace, 107 tests across sdk/components/auth/layout (12 files).
 4. ✅ **SignIn MFA challenge**: Wired to `MfaVerifyForm` (2026-07-31).
 5. ✅ **Duplicate dropdowns**: `layout/UserMenu` now uses `@arc-ui/components` `DropdownMenu`.
 6. ✅ **Type strictness**: SDK now has strict domain interfaces in `sdk/src/types.ts`; `Record<string, unknown>` eliminated.
 7. ✅ **Sidebar router coupling**: `RouterAdapter` pattern (`router.tsx`) supports Next.js App Router, Remix, and React Router.
 8. ✅ **Theme switching**: `ThemeProvider`/`useTheme`/`ThemeToggle` with localStorage persistence + system preference detection.
+9. ✅ **OAuth provider buttons**: SignIn renders provider buttons from `config.oauthProviders` and calls `onOAuth`.
+10. ✅ **Form validation**: Auth forms integrate react-hook-form + zod with inline errors.
+11. ✅ **Domain preset registry**: `registerPreset`/`getPreset`/`resolvePreset` in auth and layout.
+12. ✅ **Docs mock types**: `apps/docs/src/stories/mock-sdk.ts` now typed against strict SDK types (User/Membership, TokenBundle), so `pnpm typecheck` is green repo-wide.
 
-**Still open (not blockers):** 9. **OAuth provider buttons**: SignIn renders provider buttons from `config.oauthProviders` but they are inert; an `onOAuth` callback is planned. 10. **No Tailwind config**: No `tailwind.config.*`. Relies on CSS variables. Consumers need `tailwindcss-animate` plugin. 11. **Form validation**: Auth forms do client-side validation (password match, min length) but no integration with react-hook-form or zod.
-
-**Optimization opportunities for scalability & dynamism:** 12. **No icon library registry**: lucide-react adopted piecemeal. An IconRegistry with domain overrides would enable runtime icon swapping. 13. **Domain preset extensibility**: Currently 5 hardcoded presets. A registry pattern (register custom domain configs) would let third parties add presets without forking. 14. **Bundle optimization**: tsup uses CLI flags, not config files. No code-splitting, no external analysis for tree-shake effectiveness. 15. **CSS build pipeline**: Tokens CSS is copied via inline `fs.cpSync` instead of a proper build step (PostCSS + autoprefixer + minification). 16. **Cross-package dependency graph**: `tokens ← components ← auth ← layout` (plus SDK is peer). No circular deps. Adding `turbo`/`nx` for task orchestration would make incremental builds reliable. 17. **Component a11y audit**: Radix primitives provide baseline accessibility, but compounded components (SignIn state machine, MfaDialog phases) need keyboard navigation and screen reader testing before third-party use.
+**Still open (not blockers):** 1. **No Tailwind config**: No `tailwind.config.*`. Relies on CSS variables. Consumers need `tailwindcss-animate` plugin. 2. **Icon library registry**: lucide-react adopted piecemeal; an IconRegistry with domain overrides would enable runtime icon swapping. 3. **Bundle optimization**: tsup uses CLI flags, not config files; no code-splitting or tree-shake analysis. 4. **CSS build pipeline**: Tokens CSS is copied via inline `fs.cpSync` instead of a proper build step (PostCSS + autoprefixer + minification). 5. **Turbo validation**: `turbo.json` exists but hasn't been validated with a real run. 6. **Component a11y audit**: Radix primitives provide baseline accessibility, but compounded components (SignIn state machine, MfaDialog phases) need keyboard navigation and screen reader testing before third-party use.
 
 ## Consumption Target
 
-arc-id will consume arc-ui as `@arc-ui/*` packages (npm published). The overlap analysis in arc-id's `.agent/output.txt` shows near-exact duplication of:
+arc-id will consume arc-ui as npm-published packages. The overlap analysis in arc-id's `.agent/output.txt` shows near-exact duplication of:
 
 - `src/components/ui/*` → replace with `@arc-ui/components`
 - `src/components/auth/*` → replace with `@arc-ui/auth`
 - `src/sdk/*` → replace with `@arc-ui/sdk`
 - `globals.css :root` → replace with `@arc-ui/tokens/tokens.css`
+
+Note: the `@arc-ui/*` scope on the public npm registry is currently owned
+by an unrelated project (BT's Arc UI System). Publishing under it is
+blocked until a scope we control is chosen (e.g. `@arcevo/*`). See
+`.agent/output.txt` PUBLISH STATUS.
 
 arc-id keeps: Zustand stores, hooks, providers (tenant hydration), pages, layout components (until replacing with `@arc-ui/layout`).
 

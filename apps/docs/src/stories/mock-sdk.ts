@@ -5,20 +5,23 @@
 
 import type {
   TokenPair,
-  UserProfile,
+  User,
+  Membership,
   MfaVerifyResult,
   MfaSetupResult,
   RecoveryCodesResult,
 } from "@arc-ui/sdk";
 
-export const MOCK_USER: UserProfile = {
+export const MOCK_MEMBERSHIPS: Membership[] = [
+  { tenantId: "org_arc_001", name: "Arcevo Labs", role: "admin" },
+  { tenantId: "org_acme_001", name: "Acme Corp", role: "member" },
+];
+
+export const MOCK_USER: User = {
   id: "usr_mock_001",
   email: "jane@example.com",
   name: "Jane Archer",
-  memberships: [
-    { id: "mem_001", name: "Arcevo Labs", organizationId: "org_arc_001", role: "admin" },
-    { id: "mem_002", name: "Acme Corp", organizationId: "org_acme_001", role: "member" },
-  ],
+  memberships: MOCK_MEMBERSHIPS,
   plan: "pro",
   tenantId: "tenant_arc_001",
 };
@@ -26,13 +29,15 @@ export const MOCK_USER: UserProfile = {
 export const MOCK_TOKEN_PAIR: TokenPair = {
   accessToken: "mock_access_eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9",
   refreshToken: "mock_refresh_eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9",
-  user: MOCK_USER as unknown as Record<string, unknown>,
+  user: MOCK_USER,
 };
 
 export const MOCK_MFA_VERIFY: MfaVerifyResult = {
+  sessionId: "sess_mock_001",
   accessToken: "mock_mfa_access_xxx",
   refreshToken: "mock_mfa_refresh_xxx",
-  user: MOCK_USER as unknown as Record<string, unknown>,
+  idToken: null,
+  expiresIn: 900,
 };
 
 export const MOCK_MFA_SETUP: MfaSetupResult = {

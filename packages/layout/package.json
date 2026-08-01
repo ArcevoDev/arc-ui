@@ -1,7 +1,7 @@
 {
   "name": "@arc-ui/layout",
   "version": "1.0.0",
-  "description": "Domain-configurable app shell for the ArcevoCirqle ecosystem: Sidebar, Topbar, AppLayout, ConsoleLayout, LandingLayout, PageHeader, TenantSwitcher, and 5 domain presets (fintech, med, edu, enterprise, default).",
+  "description": "Domain-configurable app shell for the ArcevoCirqle ecosystem: Sidebar, Topbar, AuthLayout, ConsoleLayout, LandingLayout, PageHeader, TenantSwitcher, and 5 domain presets (fintech, med, edu, enterprise, default).",
   "type": "module",
   "exports": {
     ".": {

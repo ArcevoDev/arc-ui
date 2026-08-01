@@ -18,6 +18,11 @@ design manual (Alpha Palette), and your auth requirements differ per sector
 
 All five packages are versioned at 1.0.0 and publish-ready.
 
+## Sites
+
+- Landing: https://facet.arcevocirqle.com.ng
+- Docs: https://docs.facet.arcevocirqle.com.ng
+
 ## Quick Start
 
 ```sh
@@ -90,7 +95,8 @@ pnpm changeset publish   # ships unpublished packages at their current version
 ## Dev Preview
 
 ```sh
-pnpm dev:docs   # Storybook → http://localhost:6006
+pnpm dev:docs   # Storybook → http://localhost:6006 (local)
+pnpm dev:landing # Landing → http://localhost:5173 (local)
 ```
 
 ## License

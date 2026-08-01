@@ -18,7 +18,7 @@ export function Footer() {
             GitHub
           </a>
           <a
-            href="https://github.com/arcevodev/facet#readme"
+            href="https://docs.facet.arcevocirqle.com.ng"
             className="flex items-center gap-1.5 text-xs text-muted-foreground transition-colors hover:text-foreground"
           >
             <BookOpen size={14} />

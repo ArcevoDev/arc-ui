@@ -45,7 +45,7 @@ export function Nav() {
             GitHub
           </a>
           <ThemeToggle />
-          <Button size="sm" onClick={() => window.open("http://localhost:6006")}>
+          <Button size="sm" onClick={() => window.open("https://docs.facet.arcevocirqle.com.ng")}>
             Browse components
           </Button>
         </div>

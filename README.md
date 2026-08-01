@@ -91,9 +91,14 @@ pnpm changeset publish     # ships unpublished packages at their current version
 ```
 
 The GitHub Actions workflow (`.github/workflows/ci-cd.yml`) also runs
-`pnpm changeset publish` on `main` using the `NPM_TOKEN` secret. No packages
-are published yet; after `npm login` succeeds, run `pnpm changeset publish`
-to ship the initial 1.0.0 release.
+`pnpm changeset publish` on `main` using the `NPM_TOKEN` secret.
+
+**Current blocker (verified 2026-08-01):** auth works (`npm whoami` →
+`abefe`), but `npm publish` returns `404 Scope not found` on PUT for
+`@arcevo/facet-*`. The `@arcevo` scope has no packages on the registry and
+is not claimed by the publishing account. Fix: claim the `@arcevo` scope on
+npm (publish a placeholder package or create the npm org/team for it), then
+run `pnpm changeset publish` to ship the initial 1.0.0 release.
 
 ## Dev Preview
 

@@ -142,15 +142,15 @@ export function IconProvider({ overrides, children }: IconProviderProps) {
 
 /* ── Icon component ───────────────────────────────────────── */
 
-export interface IconProps {
+export interface IconProps extends React.SVGProps<SVGSVGElement> {
   name: IconName;
   className?: string;
   size?: number | string;
 }
 
 /** Renders the resolved icon for a semantic name (context overrides win). */
-export function Icon({ name, className, size }: IconProps) {
+export function Icon({ name, className, size, ...props }: IconProps) {
   const overrides = React.useContext(IconContext);
   const Component = overrides?.[name] ?? globalRegistry[name];
-  return <Component className={className} size={size} />;
+  return <Component className={className} size={size} {...props} />;
 }

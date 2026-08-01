@@ -196,6 +196,7 @@ export function Navbar({
       {/* Mobile menu */}
       {showHamburger && mobileOpen && (
         <div
+          onClick={() => setMobileOpen(false)}
           className={cn(
             "absolute inset-x-0 top-full z-50 border-b border-border bg-background p-4 md:hidden",
             isPill && "mt-1 rounded-2xl shadow-lg",

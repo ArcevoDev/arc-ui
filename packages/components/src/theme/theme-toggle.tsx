@@ -6,7 +6,7 @@
  * currently applied (resolved) theme.
  */
 
-import { Check, Moon, Sun } from "lucide-react";
+import { Icon } from "../icon/index.js";
 import { cn } from "../utils.js";
 import {
   DropdownMenu,
@@ -37,7 +37,7 @@ export function ThemeToggle({
 }: ThemeToggleProps) {
   const { theme, setTheme, resolvedTheme } = useTheme();
 
-  const TriggerIcon = resolvedTheme === "dark" ? Moon : Sun;
+  const TriggerIcon = resolvedTheme === "dark" ? "moon" : "sun";
 
   return (
     <DropdownMenu>
@@ -48,12 +48,12 @@ export function ThemeToggle({
           className,
         )}
       >
-        <TriggerIcon className="size-4" />
+        <Icon name={TriggerIcon} className="size-4" />
       </DropdownMenuTrigger>
       <DropdownMenuContent align="end">
         {items.map((item) => (
           <DropdownMenuItem key={item} onClick={() => setTheme(item)} className="cursor-pointer">
-            {theme === item && <Check className="size-4" />}
+            {theme === item && <Icon name="check" className="size-4" />}
             <span className={theme === item ? "" : "pl-6"}>{ITEM_LABELS[item]}</span>
           </DropdownMenuItem>
         ))}

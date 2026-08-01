@@ -1,5 +1,23 @@
 # @arcevo/facet-layout
 
+## 1.0.2
+
+### Patch Changes
+
+- Updated dependencies
+- Updated dependencies
+  - @arcevo/facet-components@1.0.2
+  - @arcevo/facet-auth@1.0.2
+
+## 1.0.1
+
+### Patch Changes
+
+- d94a724: chore: update homepage to facet.arcevocirqle.com.ng
+- Updated dependencies [d94a724]
+  - @arcevo/facet-auth@1.0.1
+  - @arcevo/facet-components@1.0.1
+
 ## 1.0.0
 
 ### Major Changes

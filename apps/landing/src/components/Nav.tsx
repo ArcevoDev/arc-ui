@@ -1,4 +1,4 @@
-import { Github } from "lucide-react";
+import { Github, ExternalLink } from "lucide-react";
 import { Navbar, Button, ThemeToggle } from "@arcevo/facet-components";
 import type { NavLink } from "@arcevo/facet-components";
 
@@ -29,17 +29,52 @@ function Brand() {
   );
 }
 
+function MobileMenu() {
+  return (
+    <div className="flex flex-col gap-1">
+      {LINKS.map((link) => (
+        <a
+          key={link.href}
+          href={link.href}
+          className="flex items-center gap-2 rounded-md px-3 py-2 text-sm font-medium text-foreground/70 transition-colors hover:bg-accent hover:text-foreground"
+        >
+          {link.label}
+        </a>
+      ))}
+      <div className="my-1 h-px bg-border" />
+      <a
+        href="https://github.com/arcevodev/facet"
+        target="_blank"
+        rel="noreferrer"
+        className="flex items-center gap-2 rounded-md px-3 py-2 text-sm font-medium text-foreground/70 transition-colors hover:bg-accent hover:text-foreground"
+      >
+        <Github size={16} />
+        GitHub
+      </a>
+      <Button
+        size="sm"
+        className="mt-1 w-full"
+        onClick={() => window.open("https://docs.facet.arcevocirqle.com.ng")}
+      >
+        Browse components
+        <ExternalLink size={14} />
+      </Button>
+    </div>
+  );
+}
+
 export function Nav() {
   return (
     <Navbar
       variant="pill"
       brand={<Brand />}
       links={LINKS}
+      mobileMenu={<MobileMenu />}
       actions={
         <div className="flex items-center gap-2">
           <a
             href="https://github.com/arcevodev/facet"
-            className="hidden items-center gap-1.5 text-sm text-muted-foreground transition-colors hover:text-foreground sm:flex"
+            className="hidden items-center gap-1.5 text-sm text-muted-foreground transition-colors hover:text-foreground md:flex"
           >
             <Github size={16} />
             GitHub

@@ -101,7 +101,7 @@ export function Sidebar({ config, isLoading, collapsed = false }: SidebarProps) 
           </p>
         ) : (
           <p className="text-center text-xs text-sidebar-foreground/40">
-            {config.brand.name} v0.1.0
+            {config.brand.name} v1.0.0
           </p>
         )}
       </div>

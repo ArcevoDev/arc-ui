@@ -10,6 +10,8 @@ It overrides/supplements CLAUDE.md for AI agents.
 2. After every significant milestone, update `.agent/output.txt` status dashboard.
 3. When starting a new package, read any existing `.agent/**` planning files
    first before writing code.
+4. `.agent/` is gitignored (tracker is local-only); any important details
+   must be synced into the tracked README before a session ends.
 
 ## Architecture Rules
 
@@ -28,11 +30,11 @@ It overrides/supplements CLAUDE.md for AI agents.
 
 ## Current Build Status
 
-See `.agent/output.txt` for the live status dashboard.
+See `CLAUDE.md` and the README for the verified build/test/typecheck state.
+`.agent/output.txt` is the local-only live dashboard.
 
 ## Publish Status
 
-Initial 1.0.0 release is ready but blocked: the `@arcevo/facet-*` npm scope is
-owned by an unrelated project (BT's Arc UI System), and npm requires
-delegated browser auth to publish. See the PUBLISH STATUS section of
-`.agent/output.txt` before attempting any publish.
+Packages publish to npm under the `@arcevo/facet-*` scope via Changesets
+(`pnpm changeset publish`). The GitHub Actions workflow publishes on `main`
+using the `NPM_TOKEN` secret. See the README Publishing section.

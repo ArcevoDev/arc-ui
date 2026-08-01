@@ -16,9 +16,7 @@ design manual (Alpha Palette), and your auth requirements differ per sector
 | `@arcevo/facet-auth`       | Auth components + domain presets: SignIn, SignUp, Guard, MfaDialog, forms                           | ✅ 1.0.0 |
 | `@arcevo/facet-layout`     | Domain-configurable app shell: ConsoleLayout, AuthLayout, LandingLayout, Sidebar, Topbar, 5 presets | ✅ 1.0.0 |
 
-All five packages are versioned at 1.0.0 and publish-ready. See
-`.agent/output.txt` (kept in sync during development) for the live build
-status; the tracked `README.md` mirrors the important details.
+All five packages are versioned at 1.0.0 and publish-ready.
 
 ## Quick Start
 
@@ -81,24 +79,13 @@ Forms are independently importable: `LoginForm`, `MagicLinkForm`, `ForgotPasswor
 
 ## Publishing
 
-Packages publish to npm under the `@arcevo/facet-*` scope via Changesets
-(the repo was renamed from `@arc-ui/*` because that scope belongs to an
-unrelated project).
-
-```sh
-npm login                  # requires delegated browser auth
-pnpm changeset publish     # ships unpublished packages at their current version
-```
-
-The GitHub Actions workflow (`.github/workflows/ci-cd.yml`) also runs
+Packages publish to npm under the `@arcevo/facet-*` scope via Changesets.
+The GitHub Actions workflow (`.github/workflows/ci-cd.yml`) runs
 `pnpm changeset publish` on `main` using the `NPM_TOKEN` secret.
 
-**Current blocker (verified 2026-08-01):** auth works (`npm whoami` →
-`abefe`), but `npm publish` returns `404 Scope not found` on PUT for
-`@arcevo/facet-*`. The `@arcevo` scope has no packages on the registry and
-is not claimed by the publishing account. Fix: claim the `@arcevo` scope on
-npm (publish a placeholder package or create the npm org/team for it), then
-run `pnpm changeset publish` to ship the initial 1.0.0 release.
+```sh
+pnpm changeset publish   # ships unpublished packages at their current version
+```
 
 ## Dev Preview
 

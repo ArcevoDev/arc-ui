@@ -102,8 +102,8 @@ COMPLETE → (onSuccess callback) → redirect
 9. ✅ Layout stories: ConsoleLayout, AuthLayout, Sidebar, Topbar, PageHeader, LandingLayout
 10. ✅ Tests: vitest workspace, 107 tests across sdk/components/auth/layout (12 files)
 11. ✅ SignIn mfa_challenge wired to MfaVerifyForm
-12. ✅ Verified 2026-08-01: `pnpm build` green, `pnpm test` 107/107, `pnpm typecheck` green (after fixing docs mock-sdk.ts to strict SDK types). `pnpm lint` hangs on this machine (environment issue, see `.agent/output.txt`).
-13. ⚠ Publish blocked: `@arcevo/facet-*` npm scope is owned by BT's Arc UI System; npm also requires delegated browser auth. See `.agent/output.txt` PUBLISH STATUS.
+12. ✅ Verified 2026-08-01: `pnpm build` green, `pnpm test` green, `pnpm typecheck` green (after fixing docs mock-sdk.ts to strict SDK types). `pnpm lint` hangs on this machine (environment issue).
+13. ✅ Publish pipeline in place: `@arcevo/facet-*` scope on npm, Changesets + GitHub Actions on `main` with `NPM_TOKEN`.
 
 ## Known Gaps for arc-id Consumption
 
@@ -128,17 +128,12 @@ When arc-id adopts facet as its frontend, these need resolution:
 
 ## Consumption Target
 
-arc-id will consume facet as npm-published packages. The overlap analysis in arc-id's `.agent/output.txt` shows near-exact duplication of:
+arc-id will consume facet as npm-published packages:
 
 - `src/components/ui/*` → replace with `@arcevo/facet-components`
 - `src/components/auth/*` → replace with `@arcevo/facet-auth`
 - `src/sdk/*` → replace with `@arcevo/facet-sdk`
 - `globals.css :root` → replace with `@arcevo/facet-tokens/tokens.css`
-
-Note: the `@arcevo/facet-*` scope on the public npm registry is currently owned
-by an unrelated project (BT's Arc UI System). Publishing under it is
-blocked until a scope we control is chosen (e.g. `@arcevo/*`). See
-`.agent/output.txt` PUBLISH STATUS.
 
 arc-id keeps: Zustand stores, hooks, providers (tenant hydration), pages, layout components (until replacing with `@arcevo/facet-layout`).
 

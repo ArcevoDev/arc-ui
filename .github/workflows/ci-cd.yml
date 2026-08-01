@@ -22,8 +22,8 @@ jobs:
           node-version: 22
           cache: pnpm
       - run: pnpm install --frozen-lockfile
-      - run: pnpm -r typecheck
       - run: pnpm build
+      - run: pnpm -r typecheck
 
   publish:
     name: Publish to npm

@@ -121,6 +121,22 @@ describe("Accordion", () => {
     expect(item?.className).toContain("bg-card");
     expect(item?.className).toContain("rounded-lg");
   });
+
+  it("spaces separated items apart within a single accordion", () => {
+    const { container } = render(
+      <Accordion type="single">
+        <AccordionItem variant="separated" value="item-1">
+          <AccordionTrigger>First</AccordionTrigger>
+        </AccordionItem>
+        <AccordionItem variant="separated" value="item-2">
+          <AccordionTrigger>Second</AccordionTrigger>
+        </AccordionItem>
+      </Accordion>,
+    );
+    const headers = container.querySelectorAll("h3");
+    const items = Array.from(headers, (h) => h.parentElement);
+    expect(items[1]?.className).toContain("mt-2");
+  });
 });
 
 describe("Dialog", () => {

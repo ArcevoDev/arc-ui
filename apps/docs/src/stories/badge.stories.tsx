@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import { Check, Info, ShieldAlert, Sparkles, X } from "lucide-react";
-import { Badge } from "@arc-ui/components";
+import { Badge } from "@arcevo/facet-components";
 
 const meta: Meta<typeof Badge> = {
   title: "Components/Badge",

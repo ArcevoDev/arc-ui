@@ -3,19 +3,19 @@
  *
  * Orchestrates MfaVerifyForm, MfaSetupForm, MfaRecoveryCodesForm, and
  * MfaRecoveryForm through the MFA phase flow. Extracted forms are
- * independently importable from @arc-ui/auth.
+ * independently importable from @arcevo/facet-auth.
  *
  * Steps: verify → setup → confirm_setup → recovery_codes → recovery
  */
 
 import * as React from "react";
-import { AuthSdk } from "@arc-ui/sdk";
-import type { ArcIdClient, MfaVerifyResult, MfaSetupResult } from "@arc-ui/sdk";
+import { AuthSdk } from "@arcevo/facet-sdk";
+import type { ArcIdClient, MfaVerifyResult, MfaSetupResult } from "@arcevo/facet-sdk";
 import { MfaVerifyForm } from "./forms/mfa/verify-form.js";
 import { MfaSetupForm, MfaRecoveryCodesForm } from "./forms/mfa/setup-form.js";
 import { MfaRecoveryForm } from "./forms/mfa/recovery-form.js";
 
-import { Dialog, DialogContent } from "@arc-ui/components";
+import { Dialog, DialogContent } from "@arcevo/facet-components";
 import type { Appearance } from "./types.js";
 
 /* ── Props ─────────────────────────────────────────────────── */

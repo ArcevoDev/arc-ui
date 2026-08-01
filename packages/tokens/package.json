@@ -1,5 +1,5 @@
 {
-  "name": "@arc-ui/tokens",
+  "name": "@arcevo/facet-tokens",
   "version": "1.0.0",
   "description": "Design tokens for the ArcevoCirqle ecosystem: Alpha Palette colors, typography, spacing, and sub-brand accents in OKLCH",
   "type": "module",
@@ -32,13 +32,13 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/ArcevoDev/arc-ui.git",
+    "url": "git+https://github.com/ArcevoDev/facet.git",
     "directory": "packages/tokens"
   },
   "bugs": {
-    "url": "https://github.com/ArcevoDev/arc-ui/issues"
+    "url": "https://github.com/ArcevoDev/facet/issues"
   },
-  "homepage": "https://arc-ui.vercel.app",
+  "homepage": "https://facet.vercel.app",
   "license": "MIT",
   "keywords": [
     "design-tokens",

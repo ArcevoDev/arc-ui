@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import { UserMenu } from "@arc-ui/layout";
+import { UserMenu } from "@arcevo/facet-layout";
 import { withMockAuthSession } from "./layout-decorator.js";
 
 const meta: Meta<typeof UserMenu> = {

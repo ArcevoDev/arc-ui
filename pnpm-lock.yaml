@@ -62,19 +62,19 @@ importers:
 
   apps/docs:
     dependencies:
-      '@arc-ui/auth':
+      '@arcevo/facet-auth':
         specifier: workspace:*
         version: link:../../packages/auth
-      '@arc-ui/components':
+      '@arcevo/facet-components':
         specifier: workspace:*
         version: link:../../packages/components
-      '@arc-ui/layout':
+      '@arcevo/facet-layout':
         specifier: workspace:*
         version: link:../../packages/layout
-      '@arc-ui/sdk':
+      '@arcevo/facet-sdk':
         specifier: workspace:*
         version: link:../../packages/sdk
-      '@arc-ui/tokens':
+      '@arcevo/facet-tokens':
         specifier: workspace:*
         version: link:../../packages/tokens
     devDependencies:
@@ -120,13 +120,13 @@ importers:
 
   apps/landing:
     dependencies:
-      '@arc-ui/components':
+      '@arcevo/facet-components':
         specifier: workspace:*
         version: link:../../packages/components
-      '@arc-ui/layout':
+      '@arcevo/facet-layout':
         specifier: workspace:*
         version: link:../../packages/layout
-      '@arc-ui/tokens':
+      '@arcevo/facet-tokens':
         specifier: workspace:*
         version: link:../../packages/tokens
       lucide-react:
@@ -166,10 +166,10 @@ importers:
 
   packages/auth:
     dependencies:
-      '@arc-ui/components':
+      '@arcevo/facet-components':
         specifier: workspace:*
         version: link:../components
-      '@arc-ui/sdk':
+      '@arcevo/facet-sdk':
         specifier: workspace:*
         version: link:../sdk
       '@hookform/resolvers':
@@ -209,7 +209,7 @@ importers:
 
   packages/components:
     dependencies:
-      '@arc-ui/tokens':
+      '@arcevo/facet-tokens':
         specifier: workspace:*
         version: link:../tokens
       '@radix-ui/react-accordion':
@@ -312,10 +312,10 @@ importers:
 
   packages/layout:
     dependencies:
-      '@arc-ui/auth':
+      '@arcevo/facet-auth':
         specifier: workspace:*
         version: link:../auth
-      '@arc-ui/components':
+      '@arcevo/facet-components':
         specifier: workspace:*
         version: link:../components
       lucide-react:

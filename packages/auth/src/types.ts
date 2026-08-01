@@ -9,12 +9,12 @@ import type {
   RegisterResult,
   TokenBundle,
   UserProfile,
-} from "@arc-ui/sdk";
-import type { ArcIdClient } from "@arc-ui/sdk";
+} from "@arcevo/facet-sdk";
+import type { ArcIdClient } from "@arcevo/facet-sdk";
 
 /* ── Identity ──────────────────────────────────────────────── */
 
-export type { TokenPair } from "@arc-ui/sdk";
+export type { TokenPair } from "@arcevo/facet-sdk";
 
 export type AuthUser = UserProfile;
 

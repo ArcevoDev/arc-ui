@@ -3,15 +3,15 @@
  *
  * Orchestrates LoginForm, MagicLinkForm, and ForgotPasswordForm through
  * the auth step flow. Extracted forms are independently importable from
- * @arc-ui/auth.
+ * @arcevo/facet-auth.
  *
  * Steps: idle → check_session → select_method → login_form / magic_link_form
  *        → check_mfa → mfa_challenge → complete
  */
 
 import * as React from "react";
-import { AuthSdk, PasskeySdk } from "@arc-ui/sdk";
-import type { LoginResult, TokenPair } from "@arc-ui/sdk";
+import { AuthSdk, PasskeySdk } from "@arcevo/facet-sdk";
+import type { LoginResult, TokenPair } from "@arcevo/facet-sdk";
 import { useAuth } from "./provider.js";
 import { defaultConfig } from "./types.js";
 import type { AuthConfig, Appearance, ComponentSlots, SignInStep } from "./types.js";
@@ -28,7 +28,7 @@ import {
   CardDescription,
   CardContent,
   Separator,
-} from "@arc-ui/components";
+} from "@arcevo/facet-components";
 
 /* ── Props ─────────────────────────────────────────────────── */
 

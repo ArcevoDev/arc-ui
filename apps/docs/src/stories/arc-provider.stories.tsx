@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import { ArcProvider } from "@arc-ui/auth";
+import { ArcProvider } from "@arcevo/facet-auth";
 import { withMockAuth } from "./auth-decorator.js";
 
 const meta: Meta<typeof ArcProvider> = {

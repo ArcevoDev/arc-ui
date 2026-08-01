@@ -1,10 +1,10 @@
 /**
- * @arc-ui/sdk: arc-id API client
+ * @arcevo/facet-sdk: arc-id API client
  *
  * Pure fetch. No framework dependencies.
  *
  * Usage:
- *   import { ArcIdClient, AuthSdk } from "@arc-ui/sdk";
+ *   import { ArcIdClient, AuthSdk } from "@arcevo/facet-sdk";
  *
  *   const client = new ArcIdClient({ baseUrl: "https://auth.arcevo.dev/api/v1" });
  *   const auth = new AuthSdk(client);

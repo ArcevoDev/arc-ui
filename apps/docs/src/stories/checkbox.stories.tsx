@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import { Checkbox } from "@arc-ui/components";
-import { Label } from "@arc-ui/components";
+import { Checkbox } from "@arcevo/facet-components";
+import { Label } from "@arcevo/facet-components";
 
 const meta: Meta<typeof Checkbox> = {
   title: "Components/Checkbox",

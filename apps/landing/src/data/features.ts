@@ -50,17 +50,17 @@ export const INSTALL_STEPS: InstallStep[] = [
   {
     num: "01",
     label: "Install",
-    code: "pnpm add @arc-ui/components @arc-ui/auth @arc-ui/layout @arc-ui/sdk",
+    code: "pnpm add @arcevo/facet-components @arcevo/facet-auth @arcevo/facet-layout @arcevo/facet-sdk",
   },
   {
     num: "02",
     label: "Import tokens",
-    code: '@import "@arc-ui/tokens/tokens.css"',
+    code: '@import "@arcevo/facet-tokens/tokens.css"',
   },
   {
     num: "03",
     label: "Use components",
-    code: `import { Button, Card } from "@arc-ui/components"`,
+    code: `import { Button, Card } from "@arcevo/facet-components"`,
   },
   {
     num: "04",

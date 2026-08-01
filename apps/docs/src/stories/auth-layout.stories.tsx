@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import { AuthLayout, fintechLayoutPreset, eduLayoutPreset } from "@arc-ui/layout";
-import { Button } from "@arc-ui/components";
+import { AuthLayout, fintechLayoutPreset, eduLayoutPreset } from "@arcevo/facet-layout";
+import { Button } from "@arcevo/facet-components";
 
 const meta: Meta<typeof AuthLayout> = {
   title: "Layout/AuthLayout",

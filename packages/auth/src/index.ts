@@ -1,8 +1,8 @@
 /**
- * @arc-ui/auth: domain-customizable auth components wired to arc-id SDK.
+ * @arcevo/facet-auth: domain-customizable auth components wired to arc-id SDK.
  *
  * Usage:
- *   import { ArcProvider, SignIn, Guard } from "@arc-ui/auth";
+ *   import { ArcProvider, SignIn, Guard } from "@arcevo/facet-auth";
  *
  *   <ArcProvider client={arcIdClient}>
  *     <Guard fallback={<SignIn />}>

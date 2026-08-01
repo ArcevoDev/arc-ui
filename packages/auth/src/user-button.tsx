@@ -9,8 +9,8 @@ import * as React from "react";
 import { useAuth } from "./provider.js";
 import type { Appearance, ComponentSlots } from "./types.js";
 
-import { Button } from "@arc-ui/components";
-import { Avatar, AvatarFallback } from "@arc-ui/components";
+import { Button } from "@arcevo/facet-components";
+import { Avatar, AvatarFallback } from "@arcevo/facet-components";
 import {
   DropdownMenu,
   DropdownMenuTrigger,
@@ -19,7 +19,7 @@ import {
   DropdownMenuSeparator,
   DropdownMenuItem,
   DropdownMenuShortcut,
-} from "@arc-ui/components";
+} from "@arcevo/facet-components";
 
 /* ── Props ─────────────────────────────────────────────────── */
 

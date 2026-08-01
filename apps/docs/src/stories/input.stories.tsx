@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import { Input } from "@arc-ui/components";
+import { Input } from "@arcevo/facet-components";
 
 const meta: Meta<typeof Input> = {
   title: "Components/Input",

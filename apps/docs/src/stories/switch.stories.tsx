@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import { Switch } from "@arc-ui/components";
-import { Label } from "@arc-ui/components";
+import { Switch } from "@arcevo/facet-components";
+import { Label } from "@arcevo/facet-components";
 
 const meta: Meta<typeof Switch> = {
   title: "Components/Switch",

@@ -1,5 +1,5 @@
 {
-  "name": "@arc-ui/sdk",
+  "name": "@arcevo/facet-sdk",
   "version": "1.0.0",
   "description": "arc-id API client: framework-agnostic fetch SDK for the ArcevoCirqle identity platform. Auth, credentials, passkeys, OAuth, tenants, billing, webhooks, audit, IdP.",
   "type": "module",
@@ -30,13 +30,13 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/ArcevoDev/arc-ui.git",
+    "url": "git+https://github.com/ArcevoDev/facet.git",
     "directory": "packages/sdk"
   },
   "bugs": {
-    "url": "https://github.com/ArcevoDev/arc-ui/issues"
+    "url": "https://github.com/ArcevoDev/facet/issues"
   },
-  "homepage": "https://arc-ui.vercel.app",
+  "homepage": "https://facet.vercel.app",
   "license": "MIT",
   "keywords": [
     "arc-id",

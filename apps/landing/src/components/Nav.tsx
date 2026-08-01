@@ -1,6 +1,6 @@
 import { Github } from "lucide-react";
-import { Navbar, Button, ThemeToggle } from "@arc-ui/components";
-import type { NavLink } from "@arc-ui/components";
+import { Navbar, Button, ThemeToggle } from "@arcevo/facet-components";
+import type { NavLink } from "@arcevo/facet-components";
 
 // Anchor links scroll to in-page sections; no dead routes.
 const LINKS: NavLink[] = [
@@ -24,7 +24,7 @@ function Brand() {
           opacity="0.4"
         />
       </svg>
-      <span className="font-heading text-lg font-bold text-foreground">arc-ui</span>
+      <span className="font-heading text-lg font-bold text-foreground">facet</span>
     </div>
   );
 }
@@ -38,7 +38,7 @@ export function Nav() {
       actions={
         <div className="flex items-center gap-2">
           <a
-            href="https://github.com/arcevodev/arc-ui"
+            href="https://github.com/arcevodev/facet"
             className="hidden items-center gap-1.5 text-sm text-muted-foreground transition-colors hover:text-foreground sm:flex"
           >
             <Github size={16} />

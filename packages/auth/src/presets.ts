@@ -5,7 +5,7 @@
  * allowed methods, etc.) to the security and UX needs of that domain.
  *
  * Usage:
- *   import { fintechPreset } from "@arc-ui/auth";
+ *   import { fintechPreset } from "@arcevo/facet-auth";
  *
  *   <ArcProvider client={client} config={fintechPreset}>
  *     <App />

@@ -1,4 +1,4 @@
-# arc-ui: Agent Session Rules
+# facet: Agent Session Rules
 
 This file is loaded at the start of every session.
 It overrides/supplements CLAUDE.md for AI agents.
@@ -32,7 +32,7 @@ See `.agent/output.txt` for the live status dashboard.
 
 ## Publish Status
 
-Initial 1.0.0 release is ready but blocked: the `@arc-ui/*` npm scope is
+Initial 1.0.0 release is ready but blocked: the `@arcevo/facet-*` npm scope is
 owned by an unrelated project (BT's Arc UI System), and npm requires
 delegated browser auth to publish. See the PUBLISH STATUS section of
 `.agent/output.txt` before attempting any publish.

@@ -1,7 +1,7 @@
 /**
- * @arc-ui/layout: RouterAdapter
+ * @arcevo/facet-layout: RouterAdapter
  *
- * Framework-agnostic navigation. arc-ui components never import a router
+ * Framework-agnostic navigation. facet components never import a router
  * directly; consumers pass a RouterAdapter into <LayoutProvider> (or a
  * per-component adapter prop) so Sidebar, Navbar, and UserMenu render
  * framework-native links and detect the active route.

@@ -12,7 +12,7 @@ import {
   TabsList,
   TabsTrigger,
   TabsContent,
-} from "@arc-ui/components";
+} from "@arcevo/facet-components";
 import { BUTTON_VARIANTS, BADGE_VARIANTS } from "../data/features.js";
 
 export function DemoSection() {
@@ -91,7 +91,7 @@ export function DemoSection() {
           <Card>
             <CardContent className="p-6">
               <pre className="text-sm font-mono text-foreground leading-relaxed overflow-auto">
-                <code>{`import { Button, Badge, Switch, Progress } from "@arc-ui/components";
+                <code>{`import { Button, Badge, Switch, Progress } from "@arcevo/facet-components";
 
 function MyComponent() {
   return (

@@ -1,6 +1,6 @@
 /**
  * Mock data for Storybook auth stories.
- * Types match @arc-ui/sdk's actual types exactly.
+ * Types match @arcevo/facet-sdk's actual types exactly.
  */
 
 import type {
@@ -10,7 +10,7 @@ import type {
   MfaVerifyResult,
   MfaSetupResult,
   RecoveryCodesResult,
-} from "@arc-ui/sdk";
+} from "@arcevo/facet-sdk";
 
 export const MOCK_MEMBERSHIPS: Membership[] = [
   { tenantId: "org_arc_001", name: "Arcevo Labs", role: "admin" },

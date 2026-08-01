@@ -1,8 +1,8 @@
 /**
- * @arc-ui/components: useTheme
+ * @arcevo/facet-components: useTheme
  *
  * Re-exported so the hook is available from the root package entry:
- *   import { useTheme } from "@arc-ui/components";
+ *   import { useTheme } from "@arcevo/facet-components";
  */
 
 export { useTheme } from "./theme-provider.js";

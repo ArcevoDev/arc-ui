@@ -7,7 +7,7 @@ import {
   NavigationMenuList,
   NavigationMenuTrigger,
   navigationMenuTriggerStyle,
-} from "@arc-ui/components";
+} from "@arcevo/facet-components";
 
 const meta: Meta<typeof NavigationMenu> = {
   title: "Components/NavigationMenu",
@@ -71,7 +71,7 @@ export const Default: Story = {
           <NavigationMenuContent className="w-[320px] p-3">
             <ul className="grid gap-1">
               <ListItem title="Getting started" href="/docs/getting-started">
-                Install and configure arc-ui in your project.
+                Install and configure facet in your project.
               </ListItem>
               <ListItem title="Theming" href="/docs/theming">
                 Customize tokens per brand or domain.

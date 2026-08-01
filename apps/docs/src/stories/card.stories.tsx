@@ -6,8 +6,8 @@ import {
   CardDescription,
   CardContent,
   CardFooter,
-} from "@arc-ui/components";
-import { Button } from "@arc-ui/components";
+} from "@arcevo/facet-components";
+import { Button } from "@arcevo/facet-components";
 
 const meta: Meta<typeof Card> = {
   title: "Components/Card",

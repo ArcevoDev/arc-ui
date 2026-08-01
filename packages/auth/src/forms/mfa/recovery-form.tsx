@@ -4,7 +4,7 @@
 
 import * as React from "react";
 
-import { Button, Input, DialogHeader, DialogTitle, DialogDescription } from "@arc-ui/components";
+import { Button, Input, DialogHeader, DialogTitle, DialogDescription } from "@arcevo/facet-components";
 
 /* ── Props ─────────────────────────────────────────────────── */
 

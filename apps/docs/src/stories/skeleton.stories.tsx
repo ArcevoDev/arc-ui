@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import { Skeleton } from "@arc-ui/components";
+import { Skeleton } from "@arcevo/facet-components";
 
 const meta: Meta<typeof Skeleton> = {
   title: "Components/Skeleton",

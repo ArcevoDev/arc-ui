@@ -17,7 +17,7 @@ import {
   DialogHeader,
   DialogTitle,
   DialogDescription,
-} from "@arc-ui/components";
+} from "@arcevo/facet-components";
 
 /* ── Props ─────────────────────────────────────────────────── */
 

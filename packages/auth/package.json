@@ -1,7 +1,7 @@
 {
-  "name": "@arc-ui/auth",
+  "name": "@arcevo/facet-auth",
   "version": "1.0.0",
-  "description": "Domain-customizable auth components for the ArcevoCirqle ecosystem: ArcProvider, SignIn/SignUp, Guard, MfaDialog, and 5 domain presets (fintech, med, edu, enterprise, default). Wired to @arc-ui/sdk.",
+  "description": "Domain-customizable auth components for the ArcevoCirqle ecosystem: ArcProvider, SignIn/SignUp, Guard, MfaDialog, and 5 domain presets (fintech, med, edu, enterprise, default). Wired to @arcevo/facet-sdk.",
   "type": "module",
   "exports": {
     ".": {
@@ -30,13 +30,13 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/ArcevoDev/arc-ui.git",
+    "url": "git+https://github.com/ArcevoDev/facet.git",
     "directory": "packages/auth"
   },
   "bugs": {
-    "url": "https://github.com/ArcevoDev/arc-ui/issues"
+    "url": "https://github.com/ArcevoDev/facet/issues"
   },
-  "homepage": "https://arc-ui.vercel.app",
+  "homepage": "https://facet.vercel.app",
   "license": "MIT",
   "keywords": [
     "authentication",
@@ -48,8 +48,8 @@
     "auth-ui"
   ],
   "dependencies": {
-    "@arc-ui/components": "workspace:*",
-    "@arc-ui/sdk": "workspace:*",
+    "@arcevo/facet-components": "workspace:*",
+    "@arcevo/facet-sdk": "workspace:*",
     "@hookform/resolvers": "^5.5.7",
     "react-hook-form": "^7.83.0",
     "zod": "^4.4.3"

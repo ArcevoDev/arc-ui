@@ -4,7 +4,7 @@ import { Meta } from "@storybook/blocks";
 
 # Theming
 
-arc-ui is **dark-first**: the default theme uses dark backgrounds with light text. A light theme can be enabled by toggling a `data-theme` attribute.
+facet is **dark-first**: the default theme uses dark backgrounds with light text. A light theme can be enabled by toggling a `data-theme` attribute.
 
 ## How It Works
 
@@ -20,14 +20,14 @@ All design tokens are defined in `:root`. When `data-theme="light"` is set on th
 
 ## ThemeProvider
 
-The `@arc-ui/components` package ships a complete theme system: `ThemeProvider`, `ThemeToggle`, and `useTheme`. It supports light/dark/system, persists to `localStorage`, follows the OS preference, and lets consumers override any token per brand.
+The `@arcevo/facet-components` package ships a complete theme system: `ThemeProvider`, `ThemeToggle`, and `useTheme`. It supports light/dark/system, persists to `localStorage`, follows the OS preference, and lets consumers override any token per brand.
 
 ```tsx
 import {
   ThemeProvider,
   ThemeToggle,
   useTheme,
-} from "@arc-ui/components";
+} from "@arcevo/facet-components";
 
 function App() {
   return (
@@ -67,7 +67,7 @@ Use `theme="system"` to follow the OS preference. The provider resolves it to li
 
 ## Domain Presets
 
-arc-ui ships with auth domain presets. Each preset configures MFA requirements, passkey support, session TTL, and more:
+facet ships with auth domain presets. Each preset configures MFA requirements, passkey support, session TTL, and more:
 
 | Preset | MFA | Passkey | Session TTL | Use Case |
 |---|---|---|---|---|

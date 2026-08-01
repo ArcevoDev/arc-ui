@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import { PageHeader } from "@arc-ui/layout";
-import { Button } from "@arc-ui/components";
+import { PageHeader } from "@arcevo/facet-layout";
+import { Button } from "@arcevo/facet-components";
 
 const meta: Meta<typeof PageHeader> = {
   title: "Layout/PageHeader",

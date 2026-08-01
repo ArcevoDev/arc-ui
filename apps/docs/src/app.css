@@ -4,7 +4,7 @@
 /* ── Tailwind v4 (Rust parser, CSS-native config) ──────────── */
 @import "tailwindcss";
 
-/* ── arc-ui design tokens (CSS custom properties) ──────────── */
+/* ── facet design tokens (CSS custom properties) ──────────── */
 @import "../../../packages/tokens/src/tokens.css";
 
 /* ── Tailwind v4 theme extension (maps CSS vars → utilities) ─ */

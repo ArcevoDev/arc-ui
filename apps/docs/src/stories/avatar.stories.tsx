@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import { Avatar, AvatarImage, AvatarFallback } from "@arc-ui/components";
+import { Avatar, AvatarImage, AvatarFallback } from "@arcevo/facet-components";
 
 const meta: Meta<typeof Avatar> = {
   title: "Components/Avatar",

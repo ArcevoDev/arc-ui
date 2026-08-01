@@ -1,5 +1,5 @@
 /**
- * @arc-ui/layout: PageHeader
+ * @arcevo/facet-layout: PageHeader
  *
  * Consistent page title + description + actions slot.
  */

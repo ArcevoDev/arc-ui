@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import { TenantSwitcher } from "@arc-ui/layout";
+import { TenantSwitcher } from "@arcevo/facet-layout";
 
 const meta: Meta<typeof TenantSwitcher> = {
   title: "Layout/TenantSwitcher",

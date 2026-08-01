@@ -1,5 +1,5 @@
 import { ArrowRight, Sparkles } from "lucide-react";
-import { Button, Badge } from "@arc-ui/components";
+import { Button, Badge } from "@arcevo/facet-components";
 
 const STATS = [
   { value: "35+", label: "components" },

@@ -1,5 +1,5 @@
 /**
- * @arc-ui/components: ThemeProvider
+ * @arcevo/facet-components: ThemeProvider
  *
  * Light / dark / system theming driven by a data attribute on <html>.
  * Persists the choice to localStorage and follows the OS preference
@@ -20,7 +20,7 @@ export interface ThemeProviderProps {
   children: React.ReactNode;
   /** Initial theme. Default: "system" */
   defaultTheme?: Theme;
-  /** localStorage key. Default: "arc-ui-theme" */
+  /** localStorage key. Default: "facet-theme" */
   storageKey?: string;
   /** Allow following the OS preference via "system". Default: true */
   enableSystem?: boolean;
@@ -45,7 +45,7 @@ interface ThemeContextValue {
 
 const ThemeContext = React.createContext<ThemeContextValue | undefined>(undefined);
 
-const STORAGE_KEY = "arc-ui-theme";
+const STORAGE_KEY = "facet-theme";
 const SYSTEM_QUERY = "(prefers-color-scheme: light)";
 
 function applyTheme(

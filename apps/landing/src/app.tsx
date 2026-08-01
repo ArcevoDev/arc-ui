@@ -1,5 +1,5 @@
-import { ThemeProvider } from "@arc-ui/components";
-import { LandingLayout } from "@arc-ui/layout";
+import { ThemeProvider } from "@arcevo/facet-components";
+import { LandingLayout } from "@arcevo/facet-layout";
 import { Nav } from "./components/Nav.js";
 import { HeroSection } from "./components/HeroSection.js";
 import { InstallSection } from "./components/InstallSection.js";

@@ -1,5 +1,5 @@
 /**
- * @arc-ui/layout: Layout context
+ * @arcevo/facet-layout: Layout context
  *
  * Manages sidebar open/close state and the optional RouterAdapter.
  * ConsoleLayout provides this; consumers can call `useLayout()` from
@@ -13,7 +13,7 @@ import { createDefaultAdapter, type RouterAdapter } from "./router.js";
 const LayoutContext = React.createContext<LayoutContextValue | null>(null);
 
 /** localStorage key for the rail-mode collapsed state. */
-const STORAGE_KEY = "arc-ui:sidebar-collapsed";
+const STORAGE_KEY = "facet:sidebar-collapsed";
 
 export function LayoutProvider({
   children,

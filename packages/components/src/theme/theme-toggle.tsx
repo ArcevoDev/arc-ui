@@ -1,5 +1,5 @@
 /**
- * @arc-ui/components: ThemeToggle
+ * @arcevo/facet-components: ThemeToggle
  *
  * Dropdown control for switching between light, dark, and system themes.
  * Requires a <ThemeProvider> ancestor. The trigger icon reflects the

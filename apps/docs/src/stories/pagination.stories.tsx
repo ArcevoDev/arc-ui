@@ -7,7 +7,7 @@ import {
   PaginationPrevious,
   PaginationNext,
   PaginationEllipsis,
-} from "@arc-ui/components";
+} from "@arcevo/facet-components";
 
 const meta: Meta<typeof Pagination> = {
   title: "Components/Pagination",

@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import { Guard } from "@arc-ui/auth";
+import { Guard } from "@arcevo/facet-auth";
 import { withMockAuth } from "./auth-decorator.js";
 
 const meta: Meta<typeof Guard> = {

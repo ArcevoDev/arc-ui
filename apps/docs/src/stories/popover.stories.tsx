@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import { Popover, PopoverTrigger, PopoverContent } from "@arc-ui/components";
-import { Button, Input, Label } from "@arc-ui/components";
+import { Popover, PopoverTrigger, PopoverContent } from "@arcevo/facet-components";
+import { Button, Input, Label } from "@arcevo/facet-components";
 
 const meta: Meta<typeof Popover> = {
   title: "Components/Popover",

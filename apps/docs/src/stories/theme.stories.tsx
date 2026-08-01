@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@arc-ui/components";
-import { ThemeProvider, ThemeToggle } from "@arc-ui/components";
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@arcevo/facet-components";
+import { ThemeProvider, ThemeToggle } from "@arcevo/facet-components";
 
 const meta: Meta<typeof ThemeToggle> = {
   title: "Components/Theme",

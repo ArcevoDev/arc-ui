@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import { toast } from "sonner";
-import { Button, Toaster } from "@arc-ui/components";
+import { Button, Toaster } from "@arcevo/facet-components";
 
 const meta: Meta<typeof Toaster> = {
   title: "Components/Toaster",

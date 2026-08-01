@@ -1,4 +1,4 @@
-import { Button } from "@arc-ui/components";
+import { Button } from "@arcevo/facet-components";
 
 export function CTASection() {
   return (
@@ -17,7 +17,7 @@ export function CTASection() {
           <Button
             variant="outline"
             size="lg"
-            onClick={() => window.open("https://github.com/arcevodev/arc-ui")}
+            onClick={() => window.open("https://github.com/arcevodev/facet")}
           >
             Star on GitHub
           </Button>

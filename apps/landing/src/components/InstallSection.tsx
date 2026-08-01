@@ -5,7 +5,7 @@ import {
   CardTitle,
   ScrollArea,
   ScrollBar,
-} from "@arc-ui/components";
+} from "@arcevo/facet-components";
 import { INSTALL_STEPS } from "../data/features.js";
 
 export function InstallSection() {

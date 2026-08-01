@@ -1,5 +1,5 @@
 {
-  "name": "@arc-ui/docs",
+  "name": "@arcevo/facet-docs",
   "version": "1.0.0",
   "private": true,
   "type": "module",
@@ -10,11 +10,11 @@
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {
-    "@arc-ui/auth": "workspace:*",
-    "@arc-ui/components": "workspace:*",
-    "@arc-ui/layout": "workspace:*",
-    "@arc-ui/sdk": "workspace:*",
-    "@arc-ui/tokens": "workspace:*"
+    "@arcevo/facet-auth": "workspace:*",
+    "@arcevo/facet-components": "workspace:*",
+    "@arcevo/facet-layout": "workspace:*",
+    "@arcevo/facet-sdk": "workspace:*",
+    "@arcevo/facet-tokens": "workspace:*"
   },
   "devDependencies": {
     "@storybook/addon-docs": "^10.5.5",

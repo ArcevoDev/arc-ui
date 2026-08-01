@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import { LandingLayout } from "@arc-ui/layout";
-import { Button, Navbar } from "@arc-ui/components";
+import { LandingLayout } from "@arcevo/facet-layout";
+import { Button, Navbar } from "@arcevo/facet-components";
 
 const meta: Meta<typeof LandingLayout> = {
   title: "Layout/LandingLayout",
@@ -59,7 +59,7 @@ export const Default: Story = {
     footer: (
       <div className="mx-auto flex max-w-7xl items-center justify-between px-8 py-6 text-sm text-muted-foreground">
         <span>© 2026 Acme</span>
-        <span>Built with arc-ui</span>
+        <span>Built with facet</span>
       </div>
     ),
   },

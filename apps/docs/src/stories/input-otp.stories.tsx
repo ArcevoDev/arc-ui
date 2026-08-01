@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import { InputOTP, InputOTPGroup, InputOTPSlot, InputOTPSeparator } from "@arc-ui/components";
+import { InputOTP, InputOTPGroup, InputOTPSlot, InputOTPSeparator } from "@arcevo/facet-components";
 
 const meta: Meta<typeof InputOTP> = {
   title: "Components/InputOTP",

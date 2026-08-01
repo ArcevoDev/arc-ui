@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@arc-ui/components";
+import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@arcevo/facet-components";
 
 const meta: Meta<typeof Accordion> = {
   title: "Components/Accordion",
@@ -15,7 +15,7 @@ export const Default: Story = {
   render: () => (
     <Accordion type="single" collapsible className="w-[420px]">
       <AccordionItem value="item-1">
-        <AccordionTrigger>What is arc-ui?</AccordionTrigger>
+        <AccordionTrigger>What is facet?</AccordionTrigger>
         <AccordionContent>
           A domain-customizable React component library built on Radix UI primitives with design
           tokens.
@@ -52,17 +52,27 @@ export const Multiple: Story = {
 
 export const Separated: Story = {
   render: () => (
-    <div className="space-y-2">
-      {[1, 2, 3].map((i) => (
-        <Accordion key={i} type="single" collapsible className="w-[420px]">
-          <AccordionItem variant="separated" value="item-1">
-            <AccordionTrigger>Card {i}</AccordionTrigger>
-            <AccordionContent>
-              Each item renders as its own bordered card with shadow.
-            </AccordionContent>
-          </AccordionItem>
-        </Accordion>
-      ))}
+    <div className="w-[420px]">
+      <Accordion type="single" collapsible>
+        <AccordionItem variant="separated" value="item-1">
+          <AccordionTrigger>Card 1</AccordionTrigger>
+          <AccordionContent>
+            Each item renders as its own bordered card with shadow.
+          </AccordionContent>
+        </AccordionItem>
+        <AccordionItem variant="separated" value="item-2">
+          <AccordionTrigger>Card 2</AccordionTrigger>
+          <AccordionContent>
+            Separated items in one accordion keep a consistent gap.
+          </AccordionContent>
+        </AccordionItem>
+        <AccordionItem variant="separated" value="item-3">
+          <AccordionTrigger>Card 3</AccordionTrigger>
+          <AccordionContent>
+            No wrapper needed: spacing is built into the variant.
+          </AccordionContent>
+        </AccordionItem>
+      </Accordion>
     </div>
   ),
 };

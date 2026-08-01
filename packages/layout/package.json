@@ -1,5 +1,5 @@
 {
-  "name": "@arc-ui/layout",
+  "name": "@arcevo/facet-layout",
   "version": "1.0.0",
   "description": "Domain-configurable app shell for the ArcevoCirqle ecosystem: Sidebar, Topbar, AuthLayout, ConsoleLayout, LandingLayout, PageHeader, TenantSwitcher, and 5 domain presets (fintech, med, edu, enterprise, default).",
   "type": "module",
@@ -30,13 +30,13 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/ArcevoDev/arc-ui.git",
+    "url": "git+https://github.com/ArcevoDev/facet.git",
     "directory": "packages/layout"
   },
   "bugs": {
-    "url": "https://github.com/ArcevoDev/arc-ui/issues"
+    "url": "https://github.com/ArcevoDev/facet/issues"
   },
-  "homepage": "https://arc-ui.vercel.app",
+  "homepage": "https://facet.vercel.app",
   "license": "MIT",
   "keywords": [
     "layout",
@@ -48,8 +48,8 @@
     "dashboard"
   ],
   "dependencies": {
-    "@arc-ui/auth": "workspace:*",
-    "@arc-ui/components": "workspace:*",
+    "@arcevo/facet-auth": "workspace:*",
+    "@arcevo/facet-components": "workspace:*",
     "lucide-react": "^0.468.0"
   },
   "peerDependencies": {

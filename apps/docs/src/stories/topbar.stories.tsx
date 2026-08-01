@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import { Topbar, LayoutProvider } from "@arc-ui/layout";
+import { Topbar, LayoutProvider } from "@arcevo/facet-layout";
 import { withMockAuthSession } from "./layout-decorator.js";
 
 const meta: Meta<typeof Topbar> = {

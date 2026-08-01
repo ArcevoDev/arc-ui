@@ -7,7 +7,7 @@ import {
   SelectItem,
   SelectGroup,
   SelectLabel,
-} from "@arc-ui/components";
+} from "@arcevo/facet-components";
 
 const meta: Meta<typeof Select> = {
   title: "Components/Select",

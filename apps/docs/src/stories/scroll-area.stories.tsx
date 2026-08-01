@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import { ScrollArea, ScrollBar } from "@arc-ui/components";
+import { ScrollArea, ScrollBar } from "@arcevo/facet-components";
 
 const meta: Meta<typeof ScrollArea> = {
   title: "Components/ScrollArea",

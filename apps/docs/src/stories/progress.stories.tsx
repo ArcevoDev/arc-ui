@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import { Progress } from "@arc-ui/components";
+import { Progress } from "@arcevo/facet-components";
 
 const meta: Meta<typeof Progress> = {
   title: "Components/Progress",

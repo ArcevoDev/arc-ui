@@ -1,5 +1,5 @@
 /**
- * @arc-ui/components: Icon registry
+ * @arcevo/facet-components: Icon registry
  *
  * Formalizes lucide-react as a semantic icon registry so consumers and
  * domain presets can override icons without forking components.
@@ -10,7 +10,7 @@
  *   3. IconProvider: per-app / per-domain overrides via context.
  *
  * Usage:
- *   import { Icon, registerIcon, IconProvider } from "@arc-ui/components";
+ *   import { Icon, registerIcon, IconProvider } from "@arcevo/facet-components";
  *
  *   registerIcon("settings", MyCustomSettingsIcon);
  *
@@ -50,7 +50,7 @@ import {
 
 export type IconComponent = React.ComponentType<{ className?: string; size?: number | string }>;
 
-/** Semantic icon names used across arc-ui components. */
+/** Semantic icon names used across facet components. */
 export type IconName =
   | "settings"
   | "logout"

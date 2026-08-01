@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import { Tooltip, TooltipTrigger, TooltipContent, TooltipProvider } from "@arc-ui/components";
-import { Button } from "@arc-ui/components";
+import { Tooltip, TooltipTrigger, TooltipContent, TooltipProvider } from "@arcevo/facet-components";
+import { Button } from "@arcevo/facet-components";
 
 const meta: Meta<typeof Tooltip> = {
   title: "Components/Tooltip",

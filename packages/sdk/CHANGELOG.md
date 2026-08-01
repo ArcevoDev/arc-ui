@@ -1,4 +1,4 @@
-# @arc-ui/sdk
+# @arcevo/facet-sdk
 
 ## 1.0.0
 

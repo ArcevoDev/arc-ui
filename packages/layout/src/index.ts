@@ -1,9 +1,9 @@
 /**
- * @arc-ui/layout: Domain-configurable app shell components.
+ * @arcevo/facet-layout: Domain-configurable app shell components.
  *
  * Usage:
- *   import { ConsoleLayout, Sidebar, PageHeader } from "@arc-ui/layout";
- *   import { defaultLayoutPreset } from "@arc-ui/layout";
+ *   import { ConsoleLayout, Sidebar, PageHeader } from "@arcevo/facet-layout";
+ *   import { defaultLayoutPreset } from "@arcevo/facet-layout";
  *
  *   <ConsoleLayout config={defaultLayoutPreset}>
  *     <PageHeader title="Dashboard" />

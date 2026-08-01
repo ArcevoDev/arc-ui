@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import { Tabs, TabsList, TabsTrigger, TabsContent } from "@arc-ui/components";
-import { Card, CardContent } from "@arc-ui/components";
+import { Tabs, TabsList, TabsTrigger, TabsContent } from "@arcevo/facet-components";
+import { Card, CardContent } from "@arcevo/facet-components";
 
 const meta: Meta<typeof Tabs> = {
   title: "Components/Tabs",

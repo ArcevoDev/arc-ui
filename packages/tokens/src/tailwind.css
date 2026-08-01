@@ -1,13 +1,13 @@
 /* =================================================================
- * @arc-ui/tokens: Tailwind v4 Theme Extension
+ * @arcevo/facet-tokens: Tailwind v4 Theme Extension
  *
- * Maps arc-ui design tokens (CSS custom properties from tokens.css)
+ * Maps facet design tokens (CSS custom properties from tokens.css)
  * into Tailwind v4 utility classes. Import after tokens.css and
  * tailwindcss itself:
  *
  *   @import "tailwindcss";
- *   @import "@arc-ui/tokens/tokens.css";
- *   @import "@arc-ui/tokens/tailwind.css";
+ *   @import "@arcevo/facet-tokens/tokens.css";
+ *   @import "@arcevo/facet-tokens/tailwind.css";
  * ================================================================= */
 
 @theme {

@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import { Slider } from "@arc-ui/components";
+import { Slider } from "@arcevo/facet-components";
 
 const meta: Meta<typeof Slider> = {
   title: "Components/Slider",

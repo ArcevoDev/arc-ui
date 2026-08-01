@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import { Textarea } from "@arc-ui/components";
+import { Textarea } from "@arcevo/facet-components";
 
 const meta: Meta<typeof Textarea> = {
   title: "Components/Textarea",

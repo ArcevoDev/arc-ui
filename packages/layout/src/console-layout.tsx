@@ -1,5 +1,5 @@
 /**
- * @arc-ui/layout: ConsoleLayout
+ * @arcevo/facet-layout: ConsoleLayout
  *
  * Dashboard shell: fixed sidebar + topbar + content area.
  * On mobile the sidebar collapses into a Sheet overlay.
@@ -7,8 +7,8 @@
  */
 
 import * as React from "react";
-import { useAuth } from "@arc-ui/auth";
-import { Sheet, SheetContent } from "@arc-ui/components";
+import { useAuth } from "@arcevo/facet-auth";
+import { Sheet, SheetContent } from "@arcevo/facet-components";
 import { useLayout, LayoutProvider } from "./layout-context.js";
 import { Sidebar } from "./sidebar.js";
 import { Topbar } from "./topbar.js";

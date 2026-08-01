@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import { SignIn } from "@arc-ui/auth";
+import { SignIn } from "@arcevo/facet-auth";
 import { withMockAuth } from "./auth-decorator.js";
 
 const meta: Meta<typeof SignIn> = {

@@ -4,15 +4,15 @@ import { Meta } from "@storybook/blocks";
 
 # Auth Components Guide
 
-The `@arc-ui/auth` package provides a complete authentication system built on `@arc-ui/sdk`.
+The `@arcevo/facet-auth` package provides a complete authentication system built on `@arcevo/facet-sdk`.
 
 ## ArcProvider
 
 Wrap your app with `ArcProvider` and pass an `ArcIdClient` instance:
 
 ```tsx
-import { ArcProvider } from "@arc-ui/auth";
-import { ArcIdClient } from "@arc-ui/sdk";
+import { ArcProvider } from "@arcevo/facet-auth";
+import { ArcIdClient } from "@arcevo/facet-sdk";
 
 const client = new ArcIdClient({
   baseUrl: "https://auth.arcevo.dev/api/v1",
@@ -34,7 +34,7 @@ function Root({ children }) {
 Multi-step sign-in with a state machine:
 
 ```tsx
-import { SignIn } from "@arc-ui/auth";
+import { SignIn } from "@arcevo/facet-auth";
 
 <SignIn
   config={fintechPreset}
@@ -49,7 +49,7 @@ Steps: `idle → select_method → login_form → check_mfa → mfa_challenge �
 Registration with validation:
 
 ```tsx
-import { SignUp } from "@arc-ui/auth";
+import { SignUp } from "@arcevo/facet-auth";
 
 <SignUp onSuccess={(tokenPair) => console.log("Registered", tokenPair)} />
 ```

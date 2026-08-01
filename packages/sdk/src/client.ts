@@ -1,5 +1,5 @@
 /**
- * @arc-ui/sdk: Base HTTP client
+ * @arcevo/facet-sdk: Base HTTP client
  *
  * Pure fetch. No framework dependencies. Matches arc-id's ApiResponse shape.
  *

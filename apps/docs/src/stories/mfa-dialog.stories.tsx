@@ -1,9 +1,9 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import { MfaDialog } from "@arc-ui/auth";
+import { MfaDialog } from "@arcevo/facet-auth";
 import { withMockAuth } from "./auth-decorator.js";
-import { ArcIdClient } from "@arc-ui/sdk";
+import { ArcIdClient } from "@arcevo/facet-sdk";
 import * as React from "react";
-import { Button } from "@arc-ui/components";
+import { Button } from "@arcevo/facet-components";
 
 const meta: Meta<typeof MfaDialog> = {
   title: "Auth/MfaDialog",

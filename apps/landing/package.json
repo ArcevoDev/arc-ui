@@ -1,5 +1,5 @@
 {
-  "name": "@arc-ui/landing",
+  "name": "@arcevo/facet-landing",
   "version": "0.1.0",
   "private": true,
   "type": "module",
@@ -15,9 +15,9 @@
     "react-dom": "^19",
     "react-router-dom": "^7.1.1",
     "lucide-react": "^0.468.0",
-    "@arc-ui/tokens": "workspace:*",
-    "@arc-ui/layout": "workspace:*",
-    "@arc-ui/components": "workspace:*"
+    "@arcevo/facet-tokens": "workspace:*",
+    "@arcevo/facet-layout": "workspace:*",
+    "@arcevo/facet-components": "workspace:*"
   },
   "devDependencies": {
     "@types/react": "^19",

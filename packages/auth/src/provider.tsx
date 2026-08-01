@@ -20,8 +20,8 @@
  */
 
 import * as React from "react";
-import { type ArcIdClient, AuthSdk } from "@arc-ui/sdk";
-import type { LoginResult, TokenBundle } from "@arc-ui/sdk";
+import { type ArcIdClient, AuthSdk } from "@arcevo/facet-sdk";
+import type { LoginResult, TokenBundle } from "@arcevo/facet-sdk";
 import type { AuthContextValue, AuthUser, LoginParams, RegisterParams } from "./types.js";
 import { defaultStorage, type TokenStorage } from "./storage.js";
 

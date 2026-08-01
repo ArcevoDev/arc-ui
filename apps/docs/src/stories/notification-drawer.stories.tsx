@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import { NotificationDrawer, Button } from "@arc-ui/components";
-import type { DrawerNotification } from "@arc-ui/components";
+import { NotificationDrawer, Button } from "@arcevo/facet-components";
+import type { DrawerNotification } from "@arcevo/facet-components";
 
 const meta: Meta<typeof NotificationDrawer> = {
   title: "Components/NotificationDrawer",

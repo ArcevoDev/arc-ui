@@ -10,7 +10,7 @@ import {
   CommandList,
   CommandSeparator,
   CommandShortcut,
-} from "@arc-ui/components";
+} from "@arcevo/facet-components";
 
 const meta: Meta<typeof Command> = {
   title: "Components/Command",

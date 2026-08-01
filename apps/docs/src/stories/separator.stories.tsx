@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import { Separator } from "@arc-ui/components";
+import { Separator } from "@arcevo/facet-components";
 
 const meta: Meta<typeof Separator> = {
   title: "Components/Separator",

@@ -4,8 +4,8 @@
  */
 
 import * as React from "react";
-import { ArcProvider } from "@arc-ui/auth";
-import { ArcIdClient } from "@arc-ui/sdk";
+import { ArcProvider } from "@arcevo/facet-auth";
+import { ArcIdClient } from "@arcevo/facet-sdk";
 import {
   MOCK_USER,
   MOCK_TOKEN_PAIR,

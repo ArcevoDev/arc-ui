@@ -61,11 +61,11 @@ describe("ThemeProvider", () => {
         <Probe />
       </ThemeProvider>,
     );
-    expect(localStorage.getItem("arc-ui-theme")).toBeNull();
+    expect(localStorage.getItem("facet-theme")).toBeNull();
 
     // dark → light via the probe's toggleTheme
     await userEvent.click(screen.getByTestId("probe"));
-    expect(localStorage.getItem("arc-ui-theme")).toBe("light");
+    expect(localStorage.getItem("facet-theme")).toBe("light");
     expect(document.documentElement.getAttribute("data-theme")).toBe("light");
 
     // A fresh provider reads the stored value back
@@ -120,6 +120,6 @@ describe("ThemeToggle", () => {
     await userEvent.click(lightItem);
 
     expect(document.documentElement.getAttribute("data-theme")).toBe("light");
-    expect(localStorage.getItem("arc-ui-theme")).toBe("light");
+    expect(localStorage.getItem("facet-theme")).toBe("light");
   });
 });

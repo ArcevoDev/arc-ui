@@ -8,8 +8,8 @@ import {
   TableRow,
   TableCell,
   TableCaption,
-} from "@arc-ui/components";
-import { Badge } from "@arc-ui/components";
+} from "@arcevo/facet-components";
+import { Badge } from "@arcevo/facet-components";
 
 const meta: Meta<typeof Table> = {
   title: "Components/Table",

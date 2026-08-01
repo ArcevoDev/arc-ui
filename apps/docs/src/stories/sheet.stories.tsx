@@ -8,8 +8,8 @@ import {
   SheetTitle,
   SheetDescription,
   SheetClose,
-} from "@arc-ui/components";
-import { Button, Input, Label } from "@arc-ui/components";
+} from "@arcevo/facet-components";
+import { Button, Input, Label } from "@arcevo/facet-components";
 
 const meta: Meta<typeof Sheet> = {
   title: "Components/Sheet",

@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import { ConsoleLayout, fintechLayoutPreset, enterpriseLayoutPreset } from "@arc-ui/layout";
+import { ConsoleLayout, fintechLayoutPreset, enterpriseLayoutPreset } from "@arcevo/facet-layout";
 import { withMockAuthSession } from "./layout-decorator.js";
 
 const meta: Meta<typeof ConsoleLayout> = {

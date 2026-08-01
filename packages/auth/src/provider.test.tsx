@@ -1,6 +1,6 @@
 import { act, render, renderHook, screen, waitFor } from "@testing-library/react";
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
-import { ArcIdClient } from "@arc-ui/sdk";
+import { ArcIdClient } from "@arcevo/facet-sdk";
 import { ArcProvider, useAuth } from "./provider.js";
 import { createMemoryStorage } from "./test-storage.js";
 import type { AuthUser } from "./types.js";

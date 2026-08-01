@@ -1,11 +1,11 @@
 import { Meta } from "@storybook/blocks";
-import { Button, Badge, Card, CardHeader, CardTitle, CardContent, CardFooter, Switch, Progress, Separator, Checkbox, Tabs, TabsList, TabsTrigger, TabsContent, Avatar, AvatarFallback, AvatarImage } from "@arc-ui/components";
+import { Button, Badge, Card, CardHeader, CardTitle, CardContent, CardFooter, Switch, Progress, Separator, Checkbox, Tabs, TabsList, TabsTrigger, TabsContent, Avatar, AvatarFallback, AvatarImage } from "@arcevo/facet-components";
 
 <Meta title="Playground / Component Gallery" />
 
 # Component Gallery
 
-**All 27 arc-ui components at a glance.** Click into any component story in the sidebar for full controls, variants, and code examples.
+**All 27 facet components at a glance.** Click into any component story in the sidebar for full controls, variants, and code examples.
 
 ---
 
@@ -127,14 +127,14 @@ Use `<Card>` for grouped content. Supports header, title, description, content, 
 ## Get Started
 
 ```bash
-pnpm add @arc-ui/components @arc-ui/tokens @arc-ui/auth @arc-ui/layout
+pnpm add @arcevo/facet-components @arcevo/facet-tokens @arcevo/facet-auth @arcevo/facet-layout
 ```
 
 ```tsx
-import "@arc-ui/tokens/tokens.css";
-import { Button, Card } from "@arc-ui/components";
+import "@arcevo/facet-tokens/tokens.css";
+import { Button, Card } from "@arcevo/facet-components";
 
 function App() {
-  return <Button variant="default">Hello arc-ui</Button>;
+  return <Button variant="default">Hello facet</Button>;
 }
 ```

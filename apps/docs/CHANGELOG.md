@@ -1,4 +1,4 @@
-# @arc-ui/docs
+# @arcevo/facet-docs
 
 ## 1.0.0
 
@@ -9,8 +9,8 @@
 ### Patch Changes
 
 - Updated dependencies [e79cbd5]
-  - @arc-ui/tokens@1.0.0
-  - @arc-ui/auth@1.0.0
-  - @arc-ui/sdk@1.0.0
-  - @arc-ui/components@1.0.0
-  - @arc-ui/layout@1.0.0
+  - @arcevo/facet-tokens@1.0.0
+  - @arcevo/facet-auth@1.0.0
+  - @arcevo/facet-sdk@1.0.0
+  - @arcevo/facet-components@1.0.0
+  - @arcevo/facet-layout@1.0.0

@@ -1,8 +1,8 @@
-# arc-ui
+# facet
 
 Domain-customizable auth-first component system for the ArcevoCirqle ecosystem.
 
-arc-ui is what you get when you own the identity backend (arc-id), have a formal
+facet is what you get when you own the identity backend (arc-id), have a formal
 design manual (Alpha Palette), and your auth requirements differ per sector
 (fintech vs med vs edu vs enterprise).
 
@@ -10,17 +10,17 @@ design manual (Alpha Palette), and your auth requirements differ per sector
 
 | Package              | Description                                                                                         | Status  |
 | -------------------- | --------------------------------------------------------------------------------------------------- | ------- |
-| `@arc-ui/tokens`     | Design tokens: Alpha Palette, typography, spacing, CSS vars                                         | ✅ 1.0.0 |
-| `@arc-ui/sdk`        | arc-id API client (pure fetch, typed, 10 domain SDKs)                                               | ✅ 1.0.0 |
-| `@arc-ui/components` | 35+ styled UI components (Radix + tailwind-merge + variants)                                        | ✅ 1.0.0 |
-| `@arc-ui/auth`       | Auth components + domain presets: SignIn, SignUp, Guard, MfaDialog, forms                           | ✅ 1.0.0 |
-| `@arc-ui/layout`     | Domain-configurable app shell: ConsoleLayout, AuthLayout, LandingLayout, Sidebar, Topbar, 5 presets | ✅ 1.0.0 |
+| `@arcevo/facet-tokens`     | Design tokens: Alpha Palette, typography, spacing, CSS vars                                         | ✅ 1.0.0 |
+| `@arcevo/facet-sdk`        | arc-id API client (pure fetch, typed, 10 domain SDKs)                                               | ✅ 1.0.0 |
+| `@arcevo/facet-components` | 35+ styled UI components (Radix + tailwind-merge + variants)                                        | ✅ 1.0.0 |
+| `@arcevo/facet-auth`       | Auth components + domain presets: SignIn, SignUp, Guard, MfaDialog, forms                           | ✅ 1.0.0 |
+| `@arcevo/facet-layout`     | Domain-configurable app shell: ConsoleLayout, AuthLayout, LandingLayout, Sidebar, Topbar, 5 presets | ✅ 1.0.0 |
 
 All five packages are versioned at 1.0.0 and publish-ready. Publishing is
-paused pending resolution of the npm scope: the `@arc-ui/*` names are
+paused pending resolution of the npm scope: the `@arcevo/facet-*` names are
 already owned on the public npm registry by an unrelated project (BT's
 "Arc UI System"), so the intended scope would collide. Options: publish
-under a different scope, or verify ownership of `@arc-ui` before pushing.
+under a different scope, or verify ownership of `@facet` before pushing.
 See `.agent/output.txt` for the current publish status.
 
 ## Quick Start
@@ -33,8 +33,8 @@ pnpm build
 Consume in your app:
 
 ```tsx
-import { ConsoleLayout, defaultLayoutPreset } from "@arc-ui/layout";
-import { AuthGuard } from "@arc-ui/auth";
+import { ConsoleLayout, defaultLayoutPreset } from "@arcevo/facet-layout";
+import { AuthGuard } from "@arcevo/facet-auth";
 
 function App() {
   return (
@@ -71,7 +71,7 @@ Framework-agnostic slot-based shells: no routing dependency:
 ### Auth System
 
 ```tsx
-import { fintechAuthPreset, SignIn, MfaVerifyForm } from "@arc-ui/auth";
+import { fintechAuthPreset, SignIn, MfaVerifyForm } from "@arcevo/facet-auth";
 
 // Domain presets customise every copy, step, and behaviour
 <SignIn authPreset={fintechAuthPreset} layoutPreset={fintechLayoutPreset} />;

@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import { FolderKanban, LayoutDashboard, Settings, Users } from "lucide-react";
-import { Sidebar, LayoutProvider, fintechLayoutPreset } from "@arc-ui/layout";
-import type { LayoutConfig } from "@arc-ui/layout";
+import { Sidebar, LayoutProvider, fintechLayoutPreset } from "@arcevo/facet-layout";
+import type { LayoutConfig } from "@arcevo/facet-layout";
 
 const meta: Meta<typeof Sidebar> = {
   title: "Layout/Sidebar",

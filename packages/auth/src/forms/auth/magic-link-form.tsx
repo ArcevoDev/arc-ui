@@ -20,7 +20,7 @@ import {
   CardDescription,
   CardContent,
   CardFooter,
-} from "@arc-ui/components";
+} from "@arcevo/facet-components";
 
 /* ── Props ─────────────────────────────────────────────────── */
 

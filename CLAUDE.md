@@ -1,8 +1,8 @@
-# arc-ui: Engineering Handbook
+# facet: Engineering Handbook
 
 ## Overview
 
-arc-ui is the shared UI layer for the Arcevo ecosystem (arc-id, arcbase, arc-wallet).
+facet is the shared UI layer for the Arcevo ecosystem (arc-id, arcbase, arc-wallet).
 It replaces ~100 duplicated shadcn components between projects with a single,
 domain-customizable auth-first component system.
 
@@ -44,7 +44,7 @@ apps/landing/          ← Landing page
 
 ## SDK Architecture
 
-`@arc-ui/sdk` is a pure fetch client. No React, no axios. Each API domain
+`@arcevo/facet-sdk` is a pure fetch client. No React, no axios. Each API domain
 gets its own class that takes `ArcIdClient` in its constructor. Consumers
 instantiate the modules they need:
 
@@ -103,11 +103,11 @@ COMPLETE → (onSuccess callback) → redirect
 10. ✅ Tests: vitest workspace, 107 tests across sdk/components/auth/layout (12 files)
 11. ✅ SignIn mfa_challenge wired to MfaVerifyForm
 12. ✅ Verified 2026-08-01: `pnpm build` green, `pnpm test` 107/107, `pnpm typecheck` green (after fixing docs mock-sdk.ts to strict SDK types). `pnpm lint` hangs on this machine (environment issue, see `.agent/output.txt`).
-13. ⚠ Publish blocked: `@arc-ui/*` npm scope is owned by BT's Arc UI System; npm also requires delegated browser auth. See `.agent/output.txt` PUBLISH STATUS.
+13. ⚠ Publish blocked: `@arcevo/facet-*` npm scope is owned by BT's Arc UI System; npm also requires delegated browser auth. See `.agent/output.txt` PUBLISH STATUS.
 
 ## Known Gaps for arc-id Consumption
 
-When arc-id adopts arc-ui as its frontend, these need resolution:
+When arc-id adopts facet as its frontend, these need resolution:
 
 **Resolved blockers (were blockers, now fixed):**
 
@@ -115,7 +115,7 @@ When arc-id adopts arc-ui as its frontend, these need resolution:
 2. ✅ **Placeholder handlers**: `handlePasskeyAuth` now calls `passkeySdk.authenticationOptions()` → `navigator.credentials.get()` → `passkeySdk.authenticate()`. `handleForgotPasswordSubmit` calls `authSdk.forgotPassword()`. No longer stubs.
 3. ✅ **Test infrastructure**: Vitest workspace, 107 tests across sdk/components/auth/layout (12 files).
 4. ✅ **SignIn MFA challenge**: Wired to `MfaVerifyForm` (2026-07-31).
-5. ✅ **Duplicate dropdowns**: `layout/UserMenu` now uses `@arc-ui/components` `DropdownMenu`.
+5. ✅ **Duplicate dropdowns**: `layout/UserMenu` now uses `@arcevo/facet-components` `DropdownMenu`.
 6. ✅ **Type strictness**: SDK now has strict domain interfaces in `sdk/src/types.ts`; `Record<string, unknown>` eliminated.
 7. ✅ **Sidebar router coupling**: `RouterAdapter` pattern (`router.tsx`) supports Next.js App Router, Remix, and React Router.
 8. ✅ **Theme switching**: `ThemeProvider`/`useTheme`/`ThemeToggle` with localStorage persistence + system preference detection.
@@ -128,19 +128,19 @@ When arc-id adopts arc-ui as its frontend, these need resolution:
 
 ## Consumption Target
 
-arc-id will consume arc-ui as npm-published packages. The overlap analysis in arc-id's `.agent/output.txt` shows near-exact duplication of:
+arc-id will consume facet as npm-published packages. The overlap analysis in arc-id's `.agent/output.txt` shows near-exact duplication of:
 
-- `src/components/ui/*` → replace with `@arc-ui/components`
-- `src/components/auth/*` → replace with `@arc-ui/auth`
-- `src/sdk/*` → replace with `@arc-ui/sdk`
-- `globals.css :root` → replace with `@arc-ui/tokens/tokens.css`
+- `src/components/ui/*` → replace with `@arcevo/facet-components`
+- `src/components/auth/*` → replace with `@arcevo/facet-auth`
+- `src/sdk/*` → replace with `@arcevo/facet-sdk`
+- `globals.css :root` → replace with `@arcevo/facet-tokens/tokens.css`
 
-Note: the `@arc-ui/*` scope on the public npm registry is currently owned
+Note: the `@arcevo/facet-*` scope on the public npm registry is currently owned
 by an unrelated project (BT's Arc UI System). Publishing under it is
 blocked until a scope we control is chosen (e.g. `@arcevo/*`). See
 `.agent/output.txt` PUBLISH STATUS.
 
-arc-id keeps: Zustand stores, hooks, providers (tenant hydration), pages, layout components (until replacing with `@arc-ui/layout`).
+arc-id keeps: Zustand stores, hooks, providers (tenant hydration), pages, layout components (until replacing with `@arcevo/facet-layout`).
 
 ## Commands
 

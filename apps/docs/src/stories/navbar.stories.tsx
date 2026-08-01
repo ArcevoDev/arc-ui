@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import { Navbar, Button } from "@arc-ui/components";
+import { Navbar, Button } from "@arcevo/facet-components";
 
 const meta: Meta<typeof Navbar> = {
   title: "Components/Navbar",
@@ -128,7 +128,7 @@ export const WithSubLinks: Story = {
           {
             href: "/docs/getting-started",
             label: "Getting started",
-            description: "Install and configure arc-ui in 5 minutes.",
+            description: "Install and configure facet in 5 minutes.",
           },
           {
             href: "/docs/components",

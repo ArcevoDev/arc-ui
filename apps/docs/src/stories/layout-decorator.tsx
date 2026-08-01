@@ -1,5 +1,5 @@
 /**
- * Storybook decorator for @arc-ui/layout stories.
+ * Storybook decorator for @arcevo/facet-layout stories.
  *
  * Wraps stories in an ArcProvider with a memory storage pre-seeded with
  * valid tokens, so useAuth() resolves to an authenticated user and
@@ -7,8 +7,8 @@
  */
 
 import * as React from "react";
-import { ArcProvider, type TokenStorage } from "@arc-ui/auth";
-import { ArcIdClient } from "@arc-ui/sdk";
+import { ArcProvider, type TokenStorage } from "@arcevo/facet-auth";
+import { ArcIdClient } from "@arcevo/facet-sdk";
 import { MOCK_USER, MOCK_TOKEN_PAIR } from "./mock-sdk.js";
 
 /* ── In-memory storage pre-seeded with tokens ──────────────── */

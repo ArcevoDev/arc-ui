@@ -7,7 +7,7 @@ import {
   BreadcrumbPage,
   BreadcrumbSeparator,
   BreadcrumbEllipsis,
-} from "@arc-ui/components";
+} from "@arcevo/facet-components";
 
 const meta: Meta<typeof Breadcrumb> = {
   title: "Components/Breadcrumb",

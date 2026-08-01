@@ -1,11 +1,11 @@
 /**
- * Domain preset registry for @arc-ui/layout.
+ * Domain preset registry for @arcevo/facet-layout.
  *
- * Mirrors the @arc-ui/auth registry: register custom layout presets
+ * Mirrors the @arcevo/facet-auth registry: register custom layout presets
  * (or override built-ins) without forking the package.
  *
  * Usage:
- *   import { registerLayoutPreset, resolveLayoutPreset } from "@arc-ui/layout";
+ *   import { registerLayoutPreset, resolveLayoutPreset } from "@arcevo/facet-layout";
  *
  *   registerLayoutPreset("gov", {
  *     brand: { name: "GovPort", tagline: "Citizen Identity" },

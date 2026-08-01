@@ -1,5 +1,5 @@
 /**
- * @arc-ui/layout: Sidebar
+ * @arcevo/facet-layout: Sidebar
  *
  * Fixed w-[260px] navigation panel for desktop.
  * Renders sections and items from LayoutConfig.navigation.
@@ -16,7 +16,7 @@ import {
   TooltipProvider,
   TooltipTrigger,
   TooltipContent,
-} from "@arc-ui/components";
+} from "@arcevo/facet-components";
 import type { LayoutConfig, NavItem, NavSection } from "./types.js";
 import type { RouterAdapter } from "./router.js";
 

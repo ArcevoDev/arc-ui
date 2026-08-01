@@ -1,10 +1,10 @@
 /* =================================================================
- * @arc-ui/tokens: Design Token CSS Custom Properties
+ * @arcevo/facet-tokens: Design Token CSS Custom Properties
  *
  * Dark-first design system for the Arcevo ecosystem.
  * Import this file to make all tokens available as CSS variables.
  *
- *   @import "@arc-ui/tokens/tokens.css";
+ *   @import "@arcevo/facet-tokens/tokens.css";
  *
  * The variable names match arc-id's globals.css exactly so that
  * arc-id can replace its stylesheet with this one: zero migration cost.

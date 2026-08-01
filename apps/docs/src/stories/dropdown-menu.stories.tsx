@@ -10,8 +10,8 @@ import {
   DropdownMenuSeparator,
   DropdownMenuShortcut,
   DropdownMenuRadioGroup,
-} from "@arc-ui/components";
-import { Button } from "@arc-ui/components";
+} from "@arcevo/facet-components";
+import { Button } from "@arcevo/facet-components";
 import * as React from "react";
 
 const meta: Meta<typeof DropdownMenu> = {

@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import { NotificationBell, type BellNotification } from "@arc-ui/components";
+import { NotificationBell, type BellNotification } from "@arcevo/facet-components";
 
 const meta: Meta<typeof NotificationBell> = {
   title: "Components/NotificationBell",

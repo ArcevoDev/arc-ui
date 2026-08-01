@@ -1,5 +1,5 @@
 /**
- * @arc-ui/layout: Topbar
+ * @arcevo/facet-layout: Topbar
  *
  * Sticky top bar with mobile hamburger, tenant switcher, and user menu.
  */

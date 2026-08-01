@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import { Label } from "@arc-ui/components";
-import { Input } from "@arc-ui/components";
+import { Label } from "@arcevo/facet-components";
+import { Input } from "@arcevo/facet-components";
 
 const meta: Meta<typeof Label> = {
   title: "Components/Label",

@@ -1,12 +1,12 @@
 /**
- * @arc-ui/layout: User Menu
+ * @arcevo/facet-layout: User Menu
  *
  * Avatar + dropdown with user info, settings link, and sign out.
- * Uses useAuth() from @arc-ui/auth and DropdownMenu from @arc-ui/components.
+ * Uses useAuth() from @arcevo/facet-auth and DropdownMenu from @arcevo/facet-components.
  */
 
 import * as React from "react";
-import { useAuth } from "@arc-ui/auth";
+import { useAuth } from "@arcevo/facet-auth";
 import {
   Avatar,
   AvatarFallback,
@@ -17,7 +17,7 @@ import {
   DropdownMenuSeparator,
   DropdownMenuItem,
   Icon,
-} from "@arc-ui/components";
+} from "@arcevo/facet-components";
 import { useLayout } from "./layout-context.js";
 
 export interface UserMenuProps {

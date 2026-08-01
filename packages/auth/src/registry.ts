@@ -1,12 +1,12 @@
 /**
- * Domain preset registry for @arc-ui/auth.
+ * Domain preset registry for @arcevo/facet-auth.
  *
  * Lets consumers register custom domain presets (and override built-ins)
  * without forking the package. Presets are plain AuthConfig objects, so
  * they can also be spread and extended inline.
  *
  * Usage:
- *   import { registerPreset, getPreset, resolvePreset } from "@arc-ui/auth";
+ *   import { registerPreset, getPreset, resolvePreset } from "@arcevo/facet-auth";
  *
  *   registerPreset("gov", {
  *     requireMfa: true,

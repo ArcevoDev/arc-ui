@@ -3,7 +3,7 @@ import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { SignIn } from "./sign-in.js";
 import { ArcProvider } from "./provider.js";
-import { ArcIdClient } from "@arc-ui/sdk";
+import { ArcIdClient } from "@arcevo/facet-sdk";
 import { createMemoryStorage } from "./test-storage.js";
 import { defaultConfig } from "./types.js";
 

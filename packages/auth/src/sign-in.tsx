@@ -39,6 +39,8 @@ export interface SignInProps {
   onSuccess?: (result: TokenPair) => void;
   /** Called when a user clicks an OAuth provider button. Receives the provider id (e.g. "google"). */
   onOAuth?: (provider: string) => void;
+  /** Enable zod client-side validation on the email/password forms. Default: false */
+  validate?: boolean;
 }
 
 /* ── Method selector (internal to SignIn) ──────────────────── */
@@ -112,6 +114,7 @@ export function SignIn({
   slots,
   onSuccess,
   onOAuth,
+  validate = false,
 }: SignInProps) {
   const cfg = { ...defaultConfig, ...configOverrides };
   const { login, verifyMfa, isAuthenticated, client } = useAuth();
@@ -230,9 +233,7 @@ export function SignIn({
               ),
             ),
             signature: Array.from(
-              new Uint8Array(
-                (credential.response as AuthenticatorAssertionResponse).signature,
-              ),
+              new Uint8Array((credential.response as AuthenticatorAssertionResponse).signature),
             ),
             userHandle: (credential.response as AuthenticatorAssertionResponse).userHandle
               ? Array.from(
@@ -281,6 +282,7 @@ export function SignIn({
           onSubmit={handleEmailPasswordLogin}
           onBack={() => setStep("select_method")}
           onForgotPassword={handleForgotPassword}
+          validate={validate}
         />
       );
     case "magic_link_form":
@@ -289,6 +291,7 @@ export function SignIn({
           appearance={appearance}
           onSubmit={handleMagicLinkRequest}
           onBack={() => setStep("select_method")}
+          validate={validate}
         />
       );
     case "forgot_password":
@@ -297,6 +300,7 @@ export function SignIn({
           appearance={appearance}
           onSubmit={handleForgotPasswordSubmit}
           onBack={() => setStep("login_form")}
+          validate={validate}
         />
       );
     case "mfa_challenge":
@@ -318,9 +322,7 @@ export function SignIn({
         <Card className={appearance?.className}>
           <CardHeader>
             <CardTitle>Sign In Failed</CardTitle>
-            <CardDescription>
-              {error ?? "An unexpected error occurred"}
-            </CardDescription>
+            <CardDescription>{error ?? "An unexpected error occurred"}</CardDescription>
           </CardHeader>
           <CardContent>
             <Button className="w-full" onClick={() => setStep("select_method")}>

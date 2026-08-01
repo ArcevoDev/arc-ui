@@ -29,9 +29,7 @@ describe("SignIn OAuth providers", () => {
       name: /sign in with google/i,
     });
     expect(google).toBeInTheDocument();
-    expect(
-      screen.getByRole("button", { name: /sign in with saml/i }),
-    ).toBeInTheDocument();
+    expect(screen.getByRole("button", { name: /sign in with saml/i })).toBeInTheDocument();
 
     await userEvent.click(google);
     expect(onOAuth).toHaveBeenCalledWith("google");

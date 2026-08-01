@@ -64,19 +64,12 @@ export class AuthSdk {
    * Returns a sessionId (with requiresMfa) or a full token bundle when
    * MFA is not required for this identity.
    */
-  login(
-    email: string,
-    password: string,
-  ): Promise<ApiResponse<LoginResult>> {
+  login(email: string, password: string): Promise<ApiResponse<LoginResult>> {
     return this.client.post<LoginResult>("/auth/login", { email, password });
   }
 
   /** POST /auth/register. arc-id returns only the identity (no tokens). */
-  register(
-    name: string,
-    email: string,
-    password: string,
-  ): Promise<ApiResponse<RegisterResult>> {
+  register(name: string, email: string, password: string): Promise<ApiResponse<RegisterResult>> {
     return this.client.post<RegisterResult>("/auth/register", {
       name,
       email,
@@ -105,10 +98,7 @@ export class AuthSdk {
     return this.client.post<void>("/auth/password/reset", { email });
   }
 
-  resetPassword(
-    token: string,
-    newPassword: string,
-  ): Promise<ApiResponse<void>> {
+  resetPassword(token: string, newPassword: string): Promise<ApiResponse<void>> {
     return this.client.post<void>("/auth/password/reset/confirm", {
       token,
       newPassword,
@@ -145,7 +135,12 @@ export class AuthSdk {
   stepUp(
     method: "password" | "totp" | "passkey",
     sessionId: string,
-    credential: { password?: string; totpCode?: string; passkeyResponse?: unknown; passkeyChallengeId?: string },
+    credential: {
+      password?: string;
+      totpCode?: string;
+      passkeyResponse?: unknown;
+      passkeyChallengeId?: string;
+    },
   ): Promise<ApiResponse<StepUpResult>> {
     return this.client.post<StepUpResult>("/auth/step-up", {
       method,
@@ -154,20 +149,14 @@ export class AuthSdk {
     });
   }
 
-  mfaRecovery(
-    code: string,
-    sessionId: string,
-  ): Promise<ApiResponse<TokenBundle>> {
+  mfaRecovery(code: string, sessionId: string): Promise<ApiResponse<TokenBundle>> {
     return this.client.post<TokenBundle>("/auth/mfa/recovery", {
       code,
       sessionId,
     });
   }
 
-  changePassword(
-    currentPassword: string,
-    newPassword: string,
-  ): Promise<ApiResponse<void>> {
+  changePassword(currentPassword: string, newPassword: string): Promise<ApiResponse<void>> {
     return this.client.post<void>("/auth/password/change", {
       currentPassword,
       newPassword,
@@ -186,9 +175,7 @@ export class AuthSdk {
    * POST /oauth/token (bare RFC 6749 response).
    * Normalizes snake_case access_token/refresh_token to camelCase.
    */
-  async refresh(
-    refreshToken: string,
-  ): Promise<ApiResponse<RefreshResult>> {
+  async refresh(refreshToken: string): Promise<ApiResponse<RefreshResult>> {
     const res = await this.client.post<OAuthTokenResponse>(
       "/oauth/token",
       {

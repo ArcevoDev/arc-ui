@@ -33,12 +33,9 @@ export const navbarVariants = cva(
         default: "border-b border-border bg-background",
         sticky:
           "sticky top-0 z-50 border-b border-border bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/80",
-        glass:
-          "sticky top-0 z-50 border-b border-white/10 glass",
-        bordered:
-          "border border-border/60 bg-background shadow-sm",
-        transparent:
-          "border-b border-transparent bg-transparent",
+        glass: "sticky top-0 z-50 border-b border-white/10 glass",
+        bordered: "border border-border/60 bg-background shadow-sm",
+        transparent: "border-b border-transparent bg-transparent",
         pill: [
           "sticky top-3 z-50 mx-auto w-[calc(100%-2rem)] max-w-7xl rounded-full",
           "border border-border/60 bg-background/70 px-3 py-2 shadow-lg shadow-black/5",
@@ -90,8 +87,7 @@ export interface NavLink {
 }
 
 export interface NavbarProps
-  extends React.HTMLAttributes<HTMLElement>,
-    VariantProps<typeof navbarVariants> {
+  extends React.HTMLAttributes<HTMLElement>, VariantProps<typeof navbarVariants> {
   /** Brand element: logo, name, or both */
   brand?: React.ReactNode;
   /** Nav links rendered in desktop view */
@@ -142,11 +138,7 @@ export function Navbar({
 
   return (
     <nav
-      className={cn(
-        navbarVariants({ variant, size }),
-        hasOwnPosition ? "" : "relative",
-        className,
-      )}
+      className={cn(navbarVariants({ variant, size }), hasOwnPosition ? "" : "relative", className)}
       {...props}
     >
       {/* Brand */}
@@ -157,9 +149,7 @@ export function Navbar({
         <div
           className={cn(
             "hidden items-center md:flex",
-            isPill
-              ? "gap-0.5 rounded-full bg-muted/40 p-1"
-              : "gap-1",
+            isPill ? "gap-0.5 rounded-full bg-muted/40 p-1" : "gap-1",
           )}
         >
           {links.map((link) => (
@@ -259,10 +249,7 @@ function NavLinkItem({
     return (
       <DropdownMenu>
         <DropdownMenuTrigger asChild>
-          <button
-            type="button"
-            className={cn(itemClass, "data-[state=open]:bg-accent/60")}
-          >
+          <button type="button" className={cn(itemClass, "data-[state=open]:bg-accent/60")}>
             {link.icon && <span className="size-4 shrink-0">{link.icon}</span>}
             <span>{link.label}</span>
             {link.badge != null && (
@@ -296,9 +283,7 @@ function NavLinkItem({
               >
                 <span className="flex items-center gap-2 font-medium">
                   {child.icon && (
-                    <span className="size-4 shrink-0 text-muted-foreground">
-                      {child.icon}
-                    </span>
+                    <span className="size-4 shrink-0 text-muted-foreground">{child.icon}</span>
                   )}
                   {child.label}
                   {child.badge != null && (
@@ -308,9 +293,7 @@ function NavLinkItem({
                   )}
                 </span>
                 {child.description && (
-                  <span className="pl-6 text-xs text-muted-foreground">
-                    {child.description}
-                  </span>
+                  <span className="pl-6 text-xs text-muted-foreground">{child.description}</span>
                 )}
               </DropdownMenuItem>
             </React.Fragment>
@@ -381,10 +364,7 @@ function MobileNavLink({
             strokeLinecap="round"
             strokeLinejoin="round"
             aria-hidden="true"
-            className={cn(
-              "text-muted-foreground/60 transition-transform",
-              open && "rotate-180",
-            )}
+            className={cn("text-muted-foreground/60 transition-transform", open && "rotate-180")}
           >
             <path d="m6 9 6 6 6-6" />
           </svg>

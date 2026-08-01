@@ -1,11 +1,7 @@
 import { useState } from "react";
 import type { Meta, StoryObj } from "@storybook/react";
 import { ChevronsUpDown } from "lucide-react";
-import {
-  Collapsible,
-  CollapsibleContent,
-  CollapsibleTrigger,
-} from "@arc-ui/components";
+import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "@arc-ui/components";
 
 const meta: Meta<typeof Collapsible> = {
   title: "Components/Collapsible",
@@ -27,8 +23,8 @@ export const Default: Story = {
         </CollapsibleTrigger>
       </div>
       <CollapsibleContent className="rounded-md border px-4 py-3 text-sm text-muted-foreground">
-        Core packages: tokens, components, auth, layout, and sdk. Each is
-        independently installable and tree-shakeable.
+        Core packages: tokens, components, auth, layout, and sdk. Each is independently installable
+        and tree-shakeable.
       </CollapsibleContent>
     </Collapsible>
   ),
@@ -38,11 +34,7 @@ export const Controlled: Story = {
   render: () => {
     const [open, setOpen] = useState(false);
     return (
-      <Collapsible
-        open={open}
-        onOpenChange={setOpen}
-        className="w-[380px] space-y-2"
-      >
+      <Collapsible open={open} onOpenChange={setOpen} className="w-[380px] space-y-2">
         <div className="flex items-center justify-between rounded-md border px-4 py-3 text-sm">
           <span className="font-medium">Expandable row</span>
           <CollapsibleTrigger className="inline-flex h-8 w-8 items-center justify-center rounded-md text-muted-foreground transition-colors hover:bg-accent hover:text-accent-foreground">

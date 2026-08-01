@@ -11,7 +11,10 @@ const meta: Meta<typeof ScrollArea> = {
 export default meta;
 type Story = StoryObj<typeof ScrollArea>;
 
-const longText = Array.from({ length: 20 }, (_, i) => `Line ${i + 1}: Lorem ipsum dolor sit amet, consectetur adipiscing elit.`).join("\n");
+const longText = Array.from(
+  { length: 20 },
+  (_, i) => `Line ${i + 1}: Lorem ipsum dolor sit amet, consectetur adipiscing elit.`,
+).join("\n");
 
 export const Vertical: Story = {
   render: () => (
@@ -26,7 +29,10 @@ export const Horizontal: Story = {
     <ScrollArea className="h-32 w-64 whitespace-nowrap rounded-md border">
       <div className="flex gap-4 p-4">
         {Array.from({ length: 10 }, (_, i) => (
-          <div key={i} className="flex h-24 w-32 items-center justify-center rounded-md bg-muted text-sm text-muted-foreground">
+          <div
+            key={i}
+            className="flex h-24 w-32 items-center justify-center rounded-md bg-muted text-sm text-muted-foreground"
+          >
             Card {i + 1}
           </div>
         ))}

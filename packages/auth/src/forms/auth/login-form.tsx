@@ -5,6 +5,9 @@
  */
 
 import * as React from "react";
+import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { loginSchema } from "../../validators.js";
 import type { Appearance } from "../../types.js";
 
 import {
@@ -29,7 +32,11 @@ export interface LoginFormProps {
   onBack?: () => void;
   /** Called when user clicks "Forgot password?" */
   onForgotPassword?: () => void;
+  /** Enable zod client-side validation. Default: false */
+  validate?: boolean;
 }
+
+type LoginValues = { email: string; password: string };
 
 /* ── Component ─────────────────────────────────────────────── */
 
@@ -38,25 +45,57 @@ export function LoginForm({
   onSubmit,
   onBack,
   onForgotPassword,
+  validate = false,
 }: LoginFormProps) {
   const [email, setEmail] = React.useState("");
   const [password, setPassword] = React.useState("");
   const [error, setError] = React.useState<string | null>(null);
   const [isSubmitting, setIsSubmitting] = React.useState(false);
 
-  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<LoginValues>({
+    resolver: validate ? zodResolver(loginSchema) : undefined,
+  });
+
+  const runSubmit = async (values?: LoginValues) => {
     setError(null);
     setIsSubmitting(true);
 
     try {
-      const err = await onSubmit(email, password);
+      const err = await onSubmit(values?.email ?? email, values?.password ?? password);
       if (err) setError(err);
     } catch (err) {
       setError(err instanceof Error ? err.message : "Unexpected error");
     }
     setIsSubmitting(false);
   };
+
+  const handleFormSubmit = validate
+    ? handleSubmit((values) => runSubmit(values))
+    : (e: React.FormEvent<HTMLFormElement>) => {
+        e.preventDefault();
+        return runSubmit();
+      };
+
+  const emailError = validate ? errors.email?.message : undefined;
+  const passwordError = validate ? errors.password?.message : undefined;
+
+  const emailFieldProps = validate
+    ? register("email")
+    : {
+        value: email,
+        onChange: (e: React.ChangeEvent<HTMLInputElement>) => setEmail(e.target.value),
+      };
+
+  const passwordFieldProps = validate
+    ? register("password")
+    : {
+        value: password,
+        onChange: (e: React.ChangeEvent<HTMLInputElement>) => setPassword(e.target.value),
+      };
 
   return (
     <Card className={appearance?.className}>
@@ -65,7 +104,7 @@ export function LoginForm({
         <CardDescription>Enter your credentials</CardDescription>
       </CardHeader>
       <CardContent>
-        <form onSubmit={handleSubmit} className="flex flex-col gap-4">
+        <form onSubmit={handleFormSubmit} className="flex flex-col gap-4" noValidate={validate}>
           <div className="flex flex-col gap-2">
             <Label htmlFor="signin-email">Email</Label>
             <Input
@@ -74,9 +113,10 @@ export function LoginForm({
               placeholder="you@example.com"
               autoComplete="email"
               required
-              value={email}
-              onChange={(e: React.ChangeEvent<HTMLInputElement>) => setEmail(e.target.value)}
+              {...emailFieldProps}
+              aria-invalid={emailError ? true : undefined}
             />
+            {emailError && <p className="text-sm text-destructive">{emailError}</p>}
           </div>
           <div className="flex flex-col gap-2">
             <div className="flex items-center justify-between">
@@ -98,9 +138,10 @@ export function LoginForm({
               placeholder="········"
               autoComplete="current-password"
               required
-              value={password}
-              onChange={(e: React.ChangeEvent<HTMLInputElement>) => setPassword(e.target.value)}
+              {...passwordFieldProps}
+              aria-invalid={passwordError ? true : undefined}
             />
+            {passwordError && <p className="text-sm text-destructive">{passwordError}</p>}
           </div>
           {error && <p className="text-sm text-destructive">{error}</p>}
           <Button type="submit" disabled={isSubmitting} className="w-full">

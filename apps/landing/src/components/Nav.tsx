@@ -12,13 +12,7 @@ const LINKS: NavLink[] = [
 function Brand() {
   return (
     <div className="flex items-center gap-2.5">
-      <svg
-        width="24"
-        height="24"
-        viewBox="0 0 24 24"
-        fill="none"
-        className="text-primary"
-      >
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" className="text-primary">
         <path
           d="M12 2L4 6V12C4 17.52 7.58 22.48 12 24C16.42 22.48 20 17.52 20 12V6L12 2Z"
           fill="currentColor"
@@ -30,9 +24,7 @@ function Brand() {
           opacity="0.4"
         />
       </svg>
-      <span className="font-heading text-lg font-bold text-foreground">
-        arc-ui
-      </span>
+      <span className="font-heading text-lg font-bold text-foreground">arc-ui</span>
     </div>
   );
 }
@@ -53,10 +45,7 @@ export function Nav() {
             GitHub
           </a>
           <ThemeToggle />
-          <Button
-            size="sm"
-            onClick={() => window.open("http://localhost:6006")}
-          >
+          <Button size="sm" onClick={() => window.open("http://localhost:6006")}>
             Browse components
           </Button>
         </div>

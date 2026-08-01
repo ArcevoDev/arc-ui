@@ -9,7 +9,14 @@
 
 import * as React from "react";
 import { useLayout } from "./layout-context.js";
-import { ScrollArea, Skeleton, Tooltip, TooltipProvider, TooltipTrigger, TooltipContent } from "@arc-ui/components";
+import {
+  ScrollArea,
+  Skeleton,
+  Tooltip,
+  TooltipProvider,
+  TooltipTrigger,
+  TooltipContent,
+} from "@arc-ui/components";
 import type { LayoutConfig, NavItem, NavSection } from "./types.js";
 import type { RouterAdapter } from "./router.js";
 
@@ -61,9 +68,7 @@ export function Sidebar({ config, isLoading, collapsed = false }: SidebarProps) 
           </svg>
         )}
         {!collapsed && (
-          <span className="font-semibold text-sidebar-foreground">
-            {config.brand.name}
-          </span>
+          <span className="font-semibold text-sidebar-foreground">{config.brand.name}</span>
         )}
       </div>
 
@@ -72,9 +77,7 @@ export function Sidebar({ config, isLoading, collapsed = false }: SidebarProps) 
         {isLoading ? (
           <SidebarSkeleton />
         ) : config.navigation.length === 0 ? (
-          <p className="px-2 text-sm text-sidebar-foreground/40">
-            No navigation items
-          </p>
+          <p className="px-2 text-sm text-sidebar-foreground/40">No navigation items</p>
         ) : (
           <nav className={collapsed ? "space-y-4" : "space-y-6"}>
             {config.navigation.map((section) => (
@@ -128,7 +131,14 @@ function NavSectionRenderer({
       )}
       <ul className="space-y-1">
         {section.items.map((item) => (
-          <NavItemRenderer key={item.href} item={item} router={router} onNav={onNav} depth={0} collapsed={collapsed} />
+          <NavItemRenderer
+            key={item.href}
+            item={item}
+            router={router}
+            onNav={onNav}
+            depth={0}
+            collapsed={collapsed}
+          />
         ))}
       </ul>
     </div>
@@ -196,9 +206,7 @@ function NavItemRenderer({
                 )}
               </button>
             </TooltipTrigger>
-            {collapsed && (
-              <TooltipContent side="right">{item.label}</TooltipContent>
-            )}
+            {collapsed && <TooltipContent side="right">{item.label}</TooltipContent>}
           </Tooltip>
         </TooltipProvider>
         {!collapsed && open && (
@@ -240,9 +248,7 @@ function NavItemRenderer({
                   : "text-sidebar-foreground/70 hover:bg-sidebar-accent hover:text-sidebar-accent-foreground"
               }`}
             >
-              {item.icon && (
-                <span className="size-4 shrink-0">{item.icon}</span>
-              )}
+              {item.icon && <span className="size-4 shrink-0">{item.icon}</span>}
               {!collapsed && <span className="flex-1">{item.label}</span>}
               {!collapsed && item.badge != null && (
                 <span className="rounded-full bg-primary px-1.5 py-0.5 text-[10px] font-medium text-primary-foreground">
@@ -251,9 +257,7 @@ function NavItemRenderer({
               )}
             </Link>
           </TooltipTrigger>
-          {collapsed && (
-            <TooltipContent side="right">{item.label}</TooltipContent>
-          )}
+          {collapsed && <TooltipContent side="right">{item.label}</TooltipContent>}
         </Tooltip>
       </TooltipProvider>
     </li>

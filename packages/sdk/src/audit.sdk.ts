@@ -25,9 +25,7 @@ export type AuditListParams = {
 export class AuditSdk {
   constructor(private client: ArcIdClient) {}
 
-  list(
-    params?: AuditListParams,
-  ): Promise<ApiResponse<Paginated<AuditLogEntry>>> {
+  list(params?: AuditListParams): Promise<ApiResponse<Paginated<AuditLogEntry>>> {
     const query = new URLSearchParams();
     if (params?.identityId) query.set("identityId", params.identityId);
     if (params?.tenantId) query.set("tenantId", params.tenantId);
@@ -37,8 +35,6 @@ export class AuditSdk {
     if (params?.page) query.set("page", String(params.page));
     if (params?.limit) query.set("limit", String(params.limit));
     const qs = query.toString();
-    return this.client.get<Paginated<AuditLogEntry>>(
-      `/audit/logs${qs ? `?${qs}` : ""}`,
-    );
+    return this.client.get<Paginated<AuditLogEntry>>(`/audit/logs${qs ? `?${qs}` : ""}`);
   }
 }

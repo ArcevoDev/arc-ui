@@ -33,12 +33,7 @@ export interface SignUpProps {
 
 /* ── Component ─────────────────────────────────────────────── */
 
-export function SignUp({
-  appearance,
-  config: configOverrides,
-  slots,
-  onSuccess,
-}: SignUpProps) {
+export function SignUp({ appearance, config: configOverrides, slots, onSuccess }: SignUpProps) {
   const cfg = { ...defaultConfig, ...configOverrides };
   const { register } = useAuth();
 
@@ -82,11 +77,7 @@ export function SignUp({
     <Card className={appearance?.className}>
       <CardHeader>
         {slots?.title ?? <CardTitle>Create an Account</CardTitle>}
-        {slots?.description ?? (
-          <CardDescription>
-            Enter your details to get started
-          </CardDescription>
-        )}
+        {slots?.description ?? <CardDescription>Enter your details to get started</CardDescription>}
       </CardHeader>
       <CardContent>
         <form onSubmit={handleSubmit} className="flex flex-col gap-4">
@@ -99,9 +90,7 @@ export function SignUp({
               autoComplete="name"
               required
               value={name}
-              onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-                setName(e.target.value)
-              }
+              onChange={(e: React.ChangeEvent<HTMLInputElement>) => setName(e.target.value)}
             />
           </div>
           <div className="flex flex-col gap-2">
@@ -113,9 +102,7 @@ export function SignUp({
               autoComplete="email"
               required
               value={email}
-              onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-                setEmail(e.target.value)
-              }
+              onChange={(e: React.ChangeEvent<HTMLInputElement>) => setEmail(e.target.value)}
             />
           </div>
           <div className="flex flex-col gap-2">
@@ -128,9 +115,7 @@ export function SignUp({
               required
               minLength={8}
               value={password}
-              onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-                setPassword(e.target.value)
-              }
+              onChange={(e: React.ChangeEvent<HTMLInputElement>) => setPassword(e.target.value)}
             />
           </div>
           <div className="flex flex-col gap-2">

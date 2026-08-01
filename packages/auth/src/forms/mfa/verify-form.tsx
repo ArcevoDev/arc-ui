@@ -13,6 +13,7 @@ import {
   InputOTP,
   InputOTPGroup,
   InputOTPSlot,
+  InputOTPSeparator,
   DialogHeader,
   DialogTitle,
   DialogDescription,
@@ -47,9 +48,7 @@ export function MfaVerifyForm({
     <>
       <DialogHeader>
         <DialogTitle>Two-Factor Authentication</DialogTitle>
-        <DialogDescription>
-          Enter the code from your authenticator app.
-        </DialogDescription>
+        <DialogDescription>Enter the code from your authenticator app.</DialogDescription>
       </DialogHeader>
       <div className="flex flex-col items-center gap-4 py-4">
         <InputOTP
@@ -63,6 +62,9 @@ export function MfaVerifyForm({
             <InputOTPSlot index={0} />
             <InputOTPSlot index={1} />
             <InputOTPSlot index={2} />
+          </InputOTPGroup>
+          <InputOTPSeparator />
+          <InputOTPGroup>
             <InputOTPSlot index={3} />
             <InputOTPSlot index={4} />
             <InputOTPSlot index={5} />
@@ -72,22 +74,12 @@ export function MfaVerifyForm({
       </div>
       <div className="flex flex-col gap-2">
         {onRecovery && (
-          <Button
-            variant="outline"
-            size="sm"
-            className="w-full"
-            onClick={onRecovery}
-          >
+          <Button variant="outline" size="sm" className="w-full" onClick={onRecovery}>
             Use a recovery code
           </Button>
         )}
         {onCancel && (
-          <Button
-            variant="ghost"
-            size="sm"
-            className="w-full"
-            onClick={onCancel}
-          >
+          <Button variant="ghost" size="sm" className="w-full" onClick={onCancel}>
             Cancel
           </Button>
         )}

@@ -21,9 +21,7 @@ export type ApiError = {
   requiredPlan?: string;
 };
 
-export type ApiResponse<T> =
-  | { data: T; error: null }
-  | { data: null; error: ApiError };
+export type ApiResponse<T> = { data: T; error: null } | { data: null; error: ApiError };
 
 /** Standard arc-id success envelope for domain routes. */
 export interface ApiEnvelope<T> {
@@ -169,11 +167,7 @@ export class ArcIdClient {
     const result = await attempt(this.accessToken);
 
     // Auto-refresh on 401 if a tokenRefresher is configured.
-    if (
-      result.error?.statusCode === 401 &&
-      this.config.onTokenRefresh &&
-      this.accessToken
-    ) {
+    if (result.error?.statusCode === 401 && this.config.onTokenRefresh && this.accessToken) {
       const newToken = await this.config.onTokenRefresh(this.accessToken);
       if (newToken) {
         this.setAccessToken(newToken);

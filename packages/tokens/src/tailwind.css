@@ -83,10 +83,10 @@
   --radius-3xl: var(--radius-3xl);
 
   /* ── Font families ───────────────────────────────────────── */
-  --font-sans: var(--font-body);           /* body text: Inter */
-  --font-body: var(--font-body);           /* Inter (alias for utility class) */
-  --font-mono: var(--font-mono);           /* JetBrains Mono */
-  --font-heading: var(--font-heading);     /* Montserrat */
+  --font-sans: var(--font-body); /* body text: Inter */
+  --font-body: var(--font-body); /* Inter (alias for utility class) */
+  --font-mono: var(--font-mono); /* JetBrains Mono */
+  --font-heading: var(--font-heading); /* Montserrat */
   --font-technical: var(--font-technical); /* Rajdhani */
 
   /* ── Extra brand palette (arc-id compatibility) ──────────── */
@@ -101,13 +101,21 @@
 }
 
 @keyframes accordion-down {
-  from { height: 0; }
-  to { height: var(--radix-accordion-content-height); }
+  from {
+    height: 0;
+  }
+  to {
+    height: var(--radix-accordion-content-height);
+  }
 }
 
 @keyframes accordion-up {
-  from { height: var(--radix-accordion-content-height); }
-  to { height: 0; }
+  from {
+    height: var(--radix-accordion-content-height);
+  }
+  to {
+    height: 0;
+  }
 }
 
 @keyframes pulse-ring {

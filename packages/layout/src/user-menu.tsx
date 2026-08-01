@@ -6,7 +6,6 @@
  */
 
 import * as React from "react";
-import { Settings, LogOut } from "lucide-react";
 import { useAuth } from "@arc-ui/auth";
 import {
   Avatar,
@@ -17,6 +16,7 @@ import {
   DropdownMenuLabel,
   DropdownMenuSeparator,
   DropdownMenuItem,
+  Icon,
 } from "@arc-ui/components";
 import { useLayout } from "./layout-context.js";
 
@@ -75,17 +75,13 @@ export function UserMenu({
         </DropdownMenuTrigger>
         <DropdownMenuContent align="end" className="w-56">
           <DropdownMenuLabel>
-            <p className="text-sm font-medium text-foreground">
-              {user.name}
-            </p>
-            <p className="text-xs font-normal text-muted-foreground">
-              {user.email}
-            </p>
+            <p className="text-sm font-medium text-foreground">{user.name}</p>
+            <p className="text-xs font-normal text-muted-foreground">{user.email}</p>
           </DropdownMenuLabel>
           <DropdownMenuSeparator />
           <DropdownMenuItem asChild>
             <SettingsLink href={settingsPath} className="flex items-center gap-2">
-              <Settings size={16} />
+              <Icon name="settings" size={16} />
               Settings
             </SettingsLink>
           </DropdownMenuItem>
@@ -94,7 +90,7 @@ export function UserMenu({
             onClick={handleSignOut}
             className="text-destructive focus:text-destructive focus:bg-destructive/10"
           >
-            <LogOut size={16} />
+            <Icon name="logout" size={16} />
             Sign out
           </DropdownMenuItem>
         </DropdownMenuContent>

@@ -1,5 +1,13 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import { Select, SelectTrigger, SelectValue, SelectContent, SelectItem, SelectGroup, SelectLabel } from "@arc-ui/components";
+import {
+  Select,
+  SelectTrigger,
+  SelectValue,
+  SelectContent,
+  SelectItem,
+  SelectGroup,
+  SelectLabel,
+} from "@arc-ui/components";
 
 const meta: Meta<typeof Select> = {
   title: "Components/Select",
@@ -40,7 +48,9 @@ export const WithDisabled: Story = {
         <SelectGroup>
           <SelectLabel>Fruits</SelectLabel>
           <SelectItem value="apple">Apple</SelectItem>
-          <SelectItem value="banana" disabled>Banana (out of stock)</SelectItem>
+          <SelectItem value="banana" disabled>
+            Banana (out of stock)
+          </SelectItem>
           <SelectItem value="orange">Orange</SelectItem>
         </SelectGroup>
       </SelectContent>

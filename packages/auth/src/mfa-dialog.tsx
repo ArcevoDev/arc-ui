@@ -137,12 +137,7 @@ export function MfaDialog({
         );
       }
       case "recovery_codes":
-        return (
-          <MfaRecoveryCodesForm
-            codes={phase.codes}
-            onSaved={() => onOpenChange?.(false)}
-          />
-        );
+        return <MfaRecoveryCodesForm codes={phase.codes} onSaved={() => onOpenChange?.(false)} />;
       case "recovery":
         return (
           <MfaRecoveryForm
@@ -157,9 +152,7 @@ export function MfaDialog({
 
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
-      <DialogContent className={appearance?.className}>
-        {renderPhase()}
-      </DialogContent>
+      <DialogContent className={appearance?.className}>{renderPhase()}</DialogContent>
     </Dialog>
   );
 }

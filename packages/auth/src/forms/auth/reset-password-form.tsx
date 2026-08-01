@@ -7,6 +7,9 @@
  */
 
 import * as React from "react";
+import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { resetPasswordSchema } from "../../validators.js";
 import type { Appearance } from "../../types.js";
 
 import {
@@ -31,7 +34,11 @@ export interface ResetPasswordFormProps {
   onSubmit: (token: string, newPassword: string) => Promise<string | null | undefined>;
   onSuccess?: () => void;
   onBack?: () => void;
+  /** Enable zod client-side validation. Default: false */
+  validate?: boolean;
 }
+
+type ResetValues = { password: string; confirm: string };
 
 /* ── Component ─────────────────────────────────────────────── */
 
@@ -41,6 +48,7 @@ export function ResetPasswordForm({
   onSubmit,
   onSuccess,
   onBack,
+  validate = false,
 }: ResetPasswordFormProps) {
   const [password, setPassword] = React.useState("");
   const [confirm, setConfirm] = React.useState("");
@@ -48,23 +56,32 @@ export function ResetPasswordForm({
   const [isSubmitting, setIsSubmitting] = React.useState(false);
   const [done, setDone] = React.useState(false);
 
-  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<ResetValues>({
+    resolver: validate ? zodResolver(resetPasswordSchema) : undefined,
+  });
+
+  const runSubmit = async (values?: ResetValues) => {
     setError(null);
 
-    if (password !== confirm) {
-      setError("Passwords do not match");
-      return;
-    }
-    if (password.length < 8) {
-      setError("Password must be at least 8 characters");
-      return;
+    if (!validate) {
+      if (password !== confirm) {
+        setError("Passwords do not match");
+        return;
+      }
+      if (password.length < 8) {
+        setError("Password must be at least 8 characters");
+        return;
+      }
     }
 
     setIsSubmitting(true);
 
     try {
-      const err = await onSubmit(token, password);
+      const err = await onSubmit(token, values?.password ?? password);
       if (err) {
         setError(err);
       } else {
@@ -77,14 +94,36 @@ export function ResetPasswordForm({
     setIsSubmitting(false);
   };
 
+  const handleFormSubmit = validate
+    ? handleSubmit((values) => runSubmit(values))
+    : (e: React.FormEvent<HTMLFormElement>) => {
+        e.preventDefault();
+        return runSubmit();
+      };
+
+  const passwordError = validate ? errors.password?.message : undefined;
+  const confirmError = validate ? errors.confirm?.message : undefined;
+
+  const passwordFieldProps = validate
+    ? register("password")
+    : {
+        value: password,
+        onChange: (e: React.ChangeEvent<HTMLInputElement>) => setPassword(e.target.value),
+      };
+
+  const confirmFieldProps = validate
+    ? register("confirm")
+    : {
+        value: confirm,
+        onChange: (e: React.ChangeEvent<HTMLInputElement>) => setConfirm(e.target.value),
+      };
+
   if (done) {
     return (
       <Card className={appearance?.className}>
         <CardHeader>
           <CardTitle>Password Reset</CardTitle>
-          <CardDescription>
-            Your password has been successfully reset.
-          </CardDescription>
+          <CardDescription>Your password has been successfully reset.</CardDescription>
         </CardHeader>
         <CardContent>
           <p className="text-sm text-muted-foreground">
@@ -106,12 +145,10 @@ export function ResetPasswordForm({
     <Card className={appearance?.className}>
       <CardHeader>
         <CardTitle>Set New Password</CardTitle>
-        <CardDescription>
-          Enter your new password below.
-        </CardDescription>
+        <CardDescription>Enter your new password below.</CardDescription>
       </CardHeader>
       <CardContent>
-        <form onSubmit={handleSubmit} className="flex flex-col gap-4">
+        <form onSubmit={handleFormSubmit} className="flex flex-col gap-4" noValidate={validate}>
           <div className="flex flex-col gap-2">
             <Label htmlFor="reset-password">New Password</Label>
             <Input
@@ -121,9 +158,10 @@ export function ResetPasswordForm({
               autoComplete="new-password"
               required
               minLength={8}
-              value={password}
-              onChange={(e: React.ChangeEvent<HTMLInputElement>) => setPassword(e.target.value)}
+              {...passwordFieldProps}
+              aria-invalid={passwordError ? true : undefined}
             />
+            {passwordError && <p className="text-sm text-destructive">{passwordError}</p>}
           </div>
           <div className="flex flex-col gap-2">
             <Label htmlFor="reset-confirm">Confirm Password</Label>
@@ -134,9 +172,10 @@ export function ResetPasswordForm({
               autoComplete="new-password"
               required
               minLength={8}
-              value={confirm}
-              onChange={(e: React.ChangeEvent<HTMLInputElement>) => setConfirm(e.target.value)}
+              {...confirmFieldProps}
+              aria-invalid={confirmError ? true : undefined}
             />
+            {confirmError && <p className="text-sm text-destructive">{confirmError}</p>}
           </div>
           {error && <p className="text-sm text-destructive">{error}</p>}
           <Button type="submit" disabled={isSubmitting} className="w-full">

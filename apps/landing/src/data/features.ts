@@ -1,12 +1,5 @@
 import type { LucideIcon } from "lucide-react";
-import {
-  Building2,
-  Puzzle,
-  Lock,
-  Zap,
-  Palette,
-  Ruler,
-} from "lucide-react";
+import { Building2, Puzzle, Lock, Zap, Palette, Ruler } from "lucide-react";
 
 export interface Feature {
   title: string;

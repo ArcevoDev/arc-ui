@@ -40,6 +40,13 @@ const config: StorybookConfig = {
     // Add Tailwind v4: Storybook ignores apps/docs/vite.config.ts so we
     // need @tailwindcss/vite here so @import "tailwindcss" in app.css works.
     config.plugins = [...(config.plugins ?? []), tailwindcss()];
+
+    // Build configuration limits
+    config.build = {
+      ...config.build,
+      chunkSizeWarningLimit: 1200,
+    };
+
     return config;
   },
 };

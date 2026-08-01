@@ -16,7 +16,11 @@ describe("Button", () => {
   });
 
   it("applies variant + size classes", () => {
-    const { container } = render(<Button variant="destructive" size="lg">Delete</Button>);
+    const { container } = render(
+      <Button variant="destructive" size="lg">
+        Delete
+      </Button>,
+    );
     const btn = container.querySelector("button");
     expect(btn).toHaveClass("bg-destructive");
     expect(btn).toHaveClass("h-10");
@@ -47,17 +51,13 @@ describe("Badge", () => {
   });
 
   it("renders an optional leading icon", () => {
-    const { container } = render(
-      <Badge icon={<span data-testid="icon">*</span>}>New</Badge>,
-    );
+    const { container } = render(<Badge icon={<span data-testid="icon">*</span>}>New</Badge>);
     expect(screen.getByText("New")).toBeInTheDocument();
     expect(container.querySelector("[data-testid=icon]")).toBeInTheDocument();
   });
 
   it("renders icon-only when iconOnly is set", () => {
-    const { container } = render(
-      <Badge iconOnly icon={<span data-testid="icon">*</span>} />,
-    );
+    const { container } = render(<Badge iconOnly icon={<span data-testid="icon">*</span>} />);
     expect(container.querySelector("[data-testid=icon]")).toBeInTheDocument();
     expect(container.querySelector("div")).toHaveClass("size-6");
   });

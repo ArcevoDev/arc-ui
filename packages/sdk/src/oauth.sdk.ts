@@ -44,9 +44,7 @@ export class OAuthSdk {
     return this.client.get<OAuthClient[]>("/oauth/clients");
   }
 
-  createClient(
-    data: CreateClientParams,
-  ): Promise<ApiResponse<OAuthClient>> {
+  createClient(data: CreateClientParams): Promise<ApiResponse<OAuthClient>> {
     return this.client.post<OAuthClient>("/oauth/clients", data);
   }
 
@@ -66,9 +64,7 @@ export class OAuthSdk {
 
   /* ── Consent ──────────────────────────────────────────────── */
 
-  grantConsent(
-    data: GrantConsentParams,
-  ): Promise<ApiResponse<void>> {
+  grantConsent(data: GrantConsentParams): Promise<ApiResponse<void>> {
     return this.client.post<void>("/oauth/consent", data);
   }
 
@@ -82,19 +78,11 @@ export class OAuthSdk {
 
   /* ── Introspection & Revocation ──────────────────────────── */
 
-  introspectToken(
-    token: string,
-  ): Promise<ApiResponse<TokenIntrospection>> {
-    return this.client.post<TokenIntrospection>(
-      "/oauth/introspect",
-      { token },
-    );
+  introspectToken(token: string): Promise<ApiResponse<TokenIntrospection>> {
+    return this.client.post<TokenIntrospection>("/oauth/introspect", { token });
   }
 
-  revokeTokenRFC7009(
-    token: string,
-    tokenTypeHint?: string,
-  ): Promise<ApiResponse<void>> {
+  revokeTokenRFC7009(token: string, tokenTypeHint?: string): Promise<ApiResponse<void>> {
     return this.client.post<void>("/oauth/revoke", {
       token,
       token_type_hint: tokenTypeHint,

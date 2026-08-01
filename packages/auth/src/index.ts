@@ -29,13 +29,11 @@ export { type GuardProps, Guard } from "./guard.js";
 export { type MfaDialogProps, MfaDialog } from "./mfa-dialog.js";
 
 /* ── Domain Presets ────────────────────────────────────────── */
-export {
-  fintechPreset,
-  medPreset,
-  eduPreset,
-  enterprisePreset,
-  defaultPreset,
-} from "./presets.js";
+export { fintechPreset, medPreset, eduPreset, enterprisePreset, defaultPreset } from "./presets.js";
+
+/* ── Preset Registry ──────────────────────────────────────── */
+export { registerPreset, getPreset, hasPreset, listPresets, resolvePreset } from "./registry.js";
+export type { PresetName } from "./registry.js";
 
 /* ── Forms ─────────────────────────────────────────────────── */
 export {
@@ -71,3 +69,15 @@ export type {
   MfaMethod,
   MfaFlowState,
 } from "./types.js";
+
+/* ── Validators ────────────────────────────────────────────── */
+export {
+  emailSchema,
+  passwordSchema,
+  loginSchema,
+  emailOnlySchema,
+  resetPasswordSchema,
+  mfaCodeSchema,
+  recoveryCodeSchema,
+  firstErrorMessage,
+} from "./validators.js";

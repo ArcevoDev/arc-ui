@@ -21,7 +21,8 @@ const dialogOverlayVariants = cva("fixed inset-0 z-50", {
 });
 
 interface DialogOverlayProps
-  extends React.ComponentPropsWithoutRef<typeof DialogPrimitive.Overlay>,
+  extends
+    React.ComponentPropsWithoutRef<typeof DialogPrimitive.Overlay>,
     VariantProps<typeof dialogOverlayVariants> {}
 
 const DialogOverlay = React.forwardRef<
@@ -57,7 +58,8 @@ const dialogContentVariants = cva(
 );
 
 interface DialogContentProps
-  extends React.ComponentPropsWithoutRef<typeof DialogPrimitive.Content>,
+  extends
+    React.ComponentPropsWithoutRef<typeof DialogPrimitive.Content>,
     VariantProps<typeof dialogContentVariants> {}
 
 const DialogContent = React.forwardRef<
@@ -98,29 +100,14 @@ const DialogContent = React.forwardRef<
 ));
 DialogContent.displayName = DialogPrimitive.Content.displayName;
 
-const DialogHeader = ({
-  className,
-  ...props
-}: React.HTMLAttributes<HTMLDivElement>) => (
-  <div
-    className={cn(
-      "flex flex-col space-y-1.5 text-center sm:text-left",
-      className,
-    )}
-    {...props}
-  />
+const DialogHeader = ({ className, ...props }: React.HTMLAttributes<HTMLDivElement>) => (
+  <div className={cn("flex flex-col space-y-1.5 text-center sm:text-left", className)} {...props} />
 );
 DialogHeader.displayName = "DialogHeader";
 
-const DialogFooter = ({
-  className,
-  ...props
-}: React.HTMLAttributes<HTMLDivElement>) => (
+const DialogFooter = ({ className, ...props }: React.HTMLAttributes<HTMLDivElement>) => (
   <div
-    className={cn(
-      "flex flex-col-reverse gap-3 sm:flex-row sm:justify-end sm:space-x-3",
-      className,
-    )}
+    className={cn("flex flex-col-reverse gap-3 sm:flex-row sm:justify-end sm:space-x-3", className)}
     {...props}
   />
 );
@@ -132,10 +119,7 @@ const DialogTitle = React.forwardRef<
 >(({ className, ...props }, ref) => (
   <DialogPrimitive.Title
     ref={ref}
-    className={cn(
-      "text-lg font-semibold leading-none tracking-tight",
-      className,
-    )}
+    className={cn("text-lg font-semibold leading-none tracking-tight", className)}
     {...props}
   />
 ));

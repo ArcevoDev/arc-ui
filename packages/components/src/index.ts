@@ -11,6 +11,16 @@
 
 export { cn } from "./utils.js";
 
+/* ── Icon registry ──────────────────────────────────────────── */
+export { IconProvider, Icon, registerIcon, getIcon } from "./icon/index.js";
+export type {
+  IconComponent,
+  IconName,
+  IconOverrides,
+  IconProps,
+  IconProviderProps,
+} from "./icon/index.js";
+
 /* ── Theme system ────────────────────────────────────────────── */
 export { ThemeProvider, useTheme, ThemeToggle } from "./theme/index.js";
 export type { Theme, ThemeProviderProps, ThemeToggleProps } from "./theme/index.js";
@@ -73,21 +83,11 @@ export {
   SelectScrollDownButton,
 } from "./ui/select.js";
 
-export {
-  Popover,
-  PopoverTrigger,
-  PopoverContent,
-  PopoverAnchor,
-} from "./ui/popover.js";
+export { Popover, PopoverTrigger, PopoverContent, PopoverAnchor } from "./ui/popover.js";
 
 export { Tabs, TabsList, TabsTrigger, TabsContent } from "./ui/tabs.js";
 
-export {
-  Tooltip,
-  TooltipTrigger,
-  TooltipContent,
-  TooltipProvider,
-} from "./ui/tooltip.js";
+export { Tooltip, TooltipTrigger, TooltipContent, TooltipProvider } from "./ui/tooltip.js";
 
 export { Slider } from "./ui/slider.js";
 
@@ -159,18 +159,9 @@ export { Progress } from "./ui/progress.js";
 
 export { ScrollArea, ScrollBar } from "./ui/scroll-area.js";
 
-export {
-  InputOTP,
-  InputOTPGroup,
-  InputOTPSlot,
-  InputOTPSeparator,
-} from "./ui/input-otp.js";
+export { InputOTP, InputOTPGroup, InputOTPSlot, InputOTPSeparator } from "./ui/input-otp.js";
 
-export {
-  Collapsible,
-  CollapsibleTrigger,
-  CollapsibleContent,
-} from "./ui/collapsible.js";
+export { Collapsible, CollapsibleTrigger, CollapsibleContent } from "./ui/collapsible.js";
 
 export { Toaster } from "./ui/sonner.js";
 
@@ -208,12 +199,12 @@ export {
 } from "./ui/command.js";
 
 export { NotificationBell } from "./ui/notification-bell.js";
-export type { Notification as BellNotification, NotificationBellProps } from "./ui/notification-bell.js";
+export type {
+  Notification as BellNotification,
+  NotificationBellProps,
+} from "./ui/notification-bell.js";
 
-export {
-  Navbar,
-  navbarVariants,
-} from "./ui/navbar.js";
+export { Navbar, navbarVariants } from "./ui/navbar.js";
 export type {
   NavbarProps,
   NavLink,
@@ -222,9 +213,7 @@ export type {
   NavbarRouterLinkProps,
 } from "./ui/navbar.js";
 
-export {
-  NotificationDrawer,
-} from "./ui/notification-drawer.js";
+export { NotificationDrawer } from "./ui/notification-drawer.js";
 export type {
   Notification as DrawerNotification,
   NotificationDrawerProps,

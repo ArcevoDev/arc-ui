@@ -34,16 +34,26 @@ export function matchPath(href: string, pathname: string): boolean {
   return pathname.startsWith(href.endsWith("/") ? href : href + "/");
 }
 
-function DefaultLink({
-  href,
-  className,
-  onClick,
-  children,
-  "aria-label": ariaLabel,
-  "aria-current": ariaCurrent,
-}: RouterLinkProps, ref: React.Ref<HTMLAnchorElement>) {
+function DefaultLink(
+  {
+    href,
+    className,
+    onClick,
+    children,
+    "aria-label": ariaLabel,
+    "aria-current": ariaCurrent,
+  }: RouterLinkProps,
+  ref: React.Ref<HTMLAnchorElement>,
+) {
   return (
-    <a href={href} className={className} onClick={onClick} aria-label={ariaLabel} aria-current={ariaCurrent} ref={ref}>
+    <a
+      href={href}
+      className={className}
+      onClick={onClick}
+      aria-label={ariaLabel}
+      aria-current={ariaCurrent}
+      ref={ref}
+    >
       {children}
     </a>
   );

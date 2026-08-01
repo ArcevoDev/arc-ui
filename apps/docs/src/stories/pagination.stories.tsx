@@ -1,7 +1,12 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import {
-  Pagination, PaginationContent, PaginationLink, PaginationItem,
-  PaginationPrevious, PaginationNext, PaginationEllipsis,
+  Pagination,
+  PaginationContent,
+  PaginationLink,
+  PaginationItem,
+  PaginationPrevious,
+  PaginationNext,
+  PaginationEllipsis,
 } from "@arc-ui/components";
 
 const meta: Meta<typeof Pagination> = {
@@ -22,7 +27,9 @@ export const Default: Story = {
           <PaginationPrevious href="#" />
         </PaginationItem>
         <PaginationItem>
-          <PaginationLink href="#" isActive>1</PaginationLink>
+          <PaginationLink href="#" isActive>
+            1
+          </PaginationLink>
         </PaginationItem>
         <PaginationItem>
           <PaginationLink href="#">2</PaginationLink>

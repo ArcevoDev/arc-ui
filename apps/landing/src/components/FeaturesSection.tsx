@@ -21,9 +21,7 @@ export function FeaturesSection() {
             >
               <Icon className="size-6 text-primary" />
               <h3 className="mt-4 font-semibold text-foreground">{f.title}</h3>
-              <p className="mt-2 text-sm text-muted-foreground leading-relaxed">
-                {f.desc}
-              </p>
+              <p className="mt-2 text-sm text-muted-foreground leading-relaxed">{f.desc}</p>
             </div>
           );
         })}

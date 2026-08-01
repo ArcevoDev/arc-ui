@@ -8,13 +8,13 @@ design manual (Alpha Palette), and your auth requirements differ per sector
 
 ## Packages
 
-| Package | Description | Status |
-|---------|-------------|--------|
-| `@arc-ui/tokens` | Design tokens: Alpha Palette, typography, spacing, CSS vars | ✅ Done |
-| `@arc-ui/sdk` | arc-id API client (pure fetch, typed, 10 domain SDKs) | ✅ Done |
-| `@arc-ui/components` | 35+ styled UI components (Radix + tailwind-merge + variants) | ✅ Done |
-| `@arc-ui/auth` | Auth components + domain presets: SignIn, SignUp, Guard, MfaDialog, forms | ✅ Done |
-| `@arc-ui/layout` | Domain-configurable app shell: ConsoleLayout, AuthLayout, LandingLayout, Sidebar, Topbar, 5 presets | ✅ Done |
+| Package              | Description                                                                                         | Status  |
+| -------------------- | --------------------------------------------------------------------------------------------------- | ------- |
+| `@arc-ui/tokens`     | Design tokens: Alpha Palette, typography, spacing, CSS vars                                         | ✅ Done |
+| `@arc-ui/sdk`        | arc-id API client (pure fetch, typed, 10 domain SDKs)                                               | ✅ Done |
+| `@arc-ui/components` | 35+ styled UI components (Radix + tailwind-merge + variants)                                        | ✅ Done |
+| `@arc-ui/auth`       | Auth components + domain presets: SignIn, SignUp, Guard, MfaDialog, forms                           | ✅ Done |
+| `@arc-ui/layout`     | Domain-configurable app shell: ConsoleLayout, AuthLayout, LandingLayout, Sidebar, Topbar, 5 presets | ✅ Done |
 
 ## Quick Start
 
@@ -67,7 +67,7 @@ Framework-agnostic slot-based shells: no routing dependency:
 import { fintechAuthPreset, SignIn, MfaVerifyForm } from "@arc-ui/auth";
 
 // Domain presets customise every copy, step, and behaviour
-<SignIn authPreset={fintechAuthPreset} layoutPreset={fintechLayoutPreset} />
+<SignIn authPreset={fintechAuthPreset} layoutPreset={fintechLayoutPreset} />;
 ```
 
 Forms are independently importable: `LoginForm`, `MagicLinkForm`, `ForgotPasswordForm`,

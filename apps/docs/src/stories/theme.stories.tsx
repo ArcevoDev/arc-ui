@@ -20,8 +20,8 @@ export const Default: Story = {
           <CardHeader>
             <CardTitle>Theme control</CardTitle>
             <CardDescription>
-              Switch between light, dark, and system. The choice persists to
-              localStorage and any brand can override the CSS variables.
+              Switch between light, dark, and system. The choice persists to localStorage and any
+              brand can override the CSS variables.
             </CardDescription>
           </CardHeader>
           <CardContent>
@@ -45,10 +45,7 @@ export const LightOnly: Story = {
 
 export const WithOverrideVars: Story = {
   render: () => (
-    <ThemeProvider
-      defaultTheme="dark"
-      overrideVars={{ "--primary": "oklch(0.55 0.2 162)" }}
-    >
+    <ThemeProvider defaultTheme="dark" overrideVars={{ "--primary": "oklch(0.55 0.2 162)" }}>
       <div className="flex gap-3">
         <ThemeToggle />
       </div>

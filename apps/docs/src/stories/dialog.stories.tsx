@@ -1,5 +1,14 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import { Dialog, DialogTrigger, DialogContent, DialogHeader, DialogFooter, DialogTitle, DialogDescription, DialogClose } from "@arc-ui/components";
+import {
+  Dialog,
+  DialogTrigger,
+  DialogContent,
+  DialogHeader,
+  DialogFooter,
+  DialogTitle,
+  DialogDescription,
+  DialogClose,
+} from "@arc-ui/components";
 import { Button, Input, Label } from "@arc-ui/components";
 
 const meta: Meta<typeof Dialog> = {
@@ -25,11 +34,15 @@ export const Default: Story = {
         </DialogHeader>
         <div className="grid gap-4 py-4">
           <div className="grid grid-cols-4 items-center gap-4">
-            <Label htmlFor="name" className="text-right">Name</Label>
+            <Label htmlFor="name" className="text-right">
+              Name
+            </Label>
             <Input id="name" defaultValue="Jane Archer" className="col-span-3" />
           </div>
           <div className="grid grid-cols-4 items-center gap-4">
-            <Label htmlFor="email" className="text-right">Email</Label>
+            <Label htmlFor="email" className="text-right">
+              Email
+            </Label>
             <Input id="email" defaultValue="jane@example.com" className="col-span-3" />
           </div>
         </div>

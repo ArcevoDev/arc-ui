@@ -11,11 +11,7 @@ import { Footer } from "./components/Footer.js";
 export default function App() {
   return (
     <ThemeProvider defaultTheme="system">
-      <LandingLayout
-        nav={<Nav />}
-        hero={<HeroSection />}
-        footer={<Footer />}
-      >
+      <LandingLayout nav={<Nav />} hero={<HeroSection />} footer={<Footer />}>
         <FeaturesSection />
         <DemoSection />
         <InstallSection />

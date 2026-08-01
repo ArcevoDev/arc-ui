@@ -1,10 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import {
-  FolderKanban,
-  LayoutDashboard,
-  Settings,
-  Users,
-} from "lucide-react";
+import { FolderKanban, LayoutDashboard, Settings, Users } from "lucide-react";
 import { Sidebar, LayoutProvider, fintechLayoutPreset } from "@arc-ui/layout";
 import type { LayoutConfig } from "@arc-ui/layout";
 
@@ -55,7 +50,11 @@ export const WithNestedGroups: Story = {
         {
           title: "Overview",
           items: [
-            { href: "/dashboard", label: "Dashboard", icon: <LayoutDashboard className="size-4" /> },
+            {
+              href: "/dashboard",
+              label: "Dashboard",
+              icon: <LayoutDashboard className="size-4" />,
+            },
           ],
         },
         {

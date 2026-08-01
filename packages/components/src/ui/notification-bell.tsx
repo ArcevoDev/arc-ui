@@ -37,8 +37,7 @@ export function NotificationBell({
   trigger,
   className,
 }: NotificationBellProps) {
-  const count =
-    unreadCount ?? notifications.filter((n) => n.read !== true).length;
+  const count = unreadCount ?? notifications.filter((n) => n.read !== true).length;
 
   return (
     <Sheet>
@@ -61,19 +60,14 @@ export function NotificationBell({
         <SheetHeader className="flex flex-row items-center justify-between">
           <SheetTitle>Notifications</SheetTitle>
           {count > 0 && onMarkAllRead && (
-            <button
-              onClick={onMarkAllRead}
-              className="text-xs text-primary hover:underline"
-            >
+            <button onClick={onMarkAllRead} className="text-xs text-primary hover:underline">
               Mark all as read
             </button>
           )}
         </SheetHeader>
         <div className="mt-4 flex flex-col gap-1">
           {notifications.length === 0 ? (
-            <p className="py-8 text-center text-sm text-muted-foreground">
-              No notifications
-            </p>
+            <p className="py-8 text-center text-sm text-muted-foreground">No notifications</p>
           ) : (
             notifications.map((n) => (
               <button
@@ -85,15 +79,9 @@ export function NotificationBell({
               >
                 <span className="font-medium text-foreground">{n.title}</span>
                 {n.description && (
-                  <span className="text-xs text-muted-foreground">
-                    {n.description}
-                  </span>
+                  <span className="text-xs text-muted-foreground">{n.description}</span>
                 )}
-                {n.time && (
-                  <span className="text-[10px] text-muted-foreground/60">
-                    {n.time}
-                  </span>
-                )}
+                {n.time && <span className="text-[10px] text-muted-foreground/60">{n.time}</span>}
               </button>
             ))
           )}

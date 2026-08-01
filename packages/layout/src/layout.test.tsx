@@ -3,12 +3,24 @@ import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { LayoutProvider, useLayout } from "./layout-context.js";
 import { Sidebar } from "./sidebar.js";
-import { defaultLayoutPreset, enterpriseLayoutPreset, fintechLayoutPreset, medLayoutPreset, eduLayoutPreset } from "./presets.js";
+import {
+  defaultLayoutPreset,
+  enterpriseLayoutPreset,
+  fintechLayoutPreset,
+  medLayoutPreset,
+  eduLayoutPreset,
+} from "./presets.js";
 import type { LayoutConfig } from "./types.js";
 
 describe("domain presets", () => {
   it("exports all five presets with brand + navigation", () => {
-    const presets = [fintechLayoutPreset, medLayoutPreset, eduLayoutPreset, enterpriseLayoutPreset, defaultLayoutPreset];
+    const presets = [
+      fintechLayoutPreset,
+      medLayoutPreset,
+      eduLayoutPreset,
+      enterpriseLayoutPreset,
+      defaultLayoutPreset,
+    ];
     expect(presets).toHaveLength(5);
     for (const p of presets) {
       expect(p.brand.name).toBeTruthy();
@@ -57,7 +69,10 @@ describe("Sidebar", () => {
     expect(screen.getByText("Overview")).toBeInTheDocument();
     expect(screen.getByText("Account")).toBeInTheDocument();
     expect(screen.getByRole("link", { name: /dashboard/i })).toHaveAttribute("href", "/dashboard");
-    expect(screen.getByRole("link", { name: /profile/i })).toHaveAttribute("href", "/settings/profile");
+    expect(screen.getByRole("link", { name: /profile/i })).toHaveAttribute(
+      "href",
+      "/settings/profile",
+    );
   });
 
   it("shows skeleton when loading", () => {
@@ -75,9 +90,7 @@ describe("Sidebar", () => {
   it("renders badges on nav items", () => {
     const config: LayoutConfig = {
       brand: { name: "App" },
-      navigation: [
-        { title: "Alerts", items: [{ href: "/alerts", label: "Alerts", badge: 3 }] },
-      ],
+      navigation: [{ title: "Alerts", items: [{ href: "/alerts", label: "Alerts", badge: 3 }] }],
     };
     renderSidebar(config);
     expect(screen.getByText("3")).toBeInTheDocument();
@@ -154,11 +167,7 @@ describe("LayoutProvider collapsed state", () => {
   function CollapseProbe() {
     const { sidebarCollapsed, toggleSidebarCollapsed } = useLayout();
     return (
-      <button
-        type="button"
-        onClick={toggleSidebarCollapsed}
-        aria-pressed={sidebarCollapsed}
-      >
+      <button type="button" onClick={toggleSidebarCollapsed} aria-pressed={sidebarCollapsed}>
         toggle
       </button>
     );

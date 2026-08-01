@@ -78,9 +78,7 @@ export function LayoutProvider({
     ],
   );
 
-  return (
-    <LayoutContext.Provider value={value}>{children}</LayoutContext.Provider>
-  );
+  return <LayoutContext.Provider value={value}>{children}</LayoutContext.Provider>;
 }
 
 export function useLayout(): LayoutContextValue {

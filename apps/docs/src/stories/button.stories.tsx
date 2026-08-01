@@ -56,7 +56,10 @@ export const Icon: Story = {
   args: {
     children: (
       <svg width="15" height="15" viewBox="0 0 15 15" fill="none">
-        <path d="M8 2.75a.5.5 0 00-1 0v4.25H2.75a.5.5 0 000 1H7v4.25a.5.5 0 001 0V8h4.25a.5.5 0 000-1H8V2.75z" fill="currentColor" />
+        <path
+          d="M8 2.75a.5.5 0 00-1 0v4.25H2.75a.5.5 0 000 1H7v4.25a.5.5 0 001 0V8h4.25a.5.5 0 000-1H8V2.75z"
+          fill="currentColor"
+        />
       </svg>
     ),
     size: "icon",

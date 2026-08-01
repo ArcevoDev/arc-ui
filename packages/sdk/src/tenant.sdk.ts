@@ -35,18 +35,13 @@ export class TenantSdk {
     return this.client.get<Tenant>(`/tenants/${slug}`);
   }
 
-  create(data: {
-    name: string;
-    slug: string;
-  }): Promise<ApiResponse<void>> {
+  create(data: { name: string; slug: string }): Promise<ApiResponse<void>> {
     return this.client.post<void>("/tenants", data);
   }
 
   /* ── Context Switching ────────────────────────────────────── */
 
-  switchTenant(
-    tenantId: string,
-  ): Promise<ApiResponse<SwitchContextResult>> {
+  switchTenant(tenantId: string): Promise<ApiResponse<SwitchContextResult>> {
     return this.client.post<SwitchContextResult>("/auth/switch-context", {
       tenantId,
     });
@@ -54,51 +49,29 @@ export class TenantSdk {
 
   /* ── Members ──────────────────────────────────────────────── */
 
-  listMembers(
-    tenantId: string,
-  ): Promise<ApiResponse<Membership[]>> {
-    return this.client.get<Membership[]>(
-      `/tenants/${tenantId}/members`,
-    );
+  listMembers(tenantId: string): Promise<ApiResponse<Membership[]>> {
+    return this.client.get<Membership[]>(`/tenants/${tenantId}/members`);
   }
 
   addMember(
     tenantId: string,
     data: { identityId: string; role: string },
   ): Promise<ApiResponse<void>> {
-    return this.client.post<void>(
-      `/tenants/${tenantId}/members`,
-      data,
-    );
+    return this.client.post<void>(`/tenants/${tenantId}/members`, data);
   }
 
-  removeMember(
-    tenantId: string,
-    identityId: string,
-  ): Promise<ApiResponse<void>> {
-    return this.client.del<void>(
-      `/tenants/${tenantId}/members/${identityId}`,
-    );
+  removeMember(tenantId: string, identityId: string): Promise<ApiResponse<void>> {
+    return this.client.del<void>(`/tenants/${tenantId}/members/${identityId}`);
   }
 
   /* ── Policy ───────────────────────────────────────────────── */
 
-  getPolicy(
-    tenantId: string,
-  ): Promise<ApiResponse<TenantPolicy>> {
-    return this.client.get<TenantPolicy>(
-      `/tenants/${tenantId}/policy`,
-    );
+  getPolicy(tenantId: string): Promise<ApiResponse<TenantPolicy>> {
+    return this.client.get<TenantPolicy>(`/tenants/${tenantId}/policy`);
   }
 
-  updatePolicy(
-    tenantId: string,
-    data: TenantPolicy,
-  ): Promise<ApiResponse<void>> {
-    return this.client.patch<void>(
-      `/tenants/${tenantId}/policy`,
-      data,
-    );
+  updatePolicy(tenantId: string, data: TenantPolicy): Promise<ApiResponse<void>> {
+    return this.client.patch<void>(`/tenants/${tenantId}/policy`, data);
   }
 
   /* ── Invites ──────────────────────────────────────────────── */
@@ -109,80 +82,46 @@ export class TenantSdk {
 
   /* ── DID ──────────────────────────────────────────────────── */
 
-  getDid(
-    tenantId: string,
-  ): Promise<ApiResponse<TenantDid>> {
-    return this.client.get<TenantDid>(
-      `/tenants/${tenantId}/did`,
-    );
+  getDid(tenantId: string): Promise<ApiResponse<TenantDid>> {
+    return this.client.get<TenantDid>(`/tenants/${tenantId}/did`);
   }
 
-  provisionDid(
-    tenantId: string,
-    data: { domain: string },
-  ): Promise<ApiResponse<void>> {
-    return this.client.post<void>(
-      `/tenants/${tenantId}/did`,
-      data,
-    );
+  provisionDid(tenantId: string, data: { domain: string }): Promise<ApiResponse<void>> {
+    return this.client.post<void>(`/tenants/${tenantId}/did`, data);
   }
 
   /* ── Signing Keys ─────────────────────────────────────────── */
 
-  listSigningKeys(
-    tenantId: string,
-  ): Promise<ApiResponse<SigningKey[]>> {
-    return this.client.get<SigningKey[]>(
-      `/tenants/${tenantId}/signing-keys`,
-    );
+  listSigningKeys(tenantId: string): Promise<ApiResponse<SigningKey[]>> {
+    return this.client.get<SigningKey[]>(`/tenants/${tenantId}/signing-keys`);
   }
 
   createSigningKey(
     tenantId: string,
     data: { displayName?: string; expiresAt?: string },
   ): Promise<ApiResponse<SigningKey>> {
-    return this.client.post<SigningKey>(
-      `/tenants/${tenantId}/signing-keys`,
-      data,
-    );
+    return this.client.post<SigningKey>(`/tenants/${tenantId}/signing-keys`, data);
   }
 
-  revokeSigningKey(
-    tenantId: string,
-    kid: string,
-  ): Promise<ApiResponse<void>> {
-    return this.client.del<void>(
-      `/tenants/${tenantId}/signing-keys/${kid}`,
-    );
+  revokeSigningKey(tenantId: string, kid: string): Promise<ApiResponse<void>> {
+    return this.client.del<void>(`/tenants/${tenantId}/signing-keys/${kid}`);
   }
 
   /* ── Projects ─────────────────────────────────────────────── */
 
-  listProjects(
-    tenantId: string,
-  ): Promise<ApiResponse<Project[]>> {
-    return this.client.get<Project[]>(
-      `/tenants/${tenantId}/projects`,
-    );
+  listProjects(tenantId: string): Promise<ApiResponse<Project[]>> {
+    return this.client.get<Project[]>(`/tenants/${tenantId}/projects`);
   }
 
   createProject(
     tenantId: string,
     data: { name: string; description?: string },
   ): Promise<ApiResponse<Project>> {
-    return this.client.post<Project>(
-      `/tenants/${tenantId}/projects`,
-      data,
-    );
+    return this.client.post<Project>(`/tenants/${tenantId}/projects`, data);
   }
 
-  getProject(
-    tenantId: string,
-    projectId: string,
-  ): Promise<ApiResponse<Project>> {
-    return this.client.get<Project>(
-      `/tenants/${tenantId}/projects/${projectId}`,
-    );
+  getProject(tenantId: string, projectId: string): Promise<ApiResponse<Project>> {
+    return this.client.get<Project>(`/tenants/${tenantId}/projects/${projectId}`);
   }
 
   updateProject(
@@ -190,19 +129,11 @@ export class TenantSdk {
     projectId: string,
     data: { name?: string; description?: string },
   ): Promise<ApiResponse<Project>> {
-    return this.client.patch<Project>(
-      `/tenants/${tenantId}/projects/${projectId}`,
-      data,
-    );
+    return this.client.patch<Project>(`/tenants/${tenantId}/projects/${projectId}`, data);
   }
 
-  deleteProject(
-    tenantId: string,
-    projectId: string,
-  ): Promise<ApiResponse<void>> {
-    return this.client.del<void>(
-      `/tenants/${tenantId}/projects/${projectId}`,
-    );
+  deleteProject(tenantId: string, projectId: string): Promise<ApiResponse<void>> {
+    return this.client.del<void>(`/tenants/${tenantId}/projects/${projectId}`);
   }
 
   /* ── Onboarding Flows ─────────────────────────────────────── */
@@ -218,10 +149,7 @@ export class TenantSdk {
     );
   }
 
-  listOnboardingFlows(
-    tenantId: string,
-    projectId: string,
-  ): Promise<ApiResponse<OnboardingFlow[]>> {
+  listOnboardingFlows(tenantId: string, projectId: string): Promise<ApiResponse<OnboardingFlow[]>> {
     return this.client.get<OnboardingFlow[]>(
       `/tenants/${tenantId}/projects/${projectId}/onboarding-flows`,
     );
@@ -262,12 +190,7 @@ export class TenantSdk {
   /* ── JWKS ─────────────────────────────────────────────────── */
 
   /** GET /tenants/:slug/jwks — bare { keys } payload. */
-  getJwksBySlug(
-    slug: string,
-  ): Promise<ApiResponse<{ keys: JwkKey[] }>> {
-    return this.client.get<{ keys: JwkKey[] }>(
-      `/tenants/${slug}/jwks`,
-      { bare: true },
-    );
+  getJwksBySlug(slug: string): Promise<ApiResponse<{ keys: JwkKey[] }>> {
+    return this.client.get<{ keys: JwkKey[] }>(`/tenants/${slug}/jwks`, { bare: true });
   }
 }

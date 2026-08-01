@@ -31,17 +31,11 @@ export class IdpSdk {
     return this.client.get<IdpConnection[]>("/idp/connections");
   }
 
-  getConnection(
-    id: string,
-  ): Promise<ApiResponse<IdpConnection>> {
-    return this.client.get<IdpConnection>(
-      `/idp/connections/${id}`,
-    );
+  getConnection(id: string): Promise<ApiResponse<IdpConnection>> {
+    return this.client.get<IdpConnection>(`/idp/connections/${id}`);
   }
 
-  createConnection(
-    data: CreateConnectionParams,
-  ): Promise<ApiResponse<IdpConnection>> {
+  createConnection(data: CreateConnectionParams): Promise<ApiResponse<IdpConnection>> {
     return this.client.post<IdpConnection>("/idp/connections", data);
   }
 

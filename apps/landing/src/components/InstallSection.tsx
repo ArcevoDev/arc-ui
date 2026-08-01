@@ -28,9 +28,7 @@ export function InstallSection() {
                 <span className="inline-flex items-center justify-center size-8 rounded-full bg-primary/10 text-primary text-sm font-bold">
                   {step.num}
                 </span>
-                <CardTitle className="text-sm font-semibold">
-                  {step.label}
-                </CardTitle>
+                <CardTitle className="text-sm font-semibold">{step.label}</CardTitle>
               </CardHeader>
               <CardContent>
                 <code className="block text-[11px] text-muted-foreground font-mono leading-relaxed break-all">

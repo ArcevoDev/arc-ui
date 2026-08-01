@@ -72,31 +72,25 @@ export class PasskeySdk {
     );
   }
 
-  register(
-    data: { response: unknown; challengeId: string },
-  ): Promise<ApiResponse<PasskeyRegisterResult>> {
-    return this.client.post<PasskeyRegisterResult>(
-      "/auth/passkey/register",
-      data,
-    );
+  register(data: {
+    response: unknown;
+    challengeId: string;
+  }): Promise<ApiResponse<PasskeyRegisterResult>> {
+    return this.client.post<PasskeyRegisterResult>("/auth/passkey/register", data);
   }
 
-  authenticationOptions(
-    identityId?: string,
-  ): Promise<ApiResponse<PasskeyAuthenticationOptions>> {
+  authenticationOptions(identityId?: string): Promise<ApiResponse<PasskeyAuthenticationOptions>> {
     return this.client.post<PasskeyAuthenticationOptions>(
       "/auth/passkey/options/authenticate",
       identityId ? { identityId } : undefined,
     );
   }
 
-  authenticate(
-    data: { response: unknown; challengeId: string },
-  ): Promise<ApiResponse<PasskeyAuthenticateResult>> {
-    return this.client.post<PasskeyAuthenticateResult>(
-      "/auth/passkey/authenticate",
-      data,
-    );
+  authenticate(data: {
+    response: unknown;
+    challengeId: string;
+  }): Promise<ApiResponse<PasskeyAuthenticateResult>> {
+    return this.client.post<PasskeyAuthenticateResult>("/auth/passkey/authenticate", data);
   }
 
   deregister(passkeyId: string): Promise<ApiResponse<void>> {

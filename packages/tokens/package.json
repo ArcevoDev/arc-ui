@@ -1,6 +1,6 @@
 {
   "name": "@arc-ui/tokens",
-  "version": "0.1.0",
+  "version": "1.0.0",
   "description": "Design tokens for the ArcevoCirqle ecosystem: Alpha Palette colors, typography, spacing, and sub-brand accents in OKLCH",
   "type": "module",
   "exports": {
@@ -15,10 +15,15 @@
   },
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
-  "files": ["dist"],
-  "sideEffects": ["**/*.css"],
+  "files": [
+    "dist"
+  ],
+  "sideEffects": [
+    "**/*.css"
+  ],
   "scripts": {
     "build": "tsup src/index.ts --format esm --dts --clean && node -e \"require('fs').cpSync('src/tokens.css', 'dist/tokens.css'); require('fs').cpSync('src/tailwind.css', 'dist/tailwind.css')\"",
+    "build:analyze": "tsup src/index.ts --format esm --dts --metafile",
     "clean": "rm -rf dist",
     "typecheck": "tsc --noEmit"
   },
@@ -35,7 +40,13 @@
   },
   "homepage": "https://arc-ui.vercel.app",
   "license": "MIT",
-  "keywords": ["design-tokens", "alpha-palette", "arcevocirqle", "ui", "oklch"],
+  "keywords": [
+    "design-tokens",
+    "alpha-palette",
+    "arcevocirqle",
+    "ui",
+    "oklch"
+  ],
   "devDependencies": {
     "tsup": "^8.5.1",
     "typescript": "^5"

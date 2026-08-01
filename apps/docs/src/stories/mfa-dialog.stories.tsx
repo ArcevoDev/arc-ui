@@ -18,7 +18,10 @@ type Story = StoryObj<typeof MfaDialog>;
 export const Default: Story = {
   render: () => {
     const [open, setOpen] = React.useState(false);
-    const client = React.useMemo(() => new ArcIdClient({ baseUrl: "https://auth.arcevo.dev/api/v1" }), []);
+    const client = React.useMemo(
+      () => new ArcIdClient({ baseUrl: "https://auth.arcevo.dev/api/v1" }),
+      [],
+    );
 
     return (
       <>

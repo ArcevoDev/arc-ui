@@ -94,11 +94,7 @@ export { TenantSdk } from "./tenant.sdk.js";
 export { BillingSdk } from "./billing.sdk.js";
 
 export { WebhooksSdk } from "./webhooks.sdk.js";
-export type {
-  CreateWebhookParams,
-  UpdateWebhookParams,
-  ListEventsParams,
-} from "./webhooks.sdk.js";
+export type { CreateWebhookParams, UpdateWebhookParams, ListEventsParams } from "./webhooks.sdk.js";
 
 export { AuditSdk } from "./audit.sdk.js";
 export type { AuditListParams } from "./audit.sdk.js";

@@ -9,31 +9,25 @@ const Breadcrumb = React.forwardRef<
 >(({ ...props }, ref) => <nav ref={ref} aria-label="breadcrumb" {...props} />);
 Breadcrumb.displayName = "Breadcrumb";
 
-const BreadcrumbList = React.forwardRef<
-  HTMLOListElement,
-  React.OlHTMLAttributes<HTMLOListElement>
->(({ className, ...props }, ref) => (
-  <ol
-    ref={ref}
-    className={cn(
-      "flex flex-wrap items-center gap-1.5 break-words text-sm text-muted-foreground sm:gap-2.5",
-      className,
-    )}
-    {...props}
-  />
-));
+const BreadcrumbList = React.forwardRef<HTMLOListElement, React.OlHTMLAttributes<HTMLOListElement>>(
+  ({ className, ...props }, ref) => (
+    <ol
+      ref={ref}
+      className={cn(
+        "flex flex-wrap items-center gap-1.5 break-words text-sm text-muted-foreground sm:gap-2.5",
+        className,
+      )}
+      {...props}
+    />
+  ),
+);
 BreadcrumbList.displayName = "BreadcrumbList";
 
-const BreadcrumbItem = React.forwardRef<
-  HTMLLIElement,
-  React.LiHTMLAttributes<HTMLLIElement>
->(({ className, ...props }, ref) => (
-  <li
-    ref={ref}
-    className={cn("inline-flex items-center gap-1.5", className)}
-    {...props}
-  />
-));
+const BreadcrumbItem = React.forwardRef<HTMLLIElement, React.LiHTMLAttributes<HTMLLIElement>>(
+  ({ className, ...props }, ref) => (
+    <li ref={ref} className={cn("inline-flex items-center gap-1.5", className)} {...props} />
+  ),
+);
 BreadcrumbItem.displayName = "BreadcrumbItem";
 
 const BreadcrumbLink = React.forwardRef<
@@ -44,29 +38,25 @@ const BreadcrumbLink = React.forwardRef<
   return (
     <Comp
       ref={asChild ? undefined : ref}
-      className={cn(
-        "transition-colors hover:text-foreground",
-        className,
-      )}
+      className={cn("transition-colors hover:text-foreground", className)}
       {...props}
     />
   );
 });
 BreadcrumbLink.displayName = "BreadcrumbLink";
 
-const BreadcrumbPage = React.forwardRef<
-  HTMLSpanElement,
-  React.HTMLAttributes<HTMLSpanElement>
->(({ className, ...props }, ref) => (
-  <span
-    ref={ref}
-    role="link"
-    aria-disabled="true"
-    aria-current="page"
-    className={cn("font-normal text-foreground", className)}
-    {...props}
-  />
-));
+const BreadcrumbPage = React.forwardRef<HTMLSpanElement, React.HTMLAttributes<HTMLSpanElement>>(
+  ({ className, ...props }, ref) => (
+    <span
+      ref={ref}
+      role="link"
+      aria-disabled="true"
+      aria-current="page"
+      className={cn("font-normal text-foreground", className)}
+      {...props}
+    />
+  ),
+);
 BreadcrumbPage.displayName = "BreadcrumbPage";
 
 const BreadcrumbSeparator = ({
@@ -101,23 +91,14 @@ const BreadcrumbSeparator = ({
 );
 BreadcrumbSeparator.displayName = "BreadcrumbSeparator";
 
-const BreadcrumbEllipsis = ({
-  className,
-  ...props
-}: React.HTMLAttributes<HTMLSpanElement>) => (
+const BreadcrumbEllipsis = ({ className, ...props }: React.HTMLAttributes<HTMLSpanElement>) => (
   <span
     role="presentation"
     aria-hidden="true"
     className={cn("flex h-9 w-9 items-center justify-center", className)}
     {...props}
   >
-    <svg
-      width="16"
-      height="16"
-      viewBox="0 0 16 16"
-      fill="none"
-      xmlns="http://www.w3.org/2000/svg"
-    >
+    <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
       <circle cx="3" cy="8" r="1.5" fill="currentColor" />
       <circle cx="8" cy="8" r="1.5" fill="currentColor" />
       <circle cx="13" cy="8" r="1.5" fill="currentColor" />

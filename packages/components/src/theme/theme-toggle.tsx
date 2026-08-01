@@ -52,15 +52,9 @@ export function ThemeToggle({
       </DropdownMenuTrigger>
       <DropdownMenuContent align="end">
         {items.map((item) => (
-          <DropdownMenuItem
-            key={item}
-            onClick={() => setTheme(item)}
-            className="cursor-pointer"
-          >
+          <DropdownMenuItem key={item} onClick={() => setTheme(item)} className="cursor-pointer">
             {theme === item && <Check className="size-4" />}
-            <span className={theme === item ? "" : "pl-6"}>
-              {ITEM_LABELS[item]}
-            </span>
+            <span className={theme === item ? "" : "pl-6"}>{ITEM_LABELS[item]}</span>
           </DropdownMenuItem>
         ))}
       </DropdownMenuContent>

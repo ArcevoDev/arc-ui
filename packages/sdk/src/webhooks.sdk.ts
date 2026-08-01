@@ -38,16 +38,11 @@ export class WebhooksSdk {
     return this.client.get<WebhookEndpoint[]>("/webhooks/endpoints");
   }
 
-  create(
-    data: CreateWebhookParams,
-  ): Promise<ApiResponse<WebhookEndpoint>> {
+  create(data: CreateWebhookParams): Promise<ApiResponse<WebhookEndpoint>> {
     return this.client.post<WebhookEndpoint>("/webhooks/endpoints", data);
   }
 
-  update(
-    id: string,
-    data: UpdateWebhookParams,
-  ): Promise<ApiResponse<WebhookEndpoint>> {
+  update(id: string, data: UpdateWebhookParams): Promise<ApiResponse<WebhookEndpoint>> {
     return this.client.patch<WebhookEndpoint>(`/webhooks/endpoints/${id}`, data);
   }
 
@@ -59,17 +54,13 @@ export class WebhooksSdk {
     return this.client.post<void>(`/webhooks/endpoints/${id}/test`);
   }
 
-  listEvents(
-    params?: ListEventsParams,
-  ): Promise<ApiResponse<WebhookEvent[]>> {
+  listEvents(params?: ListEventsParams): Promise<ApiResponse<WebhookEvent[]>> {
     const qs = new URLSearchParams();
     if (params?.status) qs.set("status", params.status);
     if (params?.cursor) qs.set("cursor", params.cursor);
     if (params?.limit) qs.set("limit", String(params.limit));
     const q = qs.toString();
-    return this.client.get<WebhookEvent[]>(
-      `/webhooks/events${q ? `?${q}` : ""}`,
-    );
+    return this.client.get<WebhookEvent[]>(`/webhooks/events${q ? `?${q}` : ""}`);
   }
 
   retryEvent(id: string): Promise<ApiResponse<void>> {

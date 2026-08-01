@@ -15,12 +15,8 @@ type Story = StoryObj<typeof Toaster>;
 export const Default: Story = {
   render: () => (
     <div className="flex flex-wrap gap-3">
-      <Button onClick={() => toast("Event has been created")}>
-        Default toast
-      </Button>
-      <Button onClick={() => toast.success("Saved successfully")}>
-        Success
-      </Button>
+      <Button onClick={() => toast("Event has been created")}>Default toast</Button>
+      <Button onClick={() => toast.success("Saved successfully")}>Success</Button>
       <Button variant="outline" onClick={() => toast.error("Something went wrong")}>
         Error
       </Button>

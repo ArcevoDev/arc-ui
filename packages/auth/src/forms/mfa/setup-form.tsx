@@ -49,9 +49,7 @@ export function MfaSetupForm({
     <>
       <DialogHeader>
         <DialogTitle>Set Up Two-Factor Authentication</DialogTitle>
-        <DialogDescription>
-          Scan this QR code with your authenticator app.
-        </DialogDescription>
+        <DialogDescription>Scan this QR code with your authenticator app.</DialogDescription>
       </DialogHeader>
       <div className="flex flex-col items-center gap-4 py-4">
         <div className="rounded-lg border bg-muted p-4 text-center">
@@ -62,14 +60,8 @@ export function MfaSetupForm({
           <code className="rounded bg-muted px-1">{setupData.secret}</code>
         </p>
         <div className="flex w-full flex-col gap-2">
-          <Label htmlFor="mfa-setup-code">
-            Enter the code from your app
-          </Label>
-          <InputOTP
-            maxLength={6}
-            onComplete={onConfirm}
-            disabled={isSubmitting}
-          >
+          <Label htmlFor="mfa-setup-code">Enter the code from your app</Label>
+          <InputOTP maxLength={6} onComplete={onConfirm} disabled={isSubmitting}>
             <InputOTPGroup>
               <InputOTPSlot index={0} />
               <InputOTPSlot index={1} />
@@ -88,10 +80,7 @@ export function MfaSetupForm({
 
 /* ── Recovery Codes Display ────────────────────────────────── */
 
-export function MfaRecoveryCodesForm({
-  codes,
-  onSaved,
-}: MfaRecoveryCodesFormProps) {
+export function MfaRecoveryCodesForm({ codes, onSaved }: MfaRecoveryCodesFormProps) {
   return (
     <>
       <DialogHeader>
@@ -103,10 +92,7 @@ export function MfaRecoveryCodesForm({
       <div className="flex flex-col items-center gap-4 py-4">
         <div className="grid w-full grid-cols-2 gap-2">
           {codes.map((code, i) => (
-            <code
-              key={i}
-              className="rounded bg-muted px-2 py-1 text-center font-mono text-xs"
-            >
+            <code key={i} className="rounded bg-muted px-2 py-1 text-center font-mono text-xs">
               {code}
             </code>
           ))}

@@ -48,15 +48,11 @@ export function AuthLayout({ config, children }: AuthLayoutProps) {
                 />
               </svg>
             )}
-            <span className="font-heading text-2xl font-bold text-white">
-              {brand.name}
-            </span>
+            <span className="font-heading text-2xl font-bold text-white">{brand.name}</span>
           </div>
 
           {/* Tagline */}
-          {brand.tagline && (
-            <p className="text-lg text-white/80">{brand.tagline}</p>
-          )}
+          {brand.tagline && <p className="text-lg text-white/80">{brand.tagline}</p>}
 
           {/* Benefits */}
           {brand.benefits && brand.benefits.length > 0 && (
@@ -90,13 +86,7 @@ export function AuthLayout({ config, children }: AuthLayoutProps) {
       <div className="flex flex-1 flex-col items-center justify-center p-4 lg:p-8">
         {/* Mobile logo (hidden on lg+) */}
         <div className="mb-8 flex flex-col items-center gap-2 lg:hidden">
-          <svg
-            width="40"
-            height="40"
-            viewBox="0 0 24 24"
-            fill="none"
-            className="text-primary"
-          >
+          <svg width="40" height="40" viewBox="0 0 24 24" fill="none" className="text-primary">
             <path
               d="M12 2L4 6V12C4 17.52 7.58 22.48 12 24C16.42 22.48 20 17.52 20 12V6L12 2Z"
               fill="currentColor"
@@ -109,14 +99,10 @@ export function AuthLayout({ config, children }: AuthLayoutProps) {
             />
           </svg>
           <h1 className="text-xl font-bold text-foreground">{brand.name}</h1>
-          {brand.tagline && (
-            <p className="text-sm text-muted-foreground">{brand.tagline}</p>
-          )}
+          {brand.tagline && <p className="text-sm text-muted-foreground">{brand.tagline}</p>}
         </div>
 
-        <div className="w-full max-w-md rounded-xl border bg-card p-6 shadow-lg">
-          {children}
-        </div>
+        <div className="w-full max-w-md rounded-xl border bg-card p-6 shadow-lg">{children}</div>
       </div>
     </div>
   );

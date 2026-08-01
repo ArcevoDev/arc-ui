@@ -26,13 +26,15 @@ export const Authenticated: Story = {
 
 export const WithFallback: Story = {
   render: () => (
-    <Guard fallback={
-      <div className="rounded-lg border border-destructive/50 bg-destructive/10 p-6">
-        <p className="text-sm text-destructive">
-          You are not authenticated. Please sign in to continue.
-        </p>
-      </div>
-    }>
+    <Guard
+      fallback={
+        <div className="rounded-lg border border-destructive/50 bg-destructive/10 p-6">
+          <p className="text-sm text-destructive">
+            You are not authenticated. Please sign in to continue.
+          </p>
+        </div>
+      }
+    >
       <div className="rounded-lg border border-border bg-card p-6">
         <p className="text-sm text-foreground">Protected content here.</p>
       </div>

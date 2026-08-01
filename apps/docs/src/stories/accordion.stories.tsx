@@ -1,10 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import {
-  Accordion,
-  AccordionContent,
-  AccordionItem,
-  AccordionTrigger,
-} from "@arc-ui/components";
+import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@arc-ui/components";
 
 const meta: Meta<typeof Accordion> = {
   title: "Components/Accordion",
@@ -22,15 +17,13 @@ export const Default: Story = {
       <AccordionItem value="item-1">
         <AccordionTrigger>What is arc-ui?</AccordionTrigger>
         <AccordionContent>
-          A domain-customizable React component library built on Radix UI
-          primitives with design tokens.
+          A domain-customizable React component library built on Radix UI primitives with design
+          tokens.
         </AccordionContent>
       </AccordionItem>
       <AccordionItem value="item-2">
         <AccordionTrigger>Is it MIT licensed?</AccordionTrigger>
-        <AccordionContent>
-          Yes. Everything is open source and MIT licensed.
-        </AccordionContent>
+        <AccordionContent>Yes. Everything is open source and MIT licensed.</AccordionContent>
       </AccordionItem>
       <AccordionItem value="item-3">
         <AccordionTrigger>Does it support dark mode?</AccordionTrigger>

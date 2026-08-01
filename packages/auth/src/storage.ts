@@ -20,10 +20,8 @@ function hasWindow(): boolean {
 }
 
 export const defaultStorage: TokenStorage = {
-  getAccessToken: () =>
-    hasWindow() ? window.localStorage.getItem(ACCESS_KEY) : null,
-  getRefreshToken: () =>
-    hasWindow() ? window.localStorage.getItem(REFRESH_KEY) : null,
+  getAccessToken: () => (hasWindow() ? window.localStorage.getItem(ACCESS_KEY) : null),
+  getRefreshToken: () => (hasWindow() ? window.localStorage.getItem(REFRESH_KEY) : null),
   setTokens: (accessToken, refreshToken) => {
     if (!hasWindow()) return;
     window.localStorage.setItem(ACCESS_KEY, accessToken);

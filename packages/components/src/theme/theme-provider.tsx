@@ -43,19 +43,14 @@ interface ThemeContextValue {
   toggleTheme: () => void;
 }
 
-const ThemeContext = React.createContext<ThemeContextValue | undefined>(
-  undefined,
-);
+const ThemeContext = React.createContext<ThemeContextValue | undefined>(undefined);
 
 const STORAGE_KEY = "arc-ui-theme";
 const SYSTEM_QUERY = "(prefers-color-scheme: light)";
 
 function applyTheme(
   theme: Theme,
-  {
-    attribute,
-    enableSystem,
-  }: { attribute: string; enableSystem: boolean },
+  { attribute, enableSystem }: { attribute: string; enableSystem: boolean },
 ) {
   const root = document.documentElement;
   if (theme === "system" && enableSystem) {
@@ -146,9 +141,7 @@ export function ThemeProvider({
     [theme, setTheme, resolvedTheme, toggleTheme],
   );
 
-  return (
-    <ThemeContext.Provider value={value}>{children}</ThemeContext.Provider>
-  );
+  return <ThemeContext.Provider value={value}>{children}</ThemeContext.Provider>;
 }
 
 export function useTheme(): ThemeContextValue {

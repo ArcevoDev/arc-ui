@@ -10,8 +10,7 @@ const accordionItemVariants = cva("", {
   variants: {
     variant: {
       default: "border-b",
-      separated:
-        "rounded-lg border bg-card shadow-sm",
+      separated: "rounded-lg border bg-card shadow-sm",
       ghost: "rounded-md",
       compact: "border-b rounded-md",
     },
@@ -22,7 +21,8 @@ const accordionItemVariants = cva("", {
 });
 
 interface AccordionItemProps
-  extends React.ComponentPropsWithoutRef<typeof AccordionPrimitive.Item>,
+  extends
+    React.ComponentPropsWithoutRef<typeof AccordionPrimitive.Item>,
     VariantProps<typeof accordionItemVariants> {}
 
 const AccordionItem = React.forwardRef<

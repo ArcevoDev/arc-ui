@@ -25,8 +25,7 @@ export function DemoSection() {
           See it in action
         </h2>
         <p className="mt-4 text-muted-foreground max-w-2xl mx-auto">
-          Rendered live with our own tokens and utilities. What you see is what
-          you get.
+          Rendered live with our own tokens and utilities. What you see is what you get.
         </p>
       </div>
 
@@ -80,9 +79,7 @@ export function DemoSection() {
                   <Switch />
                 </div>
                 <div className="flex items-center gap-3 min-w-[200px]">
-                  <span className="text-sm text-muted-foreground">
-                    Progress
-                  </span>
+                  <span className="text-sm text-muted-foreground">Progress</span>
                   <Progress value={65} className="flex-1" />
                 </div>
               </div>

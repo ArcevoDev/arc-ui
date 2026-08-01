@@ -1,6 +1,13 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import {
-  Table, TableHeader, TableBody, TableFooter, TableHead, TableRow, TableCell, TableCaption,
+  Table,
+  TableHeader,
+  TableBody,
+  TableFooter,
+  TableHead,
+  TableRow,
+  TableCell,
+  TableCaption,
 } from "@arc-ui/components";
 import { Badge } from "@arc-ui/components";
 
@@ -40,8 +47,11 @@ export const Default: Story = {
             <TableCell>
               <Badge
                 variant={
-                  inv.status === "Paid" ? "success" :
-                  inv.status === "Pending" ? "warning" : "destructive"
+                  inv.status === "Paid"
+                    ? "success"
+                    : inv.status === "Pending"
+                      ? "warning"
+                      : "destructive"
                 }
               >
                 {inv.status}

@@ -159,7 +159,6 @@ export function ArcProvider({
         setState(SIGNED_OUT_STATE);
         hydratedRef.current = true;
       });
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   /* ── Actions ──────────────────────────────────────────────── */

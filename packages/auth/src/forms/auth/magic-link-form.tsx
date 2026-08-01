@@ -5,6 +5,9 @@
  */
 
 import * as React from "react";
+import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { emailOnlySchema } from "../../validators.js";
 import type { Appearance } from "../../types.js";
 
 import {
@@ -26,7 +29,11 @@ export interface MagicLinkFormProps {
   /** Called with the email address. Return error string or null/undefined. */
   onSubmit: (email: string) => Promise<string | null | undefined>;
   onBack?: () => void;
+  /** Enable zod client-side validation. Default: false */
+  validate?: boolean;
 }
+
+type EmailValues = { email: string };
 
 /* ── Component ─────────────────────────────────────────────── */
 
@@ -34,19 +41,27 @@ export function MagicLinkForm({
   appearance,
   onSubmit,
   onBack,
+  validate = false,
 }: MagicLinkFormProps) {
   const [email, setEmail] = React.useState("");
   const [error, setError] = React.useState<string | null>(null);
   const [isSubmitting, setIsSubmitting] = React.useState(false);
   const [sent, setSent] = React.useState(false);
 
-  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<EmailValues>({
+    resolver: validate ? zodResolver(emailOnlySchema) : undefined,
+  });
+
+  const runSubmit = async (values?: EmailValues) => {
     setError(null);
     setIsSubmitting(true);
 
     try {
-      const err = await onSubmit(email);
+      const err = await onSubmit(values?.email ?? email);
       if (err) {
         setError(err);
       } else {
@@ -57,6 +72,22 @@ export function MagicLinkForm({
     }
     setIsSubmitting(false);
   };
+
+  const handleFormSubmit = validate
+    ? handleSubmit((values) => runSubmit(values))
+    : (e: React.FormEvent<HTMLFormElement>) => {
+        e.preventDefault();
+        return runSubmit();
+      };
+
+  const emailError = validate ? errors.email?.message : undefined;
+
+  const emailFieldProps = validate
+    ? register("email")
+    : {
+        value: email,
+        onChange: (e: React.ChangeEvent<HTMLInputElement>) => setEmail(e.target.value),
+      };
 
   if (sent) {
     return (
@@ -88,12 +119,10 @@ export function MagicLinkForm({
     <Card className={appearance?.className}>
       <CardHeader>
         <CardTitle>Magic Link</CardTitle>
-        <CardDescription>
-          Enter your email to receive a sign-in link
-        </CardDescription>
+        <CardDescription>Enter your email to receive a sign-in link</CardDescription>
       </CardHeader>
       <CardContent>
-        <form onSubmit={handleSubmit} className="flex flex-col gap-4">
+        <form onSubmit={handleFormSubmit} className="flex flex-col gap-4" noValidate={validate}>
           <div className="flex flex-col gap-2">
             <Label htmlFor="signin-ml-email">Email</Label>
             <Input
@@ -102,9 +131,10 @@ export function MagicLinkForm({
               placeholder="you@example.com"
               autoComplete="email"
               required
-              value={email}
-              onChange={(e: React.ChangeEvent<HTMLInputElement>) => setEmail(e.target.value)}
+              {...emailFieldProps}
+              aria-invalid={emailError ? true : undefined}
             />
+            {emailError && <p className="text-sm text-destructive">{emailError}</p>}
           </div>
           {error && <p className="text-sm text-destructive">{error}</p>}
           <Button type="submit" disabled={isSubmitting} className="w-full">

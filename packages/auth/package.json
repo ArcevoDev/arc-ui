@@ -1,6 +1,6 @@
 {
   "name": "@arc-ui/auth",
-  "version": "0.1.0",
+  "version": "1.0.0",
   "description": "Domain-customizable auth components for the ArcevoCirqle ecosystem: ArcProvider, SignIn/SignUp, Guard, MfaDialog, and 5 domain presets (fintech, med, edu, enterprise, default). Wired to @arc-ui/sdk.",
   "type": "module",
   "exports": {
@@ -19,6 +19,7 @@
   ],
   "scripts": {
     "build": "tsup src/index.ts --format esm --dts --clean",
+    "build:analyze": "tsup src/index.ts --format esm --dts --metafile",
     "clean": "rm -rf dist",
     "typecheck": "tsc --noEmit",
     "test": "vitest run",
@@ -37,10 +38,21 @@
   },
   "homepage": "https://arc-ui.vercel.app",
   "license": "MIT",
-  "keywords": ["authentication", "react", "arcevocirqle", "mfa", "passkeys", "oauth", "auth-ui"],
+  "keywords": [
+    "authentication",
+    "react",
+    "arcevocirqle",
+    "mfa",
+    "passkeys",
+    "oauth",
+    "auth-ui"
+  ],
   "dependencies": {
+    "@arc-ui/components": "workspace:*",
     "@arc-ui/sdk": "workspace:*",
-    "@arc-ui/components": "workspace:*"
+    "@hookform/resolvers": "^5.5.7",
+    "react-hook-form": "^7.83.0",
+    "zod": "^4.4.3"
   },
   "peerDependencies": {
     "react": "^19",

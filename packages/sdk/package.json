@@ -1,6 +1,6 @@
 {
   "name": "@arc-ui/sdk",
-  "version": "0.1.0",
+  "version": "1.0.0",
   "description": "arc-id API client: framework-agnostic fetch SDK for the ArcevoCirqle identity platform. Auth, credentials, passkeys, OAuth, tenants, billing, webhooks, audit, IdP.",
   "type": "module",
   "exports": {
@@ -13,10 +13,13 @@
   },
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
-  "files": ["dist"],
+  "files": [
+    "dist"
+  ],
   "sideEffects": false,
   "scripts": {
     "build": "tsup src/index.ts --format esm --dts --clean",
+    "build:analyze": "tsup src/index.ts --format esm --dts --metafile",
     "clean": "rm -rf dist",
     "typecheck": "tsc --noEmit",
     "test": "vitest run",
@@ -35,7 +38,15 @@
   },
   "homepage": "https://arc-ui.vercel.app",
   "license": "MIT",
-  "keywords": ["arc-id", "sdk", "identity", "oauth", "did", "verifiable-credentials", "arcevocirqle"],
+  "keywords": [
+    "arc-id",
+    "sdk",
+    "identity",
+    "oauth",
+    "did",
+    "verifiable-credentials",
+    "arcevocirqle"
+  ],
   "devDependencies": {
     "tsup": "^8.5.1",
     "typescript": "^5"

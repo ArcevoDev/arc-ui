@@ -96,11 +96,7 @@ describe("ArcProvider", () => {
     const client = makeClient();
     const { result } = renderHook(() => useAuth(), {
       wrapper: ({ children }) => (
-        <ArcProvider
-          client={client}
-          storage={storage}
-          onSessionRestore={onSessionRestore}
-        >
+        <ArcProvider client={client} storage={storage} onSessionRestore={onSessionRestore}>
           {children}
         </ArcProvider>
       ),
@@ -230,7 +226,10 @@ describe("ArcProvider", () => {
   it("login surfaces API errors in state", async () => {
     const storage = createMemoryStorage();
     fetchMock.mockResolvedValue(
-      mockJson({ success: false, error: "INVALID_CREDENTIALS", message: "Bad email or password" }, 401),
+      mockJson(
+        { success: false, error: "INVALID_CREDENTIALS", message: "Bad email or password" },
+        401,
+      ),
     );
 
     const { result } = renderHook(() => useAuth(), {
@@ -284,11 +283,7 @@ describe("ArcProvider", () => {
     fetchMock.mockResolvedValue(mockJson(envelope(loginNoMfa)));
 
     render(
-      <ArcProvider
-        client={makeClient()}
-        storage={storage}
-        onAuthChange={onAuthChange}
-      >
+      <ArcProvider client={makeClient()} storage={storage} onAuthChange={onAuthChange}>
         <ConsumerProbe />
       </ArcProvider>,
     );
@@ -299,11 +294,7 @@ describe("ArcProvider", () => {
     });
 
     await waitFor(() => {
-      expect(
-        onAuthChange.mock.calls.some(
-          (c) => c[0].isAuthenticated === true,
-        ),
-      ).toBe(true);
+      expect(onAuthChange.mock.calls.some((c) => c[0].isAuthenticated === true)).toBe(true);
     });
   });
 });
@@ -312,11 +303,5 @@ describe("ArcProvider", () => {
 
 function ConsumerProbe() {
   const { login } = useAuth();
-  return (
-    <button
-      onClick={() => login({ email: "ada@arcevo.dev", password: "pw" })}
-    >
-      Login
-    </button>
-  );
+  return <button onClick={() => login({ email: "ada@arcevo.dev", password: "pw" })}>Login</button>;
 }

@@ -1,6 +1,6 @@
 {
   "name": "@arc-ui/layout",
-  "version": "0.1.0",
+  "version": "1.0.0",
   "description": "Domain-configurable app shell for the ArcevoCirqle ecosystem: Sidebar, Topbar, AppLayout, ConsoleLayout, LandingLayout, PageHeader, TenantSwitcher, and 5 domain presets (fintech, med, edu, enterprise, default).",
   "type": "module",
   "exports": {
@@ -13,10 +13,13 @@
   },
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
-  "files": ["dist"],
+  "files": [
+    "dist"
+  ],
   "sideEffects": false,
   "scripts": {
     "build": "tsup src/index.ts --format esm --dts --clean",
+    "build:analyze": "tsup src/index.ts --format esm --dts --metafile",
     "clean": "rm -rf dist",
     "typecheck": "tsc --noEmit",
     "test": "vitest run",
@@ -35,7 +38,15 @@
   },
   "homepage": "https://arc-ui.vercel.app",
   "license": "MIT",
-  "keywords": ["layout", "sidebar", "topbar", "app-shell", "arcevocirqle", "react", "dashboard"],
+  "keywords": [
+    "layout",
+    "sidebar",
+    "topbar",
+    "app-shell",
+    "arcevocirqle",
+    "react",
+    "dashboard"
+  ],
   "dependencies": {
     "@arc-ui/auth": "workspace:*",
     "@arc-ui/components": "workspace:*",

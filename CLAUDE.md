@@ -81,12 +81,12 @@ COMPLETE → (onSuccess callback) → redirect
 
 ## Domain Presets
 
-| Feature | Fintech | Med | Edu | Enterprise |
-|---------|---------|-----|-----|------------|
-| MFA required | ✅ | ✅ | ❌ | ✅ |
-| Passkeys | ❌ | ❌ | ✅ | optional |
-| Session TTL | 15 min | 30 min | 24 hr | 8 hr |
-| Magic link | ✅ | ❌ | ✅ | ❌ |
+| Feature      | Fintech | Med    | Edu   | Enterprise |
+| ------------ | ------- | ------ | ----- | ---------- |
+| MFA required | ✅      | ✅     | ❌    | ✅         |
+| Passkeys     | ❌      | ❌     | ✅    | optional   |
+| Session TTL  | 15 min  | 30 min | 24 hr | 8 hr       |
+| Magic link   | ✅      | ❌     | ✅    | ❌         |
 
 ## Build Status (2026-07-31)
 
@@ -107,6 +107,7 @@ COMPLETE → (onSuccess callback) → redirect
 When arc-id adopts arc-ui as its frontend, these need resolution:
 
 **Resolved blockers (were blockers, now fixed):**
+
 1. ✅ **SDK 401 auto-refresh**: Added `onTokenRefresh` callback to `ArcIdClient` (`client.ts:113-124`). Automatic retry on 401.
 2. ✅ **Placeholder handlers**: `handlePasskeyAuth` now calls `passkeySdk.authenticationOptions()` → `navigator.credentials.get()` → `passkeySdk.authenticate()`. `handleForgotPasswordSubmit` calls `authSdk.forgotPassword()`. No longer stubs.
 3. ✅ **Test infrastructure**: Vitest workspace, 89 tests across all packages.
@@ -116,22 +117,14 @@ When arc-id adopts arc-ui as its frontend, these need resolution:
 7. ✅ **Sidebar router coupling**: `RouterAdapter` pattern (`router.tsx`) supports Next.js App Router, Remix, and React Router.
 8. ✅ **Theme switching**: `ThemeProvider`/`useTheme`/`ThemeToggle` with localStorage persistence + system preference detection.
 
-**Still open (not blockers):**
-9. **OAuth provider buttons**: SignIn renders provider buttons from `config.oauthProviders` but they are inert; an `onOAuth` callback is planned.
-10. **No Tailwind config**: No `tailwind.config.*`. Relies on CSS variables. Consumers need `tailwindcss-animate` plugin.
-11. **Form validation**: Auth forms do client-side validation (password match, min length) but no integration with react-hook-form or zod.
+**Still open (not blockers):** 9. **OAuth provider buttons**: SignIn renders provider buttons from `config.oauthProviders` but they are inert; an `onOAuth` callback is planned. 10. **No Tailwind config**: No `tailwind.config.*`. Relies on CSS variables. Consumers need `tailwindcss-animate` plugin. 11. **Form validation**: Auth forms do client-side validation (password match, min length) but no integration with react-hook-form or zod.
 
-**Optimization opportunities for scalability & dynamism:**
-12. **No icon library registry**: lucide-react adopted piecemeal. An IconRegistry with domain overrides would enable runtime icon swapping.
-13. **Domain preset extensibility**: Currently 5 hardcoded presets. A registry pattern (register custom domain configs) would let third parties add presets without forking.
-14. **Bundle optimization**: tsup uses CLI flags, not config files. No code-splitting, no external analysis for tree-shake effectiveness.
-15. **CSS build pipeline**: Tokens CSS is copied via inline `fs.cpSync` instead of a proper build step (PostCSS + autoprefixer + minification).
-16. **Cross-package dependency graph**: `tokens ← components ← auth ← layout` (plus SDK is peer). No circular deps. Adding `turbo`/`nx` for task orchestration would make incremental builds reliable.
-17. **Component a11y audit**: Radix primitives provide baseline accessibility, but compounded components (SignIn state machine, MfaDialog phases) need keyboard navigation and screen reader testing before third-party use.
+**Optimization opportunities for scalability & dynamism:** 12. **No icon library registry**: lucide-react adopted piecemeal. An IconRegistry with domain overrides would enable runtime icon swapping. 13. **Domain preset extensibility**: Currently 5 hardcoded presets. A registry pattern (register custom domain configs) would let third parties add presets without forking. 14. **Bundle optimization**: tsup uses CLI flags, not config files. No code-splitting, no external analysis for tree-shake effectiveness. 15. **CSS build pipeline**: Tokens CSS is copied via inline `fs.cpSync` instead of a proper build step (PostCSS + autoprefixer + minification). 16. **Cross-package dependency graph**: `tokens ← components ← auth ← layout` (plus SDK is peer). No circular deps. Adding `turbo`/`nx` for task orchestration would make incremental builds reliable. 17. **Component a11y audit**: Radix primitives provide baseline accessibility, but compounded components (SignIn state machine, MfaDialog phases) need keyboard navigation and screen reader testing before third-party use.
 
 ## Consumption Target
 
 arc-id will consume arc-ui as `@arc-ui/*` packages (npm published). The overlap analysis in arc-id's `.agent/output.txt` shows near-exact duplication of:
+
 - `src/components/ui/*` → replace with `@arc-ui/components`
 - `src/components/auth/*` → replace with `@arc-ui/auth`
 - `src/sdk/*` → replace with `@arc-ui/sdk`

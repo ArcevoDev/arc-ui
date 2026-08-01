@@ -27,9 +27,7 @@ export class VcSdk {
   }
 
   /** POST /credentials/verify: verify a Verifiable Credential string. Bare response. */
-  verify(
-    credential: string,
-  ): Promise<ApiResponse<VerificationResult>> {
+  verify(credential: string): Promise<ApiResponse<VerificationResult>> {
     return this.client.post<VerificationResult>(
       "/credentials/verify",
       { credential },
@@ -38,20 +36,16 @@ export class VcSdk {
   }
 
   /** POST /credentials/issue: issue a new credential. */
-  issue(
-    data: { type: string; subject: string; claims: JsonObject },
-  ): Promise<ApiResponse<void>> {
+  issue(data: { type: string; subject: string; claims: JsonObject }): Promise<ApiResponse<void>> {
     return this.client.post<void>("/credentials/issue", data);
   }
 
   /** POST /credentials/offers: create a credential offer. */
-  offer(
-    data: { credentialId: string; expiresAt?: string },
-  ): Promise<ApiResponse<{ token: string; expiresAt: string }>> {
-    return this.client.post<{ token: string; expiresAt: string }>(
-      "/credentials/offers",
-      data,
-    );
+  offer(data: {
+    credentialId: string;
+    expiresAt?: string;
+  }): Promise<ApiResponse<{ token: string; expiresAt: string }>> {
+    return this.client.post<{ token: string; expiresAt: string }>("/credentials/offers", data);
   }
 
   /** POST /credentials/revoke: revoke a credential by ID. */
@@ -65,9 +59,7 @@ export class VcSdk {
   }
 
   /** POST /credentials/verify/session: create a verification session. Bare response. */
-  createVerificationSession(
-    credentialRef?: string,
-  ): Promise<ApiResponse<VerificationSession>> {
+  createVerificationSession(credentialRef?: string): Promise<ApiResponse<VerificationSession>> {
     return this.client.post<VerificationSession>(
       "/credentials/verify/session",
       credentialRef ? { credentialRef } : undefined,
@@ -81,21 +73,14 @@ export class VcSdk {
     credential: unknown;
     proof: unknown;
   }): Promise<ApiResponse<VerificationResult>> {
-    return this.client.post<VerificationResult>(
-      "/credentials/verify/present",
-      data,
-      { bare: true },
-    );
+    return this.client.post<VerificationResult>("/credentials/verify/present", data, {
+      bare: true,
+    });
   }
 
   /** GET /credentials/status-lists/:id: resolve a Bitstring Status List. Bare response. */
-  getStatusList(
-    id: string,
-  ): Promise<ApiResponse<StatusList>> {
-    return this.client.get<StatusList>(
-      `/credentials/status-lists/${id}`,
-      { bare: true },
-    );
+  getStatusList(id: string): Promise<ApiResponse<StatusList>> {
+    return this.client.get<StatusList>(`/credentials/status-lists/${id}`, { bare: true });
   }
 
   /** GET /credentials/tenants/:slug/did.json: resolve a tenant's DID document. Bare response. */

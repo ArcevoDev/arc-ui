@@ -1,5 +1,14 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import { Sheet, SheetTrigger, SheetContent, SheetHeader, SheetFooter, SheetTitle, SheetDescription, SheetClose } from "@arc-ui/components";
+import {
+  Sheet,
+  SheetTrigger,
+  SheetContent,
+  SheetHeader,
+  SheetFooter,
+  SheetTitle,
+  SheetDescription,
+  SheetClose,
+} from "@arc-ui/components";
 import { Button, Input, Label } from "@arc-ui/components";
 
 const meta: Meta<typeof Sheet> = {

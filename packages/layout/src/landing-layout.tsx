@@ -19,12 +19,7 @@ export interface LandingLayoutProps {
   footer?: ReactNode;
 }
 
-export function LandingLayout({
-  hero,
-  children,
-  nav,
-  footer,
-}: LandingLayoutProps) {
+export function LandingLayout({ hero, children, nav, footer }: LandingLayoutProps) {
   return (
     <div className="flex min-h-screen flex-col bg-background">
       {/* Top nav. Rendered as-is so the consumer owns positioning:
@@ -42,18 +37,14 @@ export function LandingLayout({
               "radial-gradient(ellipse at 50% 0%, oklch(0.58 0.23 273 / 30%), transparent 70%)",
           }}
         />
-        <div className="relative mx-auto max-w-7xl px-8 py-24 lg:py-32">
-          {hero}
-        </div>
+        <div className="relative mx-auto max-w-7xl px-8 py-24 lg:py-32">{hero}</div>
       </section>
 
       {/* Content sections */}
       <main className="flex-1">{children}</main>
 
       {/* Footer */}
-      {footer && (
-        <footer className="border-t border-border/50">{footer}</footer>
-      )}
+      {footer && <footer className="border-t border-border/50">{footer}</footer>}
     </div>
   );
 }

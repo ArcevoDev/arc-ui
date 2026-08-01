@@ -37,24 +37,16 @@ export class IdentitySdk {
     if (params?.page) qs.set("page", String(params.page));
     if (params?.limit) qs.set("limit", String(params.limit));
     const q = qs.toString();
-    return this.client.get<Paginated<User>>(
-      `/identity/admin${q ? `?${q}` : ""}`,
-    );
+    return this.client.get<Paginated<User>>(`/identity/admin${q ? `?${q}` : ""}`);
   }
 
-  suspend(
-    id: string,
-    reason?: string,
-  ): Promise<ApiResponse<void>> {
+  suspend(id: string, reason?: string): Promise<ApiResponse<void>> {
     return this.client.post<void>(`/identity/admin/${id}/suspend`, {
       reason,
     });
   }
 
-  reinstate(
-    id: string,
-    reason?: string,
-  ): Promise<ApiResponse<void>> {
+  reinstate(id: string, reason?: string): Promise<ApiResponse<void>> {
     return this.client.patch<void>(
       `/identity/${id}/status`,
       reason ? { status: "ACTIVE", reason } : { status: "ACTIVE" },
@@ -88,9 +80,7 @@ export class IdentitySdk {
   /* ── Linked Accounts ───────────────────────────────────── */
 
   listLinkedAccounts(): Promise<ApiResponse<LinkedAccount[]>> {
-    return this.client.get<LinkedAccount[]>(
-      "/identity/linked-accounts",
-    );
+    return this.client.get<LinkedAccount[]>("/identity/linked-accounts");
   }
 
   unlinkLinkedAccount(id: string): Promise<ApiResponse<void>> {
@@ -100,15 +90,10 @@ export class IdentitySdk {
   /* ── External IDs ──────────────────────────────────────── */
 
   listExternalIds(): Promise<ApiResponse<ExternalId[]>> {
-    return this.client.get<ExternalId[]>(
-      "/identity/external-ids",
-    );
+    return this.client.get<ExternalId[]>("/identity/external-ids");
   }
 
-  linkExternalId(data: {
-    provider: string;
-    externalId: string;
-  }): Promise<ApiResponse<void>> {
+  linkExternalId(data: { provider: string; externalId: string }): Promise<ApiResponse<void>> {
     return this.client.post<void>("/identity/external-ids", data);
   }
 
@@ -119,14 +104,14 @@ export class IdentitySdk {
   /* ── Delegations ───────────────────────────────────────── */
 
   listDelegations(): Promise<ApiResponse<Delegation[]>> {
-    return this.client.get<Delegation[]>(
-      "/identity/delegations",
-    );
+    return this.client.get<Delegation[]>("/identity/delegations");
   }
 
-  createDelegation(
-    data: { subjectId: string; scope: string; expiresAt?: string },
-  ): Promise<ApiResponse<Delegation>> {
+  createDelegation(data: {
+    subjectId: string;
+    scope: string;
+    expiresAt?: string;
+  }): Promise<ApiResponse<Delegation>> {
     return this.client.post<Delegation>("/identity/delegations", data);
   }
 
@@ -136,21 +121,12 @@ export class IdentitySdk {
 
   /* ── Onboarding ────────────────────────────────────────── */
 
-  startOnboarding(
-    flowId: string,
-  ): Promise<ApiResponse<OnboardingSession>> {
-    return this.client.post<OnboardingSession>(
-      "/identity/onboarding/start",
-      { flowId },
-    );
+  startOnboarding(flowId: string): Promise<ApiResponse<OnboardingSession>> {
+    return this.client.post<OnboardingSession>("/identity/onboarding/start", { flowId });
   }
 
-  getOnboardingProgress(
-    progressId: string,
-  ): Promise<ApiResponse<OnboardingSession>> {
-    return this.client.get<OnboardingSession>(
-      `/identity/onboarding/${progressId}`,
-    );
+  getOnboardingProgress(progressId: string): Promise<ApiResponse<OnboardingSession>> {
+    return this.client.get<OnboardingSession>(`/identity/onboarding/${progressId}`);
   }
 
   advanceOnboarding(
@@ -158,10 +134,10 @@ export class IdentitySdk {
     stepId: string,
     data?: JsonObject,
   ): Promise<ApiResponse<OnboardingSession>> {
-    return this.client.post<OnboardingSession>(
-      `/identity/onboarding/${progressId}/advance`,
-      { stepId, ...data },
-    );
+    return this.client.post<OnboardingSession>(`/identity/onboarding/${progressId}/advance`, {
+      stepId,
+      ...data,
+    });
   }
 
   /* ── Wallet DID ────────────────────────────────────────── */

@@ -33,14 +33,21 @@ export {
   defaultLayoutPreset,
 } from "./presets.js";
 
+/* ── Preset Registry ──────────────────────────────────────── */
+export {
+  registerLayoutPreset,
+  getLayoutPreset,
+  hasLayoutPreset,
+  listLayoutPresets,
+  resolveLayoutPreset,
+} from "./registry.js";
+export type { LayoutPresetName } from "./registry.js";
+
 /* ── Context ──────────────────────────────────────────────── */
 export { LayoutProvider, useLayout } from "./layout-context.js";
 
 /* ── Router adapter ───────────────────────────────────────── */
-export {
-  createDefaultAdapter,
-  matchPath,
-} from "./router.js";
+export { createDefaultAdapter, matchPath } from "./router.js";
 export type { RouterAdapter, RouterLinkProps } from "./router.js";
 
 /* ── Components ───────────────────────────────────────────── */
@@ -54,10 +61,7 @@ export { type TenantSwitcherProps, TenantSwitcher } from "./tenant-switcher.js";
 
 export { type PageHeaderProps, PageHeader } from "./page-header.js";
 
-export {
-  type AuthLayoutProps,
-  AuthLayout,
-} from "./auth-layout.js";
+export { type AuthLayoutProps, AuthLayout } from "./auth-layout.js";
 /** @deprecated Use AuthLayout. Kept as an alias for backwards compatibility. */
 export { AppLayout } from "./auth-layout.js";
 

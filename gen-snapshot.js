@@ -8,6 +8,7 @@ const IGNORED_ITEMS = new Set([
   ".git",
   ".husky",
   "out",
+  "dist",
   ".vercel",
   "coverage",
   ".DS_Store",

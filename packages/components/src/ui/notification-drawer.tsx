@@ -6,12 +6,7 @@ import { ScrollArea } from "./scroll-area.js";
 
 /* ── Types ─────────────────────────────────────────────────── */
 
-export type NotificationType =
-  | "default"
-  | "success"
-  | "warning"
-  | "error"
-  | "info";
+export type NotificationType = "default" | "success" | "warning" | "error" | "info";
 
 export interface Notification {
   id: string;
@@ -81,8 +76,7 @@ export function NotificationDrawer({
   header,
   className,
 }: NotificationDrawerProps) {
-  const count =
-    unreadCount ?? notifications.filter((n) => n.read !== true).length;
+  const count = unreadCount ?? notifications.filter((n) => n.read !== true).length;
 
   const handleClick = (n: Notification) => {
     if (n.read !== true) onMarkRead?.(n);
@@ -93,7 +87,12 @@ export function NotificationDrawer({
     <Sheet>
       <SheetTrigger asChild>
         {trigger ?? (
-          <Button variant="ghost" size="icon" className="relative" aria-label={`Notifications${count > 0 ? ` (${count} unread)` : ""}`}>
+          <Button
+            variant="ghost"
+            size="icon"
+            className="relative"
+            aria-label={`Notifications${count > 0 ? ` (${count} unread)` : ""}`}
+          >
             <BellIcon />
             {count > 0 && (
               <span className="absolute -right-0.5 -top-0.5 flex h-4 min-w-4 items-center justify-center rounded-full bg-destructive px-1 text-[10px] font-medium text-destructive-foreground">
@@ -109,10 +108,7 @@ export function NotificationDrawer({
           <SheetHeader className="flex flex-row items-center justify-between gap-4 border-b px-4 py-3">
             <SheetTitle>Notifications</SheetTitle>
             {count > 0 && onMarkAllRead && (
-              <button
-                onClick={onMarkAllRead}
-                className="text-xs text-primary hover:underline"
-              >
+              <button onClick={onMarkAllRead} className="text-xs text-primary hover:underline">
                 Mark all as read
               </button>
             )}
@@ -120,12 +116,12 @@ export function NotificationDrawer({
         )}
 
         {notifications.length === 0 ? (
-          emptyState ?? (
+          (emptyState ?? (
             <div className="flex flex-1 flex-col items-center justify-center gap-2 p-8 text-center">
               <BellIcon className="size-8 text-muted-foreground/40" />
               <p className="text-sm text-muted-foreground">No notifications</p>
             </div>
-          )
+          ))
         ) : (
           <ScrollArea className="flex-1">
             <div className="flex flex-col gap-1 p-2">
@@ -152,9 +148,7 @@ export function NotificationDrawer({
 
                     {/* Icon slot */}
                     {n.icon ? (
-                      <span className={cn("mt-0.5 size-4 shrink-0", style.icon)}>
-                        {n.icon}
-                      </span>
+                      <span className={cn("mt-0.5 size-4 shrink-0", style.icon)}>{n.icon}</span>
                     ) : null}
 
                     {/* Content */}
@@ -168,9 +162,7 @@ export function NotificationDrawer({
                         )}
                       </div>
                       {n.description && (
-                        <p className="mt-0.5 text-xs text-muted-foreground">
-                          {n.description}
-                        </p>
+                        <p className="mt-0.5 text-xs text-muted-foreground">{n.description}</p>
                       )}
                     </div>
 
@@ -196,12 +188,7 @@ export function NotificationDrawer({
 
         {showFooter && notifications.length > 0 && (
           <div className="border-t p-3">
-            <Button
-              variant="ghost"
-              size="sm"
-              className="w-full"
-              onClick={onViewAll}
-            >
+            <Button variant="ghost" size="sm" className="w-full" onClick={onViewAll}>
               View all notifications
             </Button>
           </div>

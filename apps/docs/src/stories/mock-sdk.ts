@@ -3,7 +3,13 @@
  * Types match @arc-ui/sdk's actual types exactly.
  */
 
-import type { TokenPair, UserProfile, MfaVerifyResult, MfaSetupResult, RecoveryCodesResult } from "@arc-ui/sdk";
+import type {
+  TokenPair,
+  UserProfile,
+  MfaVerifyResult,
+  MfaSetupResult,
+  RecoveryCodesResult,
+} from "@arc-ui/sdk";
 
 export const MOCK_USER: UserProfile = {
   id: "usr_mock_001",
@@ -31,7 +37,8 @@ export const MOCK_MFA_VERIFY: MfaVerifyResult = {
 
 export const MOCK_MFA_SETUP: MfaSetupResult = {
   secret: "JBSWY3DPEHPK3PXP",
-  qrCode: "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNk+M9QDwADhgGAWjR9awAAAABJRU5ErkJggg==",
+  qrCode:
+    "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNk+M9QDwADhgGAWjR9awAAAABJRU5ErkJggg==",
   uri: "otpauth://totp/Arcevo:jane@example.com?secret=JBSWY3DPEHPK3PXP&issuer=Arcevo",
 };
 
